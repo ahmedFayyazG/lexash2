@@ -56,7 +56,7 @@ const HeaderOne = ({ style_2 }: any) => {
   const openMobileMenu2 = (menu: string) => {
     setNavTitle2((prev) => (prev === menu ? '' : menu));
   };
-
+//some changes
   return (
     <>
       <header className={`header-area ${sticky ? 'sticky-on' : ''} ${menuOpen ? 'mobile-menu-open' : ''}`}>
