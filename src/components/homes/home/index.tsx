@@ -1,38 +1,38 @@
- 
-import CtaArea from "./CtaArea";
+  
 import HeroArea from "./HeroArea";
-import Cta2Area from "./Cta2Area";
-import BlogArea from "./BlogArea";
-import AboutArea from "./AboutArea"; 
-import AwardsArea from "./AwardsArea";
+import VideoArea from "./VideoArea";
+import MissionArea from "./MissionArea";
 import ServiceArea from "./ServiceArea";
-import ProjectsArea from "./ProjectsArea";
-import WorkprocessArea from "./WorkprocessArea";
+import ProjectArea from "./ProjectArea";
+import CategoryArea from "./CategoryArea";
+import ProcessArea from "./ProcessArea";
+import TeamArea from "./TeamArea";
+import PriceArea from "./PriceArea";
+import FaqArea from "./FaqArea";
 import TestimonialArea from "./TestimonialArea";
-import HeaderOne from "@/layouts/headers/HeaderOne";
+import BlogArea from "./BlogArea";
 import FooterOne from "@/layouts/footers/FooterOne";
-import VideoAreaHomeOne from "./VideoAreaHomeOne";
+import HeaderOne from "@/layouts/headers/HeaderOne";
 
-const HomeOne = () => {
+const HomeTwo = () => {
 	return (
 		<>
-			<HeaderOne />
+			<HeaderOne style_2={true} />
       <HeroArea />
-      <CtaArea />
+      <VideoArea />
+      <MissionArea />
       <ServiceArea />
-      <AboutArea />
-      <ProjectsArea />
-      <WorkprocessArea />
-      <VideoAreaHomeOne />
-      <AwardsArea />
+      <ProjectArea />
+      <CategoryArea />
+      <ProcessArea />
+      <TeamArea />
+      <PriceArea />
+      <FaqArea />
       <TestimonialArea />
       <BlogArea />
-      <Cta2Area />
-      <FooterOne />
+      <FooterOne style_2={true} />
 		</>
 	);
 };
 
-export default HomeOne;
-
-
+export default HomeTwo;

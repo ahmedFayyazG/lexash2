@@ -1,5 +1,5 @@
  
-import HomeTwo from "@/components/homes/home-2";
+import HomeTwo from "@/components/homes/home";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {

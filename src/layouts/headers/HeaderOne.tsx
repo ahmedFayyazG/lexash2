@@ -63,8 +63,8 @@ const HeaderOne = ({ style_2 }: any) => {
         <nav className="navbar navbar-expand-lg">
           <div className="container">
             <Link className="navbar-brand" href="/">
-              <img className="dark-logo" src="/assets/img/core-img/Letters_logo.png" alt="Logo" style={{ width: '60px', height: '50px' }} />
-              <img className="light-logo" src="/assets/img/core-img/Letters_logo.png" alt="Logo" style={{ width: '60px', height: '50px' }} />
+              <img className="dark-logo" src="/assets/img/core-img/Letters_logo2.PNG" alt="Logo" style={{ width: '60px', height: '50px' }} />
+              <img className="light-logo" src="/assets/img/core-img/Letters_logo2.PNG" alt="Logo" style={{ width: '60px', height: '50px' }} />
             </Link>
 
             <button onClick={() => setMenuOpen(!menuOpen)} className="navbar-toggler" type="button">

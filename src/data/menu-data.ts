@@ -3,7 +3,7 @@ const menu_data = [
   {
     id: 1,
     title: "Home",
-    link: "/home-2",
+    link: "/home",
     has_dropdown: false,
     // sub_menus: [
     //   { link: "/", title: "Home 01", },

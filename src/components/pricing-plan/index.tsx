@@ -4,7 +4,7 @@ import HeaderOne from "@/layouts/headers/HeaderOne";
 import Cta2Area from "../homes/home/Cta2Area";
 import FooterOne from "@/layouts/footers/FooterOne";
 import PricingPlanArea from "./PricingPlanArea";
-import FaqArea from "../homes/home-2/FaqArea";
+import FaqArea from "../homes/home/FaqArea";
 
 const PricingPlan = () => {
 	return (
