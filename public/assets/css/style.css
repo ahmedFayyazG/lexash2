@@ -218,6 +218,13 @@ textarea:invalid {
     max-width: 360px;
   }
 }
+
+@media (min-width: 640px) {
+  .heading-text2 {
+    font-size: 60px; /* or any size you want for desktop */
+  }
+}
+
 @media (min-width: 480px) {
   .container,
   .container-lg,

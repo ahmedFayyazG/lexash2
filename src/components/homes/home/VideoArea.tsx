@@ -118,18 +118,26 @@ const VideoArea = ({ style_2 }: any) => {
 
         <div className="container py-2">
           <div className="text-center">
-        <h2
-  style={{
-    fontSize: '60px', // or try 64px for bigger text
-    color: '#000',
-    fontWeight: 'bold',
-    marginBottom: '1.5rem'
-  }}
->
-  Why We Exist
-</h2>
+
+     <>
+  <h2
+    className="responsive-heading"
+    style={{
+      fontSize: '58px',
+      color: '#000',
+      fontWeight: 'bold',
+      lineHeight: '1.3',
+      marginBottom: '1.8rem'
+      
+    }}
+  >
+    Why We Exist
+  </h2>
+
+</>
+
 <p
-  className="mx-auto text-[1.125rem] sm:text-[1.7rem] leading-relaxed text-justify sm:text-center text-black"
+  className="mx-auto text-[1.125rem] sm:text-[2rem] leading-relaxed text-justify sm:text-center text-black"
   style={{ maxWidth: '900px' }}
 >
   Our mission is to deliver outstanding legal service guided by our core values of insight, integrity, and impact. We exist to simplify complex legal challenges, empowering clients with clear guidance and confidence. Each case we undertake is an opportunity to provide meaningful support and create positive outcomes for individuals and businesses navigating critical immigration or estate planning decisions.
