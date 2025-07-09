@@ -118,8 +118,13 @@ const VideoArea = ({ style_2 }: any) => {
 
         <div className="container py-2">
           <div className="text-center">
-         <h2
-  // className="fw-bold text-black"
+        <h2
+  style={{
+    fontSize: '60px', // or try 64px for bigger text
+    color: '#000',
+    fontWeight: 'bold',
+    marginBottom: '1.5rem'
+  }}
 >
   Why We Exist
 </h2>

@@ -24,27 +24,29 @@ const HeroArea = () => {
             //   margin: '0 auto',
             // }}
           >  
-            <img
-              src="/assets/img/core-img/textOnlyLogo.PNG"
-              alt="Lexington Ashworth Logo"
-              className="img-fluid"
-              style={{
-                width: '100%',
-                height: 'auto',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                display: 'block',
-              }}
-            />
+          <img
+  src="/assets/img/core-img/textOnlyLogo.PNG"
+  alt="Lexington Ashworth Logo"
+  className="img-fluid"
+  style={{
+    width: '100%',
+    maxWidth: '1200px', // ✅ increase this to desired width (e.g. 500px)
+    height: 'auto',
+    objectFit: 'contain',
+    borderRadius: '12px',
+    display: 'block',
+    margin: '0 auto',   // center horizontally
+  }}
+/>
           </div>
 
           <div className="row g-4">
             {/* Main Heading */}
             <div className="col-12 col-lg-8 col-xl-9">
               <div className="hero-content home2 text-center  text-lg-start">
-           <h2
-  className="mb-0 wow text-white fadeInUp"
-  style={{ fontFamily: 'Roundo' }}
+        <h2
+  className="mb-0 wow text-white fadeInUp responsive-spacing"
+  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em' }}
   data-wow-duration="1000ms"
   data-wow-delay="700ms"
 >
@@ -60,6 +62,7 @@ const HeroArea = () => {
                 <p
                   className="my-5 wow fadeInUp"
                   data-wow-duration="1000ms"
+                  style={{ fontFamily: 'Roundo', letterSpacing: '0.08em' , lineHeight: '1.9' }}
                   data-wow-delay="1100ms"
                 >
                   Whether you are facing a Visa refusal, a Deportation order, or navigating complex
