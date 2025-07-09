@@ -3,7 +3,7 @@ import Portfolio from "@/components/portfolio";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {
-	title: "Portfolio Vorix - Creative Digital Agency Next js Template",
+	title: "Portfolio ",
 	description: "Portfolio Vorix - Creative Digital Agency HTML Template",
 	 
 };

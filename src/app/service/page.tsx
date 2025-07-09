@@ -3,8 +3,8 @@ import Service from "@/components/service";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {
-	title: "Service Vorix - Creative Digital Agency Next js Template",
-	description: "Vorix - Creative Digital Agency HTML Template",
+	title: "Service Lexington Ashworth",
+	description: "Lexington Ashworth",
 	 
 };
 

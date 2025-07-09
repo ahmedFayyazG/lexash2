@@ -3,8 +3,8 @@ import Login from "@/components/login";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {
-	title: "Login Vorix - Creative Digital Agency Next js Template",
-	description: "Vorix - Creative Digital Agency HTML Template",
+	title: "Login Lexington Ashworth",
+	description: "Lexington Ashworth",
 	 
 };
 

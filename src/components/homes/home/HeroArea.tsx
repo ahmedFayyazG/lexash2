@@ -3,7 +3,10 @@ import React from 'react';
 const HeroArea = () => {
   return (
     <>
-      <section className="hero-wrapper">
+      <section
+        className="hero-wrapper text-white"
+        style={{ backgroundColor: '#212C3C' }}
+      >
         <div className="divider"></div>
 
         <div className="container">
@@ -13,7 +16,7 @@ const HeroArea = () => {
             style={{
               backdropFilter: 'blur(10px)',
               WebkitBackdropFilter: 'blur(10px)',
-              backgroundColor: '#212C3C', // updated color
+              backgroundColor: '#212C3C',
               borderRadius: '20px',
               border: '1px solid rgba(255, 255, 255, 0.15)',
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.2)',
@@ -38,9 +41,9 @@ const HeroArea = () => {
           <div className="row g-4">
             {/* Main Heading */}
             <div className="col-12 col-lg-8 col-xl-9">
-              <div className="hero-content home2 text-center text-lg-start">
+              <div className="hero-content home2 text-center  text-lg-start">
                 <h2
-                  className="mb-0 wow fadeInUp"
+                  className="mb-0 wow text-white fadeInUp"
                   data-wow-duration="1000ms"
                   data-wow-delay="700ms"
                 >

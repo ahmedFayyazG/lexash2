@@ -3,8 +3,8 @@ import HomeTwo from "@/components/homes/home";
 import Wrapper from "@/layouts/Wrapper";
 
 export const metadata = {
-	title: "Home 2 Vorix - Creative Digital Agency Next js Template",
-	description: "Vorix - Creative Digital Agency HTML Template",
+	title: "Home 2 Lexington Ashworth",
+	description: "Lexington Ashworth",
 	 
 };
 

@@ -36,7 +36,6 @@ const MissionArea = () => {
 
                 <div className="mission-vision-accordion">
                   <div className="accordion" id="missionVision">
-
                     <div className="accordion-item">
                       <h2 className="accordion-header">
                         <button className="accordion-button" type="button" data-bs-toggle="collapse"
