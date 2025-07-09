@@ -1,7 +1,7 @@
 import React from "react";
 import Breacrumb from "@/common/Breacrumb";
 import HeaderOne from "@/layouts/headers/HeaderOne";
-import Cta2Area from "../homes/home/Cta2Area";
+// import Cta2Area from "../homes/home-3/Cta2Area";
 import FooterOne from "@/layouts/footers/FooterOne";
 import PortfolioDetailsArea from "./PortfolioDetailsArea";
 
@@ -11,7 +11,7 @@ const PortfolioDetails = () => {
 			<HeaderOne />
 			<Breacrumb title="Portfolio Details" subtitle="Portfolio" />
 			<PortfolioDetailsArea />
-			<Cta2Area />
+			{/* <Cta2Area /> */}
 			<FooterOne />
 		</>
 	);
