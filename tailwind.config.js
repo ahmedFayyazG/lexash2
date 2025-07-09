@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         gold: "#E3B77A",
       },
+      fontFamily: {
+        chakra: ['ChakraPetch', 'sans-serif'],
+      },
     },
   },
   plugins: [],

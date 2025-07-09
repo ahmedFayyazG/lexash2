@@ -76,7 +76,7 @@ const VideoArea = ({ style_2 }: any) => {
       <div
         className="cta-video-wrapper position-relative"
         style={{
-          backgroundColor: '#212C3C',
+          backgroundColor: '#FFFFFF',
           backgroundImage: 'none',
           color: '#E3B77A',
         }}
@@ -86,49 +86,50 @@ const VideoArea = ({ style_2 }: any) => {
         <div className="container">
           {!style_2 && (
             <div
-              className="video-wrap position-relative"
+              className="d-flex align-items-center justify-content-center"
               style={{
-                height: '700px',
-                overflow: 'hidden',
-                backgroundColor: '#212C3C',
-                backgroundImage: 'none',
+                height: '100vh',
+                backgroundColor: '#FFFFFF',
               }}
             >
-              <video
-                src="/assets/img/core-img/BG.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="position-absolute top-0 start-0 w-100 h-100"
-                style={{ objectFit: 'cover' }}
-              ></video>
+              <div
+                className="video-wrap position-relative"
+                style={{
+                  width: '100%',
+                  height: '700px',
+                  overflow: 'hidden',
+                  backgroundColor: '#FFFFFF',
+                  backgroundImage: 'none',
+                }}
+              >
+                <video
+                  src="/assets/img/core-img/BG.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="position-absolute top-0 start-0 w-100 h-100"
+                  style={{ objectFit: 'cover' }}
+                ></video>
+              </div>
             </div>
           )}
         </div>
 
-        <div className="container py-5">
+        <div className="container py-2">
           <div className="text-center">
-            <h2
-              className="fw-bold mb-3"
-              style={{
-                fontSize: '3.75rem',
-                color: '#E3B77A',
-              }}
-            >
-              Why We Exist
-            </h2>
-            <p
-              className="lead mx-auto"
-              style={{
-                maxWidth: '900px',
-                lineHeight: '1.8',
-                fontSize: '1.7rem',
-                color: '#FFFFFF',
-              }}
-            >
-              Our mission is to deliver outstanding legal service guided by our core values of insight, integrity, and impact. We exist to simplify complex legal challenges, empowering clients with clear guidance and confidence. Each case we undertake is an opportunity to provide meaningful support and create positive outcomes for individuals and businesses navigating critical immigration or estate planning decisions.
-            </p>
+         <h2
+  // className="fw-bold text-black"
+>
+  Why We Exist
+</h2>
+<p
+  className="mx-auto text-[1.125rem] sm:text-[1.7rem] leading-relaxed text-justify sm:text-center text-black"
+  style={{ maxWidth: '900px' }}
+>
+  Our mission is to deliver outstanding legal service guided by our core values of insight, integrity, and impact. We exist to simplify complex legal challenges, empowering clients with clear guidance and confidence. Each case we undertake is an opportunity to provide meaningful support and create positive outcomes for individuals and businesses navigating critical immigration or estate planning decisions.
+</p>
+
           </div>
         </div>
 

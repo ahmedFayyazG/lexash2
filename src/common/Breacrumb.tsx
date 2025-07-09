@@ -7,7 +7,7 @@ const Breacrumb = ({title, subtitle}: any) => {
   return (
     <>
          <div className="breadcrumb-wrapper bg-img jarallax bg-overlay" data-jarallax="" data-speed="0.6"
-      style={{backgroundImage: "url(/assets/img/bg-img/32.jpg)", backgroundAttachment: "fixed"}}>
+      style={{backgroundImage: "url(/assets/img/pagesherobg.jpg)", backgroundAttachment: "fixed"}}>
       <div className="container h-100">
          <div className="breadcrumb-content h-100">
             <h2 className="wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="700ms">{title}</h2>

@@ -67,6 +67,21 @@
 }
 
 @font-face {
+  font-family: 'ChakraPetch';
+  src: url('/assets/css/fonts/ChakraPetch-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roundo';
+  src: url('/assets/css/fonts/Roundo-Regular.otf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+@font-face {
   font-family: "Material Symbols Rounded";
   font-style: normal;
   font-weight: 100 700;

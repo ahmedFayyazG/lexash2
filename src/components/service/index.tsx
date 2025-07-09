@@ -15,8 +15,8 @@ const Service = () => {
     <Breacrumb title="Services" subtitle="Services" />
     <ServiceArea />
     {/* <ServiceAbout /> */}
-    {/* <PriceArea style_2={true} /> */}
-    <CtaArea />
+    <PriceArea style_2={true} />
+    {/* <CtaArea /> */}
     <FooterOne />      
     </>
   );
