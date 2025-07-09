@@ -120,19 +120,11 @@ const VideoArea = ({ style_2 }: any) => {
           <div className="text-center">
 
      <>
-  <h2
-    className="responsive-heading"
-    style={{
-      fontSize: '58px',
-      color: '#000',
-      fontWeight: 'bold',
-      lineHeight: '1.3',
-      marginBottom: '1.8rem'
-      
-    }}
-  >
-    Why We Exist
-  </h2>
+<h2
+  className="text-[40px] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-snug"
+>
+  Why We Exist
+</h2>
 
 </>
 

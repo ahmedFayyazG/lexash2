@@ -44,7 +44,7 @@ const HeroArea = () => {
             {/* Main Heading */}
             <div className="col-12 col-lg-8 col-xl-9">
               <div className="hero-content home2 text-center  text-lg-start">
-        <h2
+               <h2
   className="mb-0 wow text-white fadeInUp responsive-spacing"
   style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left' }}
   data-wow-duration="1000ms"
@@ -62,7 +62,7 @@ const HeroArea = () => {
                 <p
                   className="my-5 wow fadeInUp"
                   data-wow-duration="1000ms"
-                  style={{ fontFamily: 'Roundo', letterSpacing: '0.08em' , lineHeight: '1.9' }}
+                  style={{ fontFamily: 'Roundo', letterSpacing: '0.08em' , lineHeight: '1.9',  textAlign: 'left'  }}
                   data-wow-delay="1100ms"
                 >
                   Whether you are facing a Visa refusal, a Deportation order, or navigating complex
