@@ -92,16 +92,16 @@ const VideoArea = ({ style_2 }: any) => {
                 backgroundColor: '#FFFFFF',
               }}
             >
-              <div
-                className="video-wrap position-relative"
-                style={{
-                  width: '100%',
-                  height: '700px',
-                  overflow: 'hidden',
-                  backgroundColor: '#FFFFFF',
-                  backgroundImage: 'none',
-                }}
-              >
+          <div
+  className="video-wrap position-relative responsive-video-height"
+  style={{
+    width: '100%',
+    height: '700px',
+    overflow: 'hidden',
+    backgroundColor: '#FFFFFF',
+    backgroundImage: 'none',
+  }}
+>
                 <video
                   src="/assets/img/core-img/BG.mp4"
                   autoPlay

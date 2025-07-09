@@ -225,6 +225,12 @@ textarea:invalid {
   }
 }
 
+@media (max-width: 640px) {
+  .responsive-video-height {
+    height: 500px !important; /* 👈 Adjust height for mobile */
+  }
+}
+
 @media (min-width: 480px) {
   .container,
   .container-lg,

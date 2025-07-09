@@ -46,7 +46,7 @@ const HeroArea = () => {
               <div className="hero-content home2 text-center  text-lg-start">
         <h2
   className="mb-0 wow text-white fadeInUp responsive-spacing"
-  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em' }}
+  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left' }}
   data-wow-duration="1000ms"
   data-wow-delay="700ms"
 >
