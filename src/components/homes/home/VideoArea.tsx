@@ -2,16 +2,6 @@
 
 import { useEffect } from 'react';
 import 'jarallax/dist/jarallax.css';
-import Count from '@/common/count';
-
-const counter_data = [
-  {
-    count: 28,
-    label: 'Why We Exist',
-    description:
-      'Our mission is to deliver outstanding legal service guided by our core values of insight, integrity, and impact. We exist to simplify complex legal challenges, empowering clients with clear guidance and confidence. Each case we undertake is an opportunity to provide meaningful support and create positive outcomes for individuals and businesses navigating critical immigration or estate planning decisions.',
-  },
-];
 
 const VideoArea = ({ style_2 }: any) => {
   useEffect(() => {
@@ -73,6 +63,14 @@ const VideoArea = ({ style_2 }: any) => {
         </div>
       )}
 
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .responsive-video {
+            height: 250px !important;
+          }
+        }
+      `}</style>
+
       <div
         className="cta-video-wrapper position-relative"
         style={{
@@ -83,62 +81,72 @@ const VideoArea = ({ style_2 }: any) => {
       >
         {style_2 && <div className="divider"></div>}
 
-        <div className="container">
-          {!style_2 && (
-            <div
-              className="d-flex align-items-center justify-content-center"
-              style={{
-                height: '100vh',
-                backgroundColor: '#FFFFFF',
-              }}
-            >
+        <div
+          className="container"
+          style={{
+            marginTop: '2rem',
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            minHeight: '100vh',
+          }}
+        >
+          {/* Left Side - Video */}
           <div
-  className="video-wrap position-relative responsive-video-height"
-  style={{
-    width: '100%',
-    height: '700px',
-    overflow: 'hidden',
-    backgroundColor: '#FFFFFF',
-    backgroundImage: 'none',
-  }}
->
-                <video
-                  src="/assets/img/core-img/BG.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="position-absolute top-0 start-0 w-100 h-100"
-                  style={{ objectFit: 'cover' }}
-                ></video>
-              </div>
-            </div>
-          )}
-        </div>
+            className="responsive-video"
+            style={{
+              flex: '1 1 50%',
+              height: '500px',
+              overflow: 'hidden',
+              borderRadius: '1rem',
+              position: 'relative',
+            }}
+          >
+            <video
+              src="/assets/img/core-img/BG.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '1rem',
+              }}
+            ></video>
+          </div>
 
-        <div className="container py-2">
-          <div className="text-center">
-
-     <>
-<h2
-  className="text-[40px] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-snug"
->
-  Why We Exist
-</h2>
-
-</>
-
-<p
-  className="mx-auto text-[1.125rem] sm:text-[2rem] leading-relaxed text-justify sm:text-center text-black"
-  style={{ maxWidth: '900px' }}
->
-  Our mission is to deliver outstanding legal service guided by our core values of insight, integrity, and impact. We exist to simplify complex legal challenges, empowering clients with clear guidance and confidence. Each case we undertake is an opportunity to provide meaningful support and create positive outcomes for individuals and businesses navigating critical immigration or estate planning decisions.
-</p>
-
+          {/* Right Side - Text */}
+          <div
+            style={{
+              flex: '1 1 50%',
+              height: '100%',
+              backgroundColor: '#FFFFFF',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              padding: '2rem',
+            }}
+          >
+            <h2
+              className="text-[3rem] sm:text-[3.5rem] md:text-[4rem] lg:text-[4.5rem] font-extrabold text-black mb-6 leading-snug"
+            >
+              Why We Exist
+            </h2>
+            <p
+              className="text-[1.1rem] sm:text-[1.25rem] leading-relaxed text-justify text-black"
+            >
+              Our mission is to deliver outstanding legal service guided by our core values of insight,
+              integrity, and impact. We exist to simplify complex legal challenges, empowering clients
+              with clear guidance and confidence. Each case we undertake is an opportunity to provide
+              meaningful support and create positive outcomes for individuals and businesses navigating
+              critical immigration decisions.
+            </p>
           </div>
         </div>
 
-        <div className="divider"></div>
       </div>
     </>
   );

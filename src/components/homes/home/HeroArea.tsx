@@ -7,12 +7,11 @@ const HeroArea = () => {
         className="hero-wrapper text-white"
         style={{ backgroundColor: '#212C3C' }}
       >
-        <div className="divider"></div>
 
         <div className="container">
           {/* Logo on top with deep navy glassmorphic background */}
           <div
-            className="mb-5 p-4"
+            className="mb-1 p-4"
             // style={{
             // backdropFilter: 'blur(10px)',
             //   WebkitBackdropFilter: 'blur(10px)',
@@ -24,29 +23,28 @@ const HeroArea = () => {
             //   margin: '0 auto',
             // }}
           >  
-          <img
-  src="/assets/img/core-img/textOnlyLogo.PNG"
+<img
+  src="/assets/img/Lextext.png"
   alt="Lexington Ashworth Logo"
-  className="img-fluid"
   style={{
     width: '100%',
-    maxWidth: '1200px', // ✅ increase this to desired width (e.g. 500px)
-    height: 'auto',
+    maxWidth: '500px',   // ✅ Large on desktop
+    height: '150px',     // ✅ Visibly larger
     objectFit: 'contain',
-    borderRadius: '12px',
     display: 'block',
-    margin: '0 auto',   // center horizontally
+    margin: '0 auto',
   }}
+  className="img-fluid"
 />
           </div>
 
           <div className="row g-4">
             {/* Main Heading */}
-            <div className="col-12 col-lg-8 col-xl-9">
+            <div className="col-12  col-lg-8 col-xl-9">
               <div className="hero-content home2 text-center  text-lg-start">
                <h2
   className="mb-0 wow text-white fadeInUp responsive-spacing"
-  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left' }}
+  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left', marginTop:'40px' }}
   data-wow-duration="1000ms"
   data-wow-delay="700ms"
 >
