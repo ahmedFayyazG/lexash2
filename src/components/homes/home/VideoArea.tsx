@@ -2,7 +2,11 @@
 
 import React from 'react';
 
-const VideoArea = () => {
+interface VideoAreaProps {
+  style_2?: boolean; // this allows <VideoArea style_2={true} /> to compile
+}
+
+const VideoArea = ({ style_2 }: VideoAreaProps) => {
   return (
     <section
       style={{
@@ -20,7 +24,7 @@ const VideoArea = () => {
           gap: '40px',
         }}
       >
-                {/* Right Column: Text */}
+        {/* Right Column: Text */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', paddingLeft: '16px', paddingRight: '16px' }}>
           <h2
             style={{
@@ -50,7 +54,6 @@ const VideoArea = () => {
           </p>
         </div>
 
-
         {/* Left Column: Video */}
         <div
           style={{
@@ -76,11 +79,8 @@ const VideoArea = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-
-
       </div>
 
-      {/* Responsive styles for large screens */}
       <style>
         {`
           @media(min-width: 1024px) {

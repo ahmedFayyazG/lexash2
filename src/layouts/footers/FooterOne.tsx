@@ -18,8 +18,8 @@ const FooterOne = ({ style_2 }: any) => {
               <div className="footer-card">
 
                 <a href="#">
-                  <img className="dark-logo" src="/assets/img/core-img/fulltextlogo.png" alt="" />
-                  <img className="light-logo" src="/assets/img/core-img/fulltextlogo.png" alt="" />
+                  <img className="dark-logo" src="/assets/img/core-img/fulltextlogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
+                  <img className="light-logo" src="/assets/img/core-img/fulltextlogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
                 </a>
 
                 <div className="social-nav">
@@ -78,10 +78,11 @@ const FooterOne = ({ style_2 }: any) => {
 
                 <ul className="footer-nav" style={{color: "#FFFFFF"}}>
                   <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>About Us</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Portfolio</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Expert Team</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Our Team</a></li>
                   <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Pricing Plan</a></li>
                   <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Blog & News</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Site Map</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Contact Us</a></li>
                 </ul>
               </div>
             </div>

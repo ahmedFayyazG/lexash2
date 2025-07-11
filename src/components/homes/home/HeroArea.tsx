@@ -5,7 +5,8 @@ const HeroArea = () => {
     <>
       <section
         className="hero-wrapper text-white"
-        style={{ backgroundColor: '#FBF0DF' }}
+        style={{ backgroundColor: '#FBF0DF', height: '90vh' }}
+
       >
 
         <div className="container">
@@ -41,17 +42,27 @@ const HeroArea = () => {
           <div className="row g-4">
             {/* Main Heading */}
             <div className="col-12  col-lg-8 col-xl-9">
-              <div className="hero-content home2 text-center  text-lg-start">
-               <h2
-  className="mb-0 wow text-black fadeInUp responsive-spacing"
-  style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left', marginTop:'40px' }}
-  data-wow-duration="1000ms"
-  data-wow-delay="700ms"
->
-  "Specialist UK Immigration Solicitors"
-</h2>
+          <div className="hero-content home2 text-center text-lg-start">
+<div className="hero-content home2 text-center text-lg-start">
+  <h2
+    className="mb-0 wow text-black fadeInUp responsive-spacing"
+    style={{
+      fontFamily: 'Roundo',
+      letterSpacing: '0.04em',
+      textAlign: 'left',
+      marginTop: '40px',
+      position: 'relative',
+    }}
+    data-wow-duration="1000ms"
+    data-wow-delay="700ms"
+  >
+ "Specialist UK Immigration Solicitors"
+ 
+  </h2>
+</div>
 
-              </div>
+</div>
+
             </div>
 
             {/* Description and CTA */}

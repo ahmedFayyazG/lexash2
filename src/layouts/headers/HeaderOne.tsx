@@ -112,7 +112,7 @@ const HeaderOne = ({ style_2 }: any) => {
               className={`collapse navbar-collapse justify-content-end ${menuOpen ? 'show' : ''}`}
               id="vorixNav"
             >
-              <ul className="navbar-nav navbar-nav-scroll">
+              <ul className="navbar-nav navbar-nav-scroll" style={{fontFamily: 'Poppins'}}>
                 {(menu_data as MenuItem[]).map((item, i) => (
                   <li
                     key={i}
