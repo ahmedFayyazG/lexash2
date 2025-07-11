@@ -50,7 +50,7 @@ const HeroArea = () => {
       fontFamily: 'Roundo',
       letterSpacing: '0.04em',
       textAlign: 'left',
-      marginTop: '40px',
+      marginTop: '60px',
       position: 'relative',
     }}
     data-wow-duration="1000ms"
