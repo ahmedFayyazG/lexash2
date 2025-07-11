@@ -5,7 +5,7 @@ const HeroArea = () => {
     <>
       <section
         className="hero-wrapper text-white"
-        style={{ backgroundColor: '#212C3C' }}
+        style={{ backgroundColor: '#FBF0DF' }}
       >
 
         <div className="container">
@@ -23,7 +23,7 @@ const HeroArea = () => {
             //   margin: '0 auto',
             // }}
           >  
-<img
+{/* <img
   src="/assets/img/Lextext.png"
   alt="Lexington Ashworth Logo"
   style={{
@@ -35,7 +35,7 @@ const HeroArea = () => {
     margin: '0 auto',
   }}
   className="img-fluid"
-/>
+/> */}
           </div>
 
           <div className="row g-4">
@@ -43,12 +43,12 @@ const HeroArea = () => {
             <div className="col-12  col-lg-8 col-xl-9">
               <div className="hero-content home2 text-center  text-lg-start">
                <h2
-  className="mb-0 wow text-white fadeInUp responsive-spacing"
+  className="mb-0 wow text-black fadeInUp responsive-spacing"
   style={{ fontFamily: 'Roundo', letterSpacing: '0.04em', textAlign:'left', marginTop:'40px' }}
   data-wow-duration="1000ms"
   data-wow-delay="700ms"
 >
-  Specialist UK Immigration Solicitors
+  "Specialist UK Immigration Solicitors"
 </h2>
 
               </div>
@@ -58,9 +58,9 @@ const HeroArea = () => {
             <div className="col-12 col-md-8 col-lg-4 col-xl-3">
               <div className="hero-content home2">
                 <p
-                  className="my-5 wow fadeInUp"
+                  className="my-5 wow fadeInUp text-black"
                   data-wow-duration="1000ms"
-                  style={{ fontFamily: 'Roundo', letterSpacing: '0.08em' , lineHeight: '1.9',  textAlign: 'left'  }}
+                  style={{ fontFamily: 'Poppins', letterSpacing: '0.08em' , lineHeight: '1.9',  textAlign: 'left',color: '#000' }}
                   data-wow-delay="1100ms"
                 >
                   Whether you are facing a Visa refusal, a Deportation order, or navigating complex

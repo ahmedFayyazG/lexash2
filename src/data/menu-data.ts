@@ -3,7 +3,7 @@ const menu_data = [
   {
     id: 1,
     title: "Home",
-    link: "/home",
+    link: "/",
     has_dropdown: false,
     // sub_menus: [
     //   { link: "/", title: "Home 01", },
@@ -12,7 +12,7 @@ const menu_data = [
   },
   {
     id: 2,
-    title: "Our Expertise",
+    title: "Expertise",
     link: "#",
     has_dropdown: true,
     sub_menus: [

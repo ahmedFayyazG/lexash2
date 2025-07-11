@@ -11,7 +11,9 @@ module.exports = {
         gold: "#E3B77A",
       },
       fontFamily: {
-        chakra: ['ChakraPetch', 'sans-serif'],
+        // chakra: ['Roundo', 'sans-serif'],
+      roundo: ['"Roundo"', 'sans-serif'],
+
       },
     },
   },

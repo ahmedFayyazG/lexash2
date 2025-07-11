@@ -4,7 +4,7 @@ import React from 'react';
 const ProcessArea = () => {
   return (
     <>
-      <div className="process-wrapper bg-secondary">
+      {/* <div className="process-wrapper bg-secondary">
         <div className="divider"></div>
 
         <div className="container">
@@ -107,7 +107,7 @@ const ProcessArea = () => {
         </div>
 
         <div className="divider"></div>
-      </div>
+      </div> */}
     </>
   );
 };

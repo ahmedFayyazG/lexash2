@@ -58,14 +58,14 @@ const FooterOne = ({ style_2 }: any) => {
 
             <div className="col-12 col-md-6 col-xl">
               <div className="footer-card" style={{color: "#FFFFFF"}}>
-                <h5 className="mb-0" style={{color: "#FFFFFF"}}>Services</h5>
+                <h5 className="mb-0" style={{color: "#FFFFFF", fontFamily: 'Poppins'}}>Services</h5>
 
-                <ul className="footer-nav" style={{color: "#FFFFFF"}}>
-                <ul className="footer-nav">
-  <li><a href="#" style={{color: "#FFFFFF"}}>Personal Immigration</a></li>
-  <li><a href="#" style={{color: "#FFFFFF"}}>Business Immigration</a></li>
-  <li><a href="#" style={{color: "#FFFFFF"}}>Will Writing (Including Islamic Wills)</a></li>
-  <li><a href="#" style={{color: "#FFFFFF"}}>Self-Sponsorship</a></li>
+                <ul className="footer-nav" style={{color: "#FFFFFF", fontFamily: 'Poppins'}} >
+                <ul className="footer-nav" style={{fontFamily: 'Poppins'}}>
+  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Personal Immigration</a></li>
+  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Business Immigration</a></li>
+  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Will Writing (Including Islamic Wills)</a></li>
+  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Self-Sponsorship</a></li>
 </ul>
                 </ul>
               </div>
@@ -74,14 +74,14 @@ const FooterOne = ({ style_2 }: any) => {
 
             <div className="col-12 col-md-6 col-xl">
               <div className="footer-card" >
-                <h5 className="mb-0" style={{color: "#FFFFFF"}}>Resources</h5>
+                <h5 className="mb-0" style={{color: "#FFFFFF", fontFamily: 'Poppins'}}>Resources</h5>
 
                 <ul className="footer-nav" style={{color: "#FFFFFF"}}>
-                  <li><a href="#" style={{color: "#FFFFFF"}}>About Us</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF"}}>Portfolio</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF"}}>Expert Team</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF"}}>Pricing Plan</a></li>
-                  <li><a href="#" style={{color: "#FFFFFF"}}>Blog & News</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>About Us</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Portfolio</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Expert Team</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Pricing Plan</a></li>
+                  <li><a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Blog & News</a></li>
                 </ul>
               </div>
             </div>
@@ -89,7 +89,7 @@ const FooterOne = ({ style_2 }: any) => {
 
             <div className="col-12 col-md-6 col-xl-4">
               <div className="footer-card">
-                <h5 className="mb-0" style={{color: "#FFFFFF"}}>Subscribe</h5>
+                <h5 className="mb-0" style={{color: "#FFFFFF", fontFamily: 'Poppins'}}>Subscribe</h5>
                 <form action="#" className="subscribe-form">
                   <input type="email" className="form-control" placeholder="Email address" />
                   <button className="btn">
@@ -100,7 +100,7 @@ const FooterOne = ({ style_2 }: any) => {
 
                 <div className="form-check">
                   <input className="form-check-input" type="checkbox" id="flexCheckDefault" />
-                  <label className="form-check-label ps-2" htmlFor="flexCheckDefault" style={{color: "#FFFFFF"}}>
+                  <label className="form-check-label ps-2" htmlFor="flexCheckDefault" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>
                     I agree with the terms and conditions.
                   </label>
                 </div>
@@ -120,13 +120,13 @@ const FooterOne = ({ style_2 }: any) => {
           <div className="row align-items-center">
 
             <div className="col-12 col-lg-6">
-              <p className="mb-0 copyright" style={{color: "#FFFFFF"}}>Copyright © {new Date().getFullYear()} <span id="year" style={{color: "#FFFFFF"}}></span> <a href="#" style={{color: "#FFFFFF"}}> Lexington Ashworth </a></p>
+              <p className="mb-0 copyright" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Copyright © {new Date().getFullYear()} <span id="year" style={{color: "#FFFFFF"}}></span> <a href="#" style={{color: "#FFFFFF", fontFamily: 'Poppins'}}> Lexington Ashworth </a></p>
             </div>
 
             <div className="col-12 col-lg-6">
               <div className="footer-bottom-nav">
-                <a href="#" style={{color: "#FFFFFF"}}>Terms & conditions</a>
-                <a href="#" style={{color: "#FFFFFF"}}>Privacy policy</a>
+                <a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Terms & conditions</a>
+                <a href="#" style={{color: "#FFFFFF",fontFamily: 'Poppins'}}>Privacy policy</a>
               </div>
             </div>
           </div>

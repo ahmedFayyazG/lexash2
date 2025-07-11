@@ -42,11 +42,17 @@ const CategoryArea = () => {
   if (!mounted) return null; // Prevents rendering on the server
 
   return (
-    <div className="catagory-slide" id="catagorySlide">
+    <div className="catagory-slide" id="catagorySlide" style={{ backgroundColor: '#FBF0DF', fontFamily: 'Roundo', letterSpacing: '0.04em' }}>
       <div className="marquee3k" data-speed="1">
         <Marquee gradient={false} speed={50}>
           <h2 className="d-flex align-items-center mb-0">
             <span>.</span>
+            <span>Integrity</span>
+            <span>.</span>
+            <span>Insight</span>
+            <span>.</span>
+            <span>Impact</span>
+             <span>.</span>
             <span>Integrity</span>
             <span>.</span>
             <span>Insight</span>

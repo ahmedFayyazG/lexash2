@@ -5,7 +5,6 @@ import Wrapper from "@/layouts/Wrapper";
 export const metadata = {
 	title: "Home 2 Lexington Ashworth",
 	description: "Lexington Ashworth",
-	 
 };
 
 const index = () => {

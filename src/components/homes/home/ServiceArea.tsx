@@ -54,7 +54,7 @@ const ServiceArea = () => {
                     fontWeight: 900
                   }}
                 >
-                  Our Services
+                  Our Services 
                 </h2>
               </div>
             </div>
@@ -99,7 +99,7 @@ const ServiceArea = () => {
             {services.map((service, index) => (
               <SwiperSlide key={index} className="swiper-slide">
                 <Link href={service.link}>
-                  <div className="icon-wrapper">{service.icon}</div>
+                  <div className="icon-wrapper" style={{backgroundColor:"#EBBF7D"}}>{service.icon}</div>
                   <h2
                     style={{
                       fontFamily: 'Roundo, sans-serif',

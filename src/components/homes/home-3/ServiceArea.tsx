@@ -9,7 +9,7 @@ import { UserCheck, BriefcaseBusiness, ScrollText, Building2 } from "lucide-reac
 
 const services = [
   {
-    title: "Personal Immigration",
+    title: "Personal Immigration 22222",
     icon: "UserCheck", // Lucide icon
     content:
       "We provide tailored legal support across the full range of UK personal immigration matters. We assist with visa applications including Spouse, Partner, Child, Parent, and Adult Dependent Visas, as well as UK Visitor Visas, ILR, and British Citizenship. We also handle complex cases involving visa refusals, human rights claims, deportation challenges, and judicial reviews."
@@ -124,7 +124,7 @@ const ServiceArea = () => {
                     onMouseEnter={() => setActiveIndex(i)}
                     onMouseLeave={() => setActiveIndex(null)}
                     className={`service-slide-card  ${activeIndex === i ? "active" : ""}`}>
-                    <span className="material-symbols-outlined">{item.icon}</span>
+                    <span className="material-symbols-outlined" style={{backgroundColor:"#EBBF7D"}}>{item.icon}</span>
                     {/* <h2 style={{ bottom: `${activeIndex === i ? '140px' : ''}` }}>{item.title}</h2>
                     <p className="mb-0" style={{ bottom: `${activeIndex === i ? '45px' : ''}` }}>
                       {item.description}

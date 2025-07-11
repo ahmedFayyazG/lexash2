@@ -30,7 +30,6 @@ const ErrorArea = () => {
             </div>
           </div>
         </div>
-
         <div className="divider"></div>
       </div>
       <Cta2Area />

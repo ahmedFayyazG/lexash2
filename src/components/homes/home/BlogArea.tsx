@@ -11,7 +11,7 @@ const BlogArea = () => {
           <div className="row justify-content-center">
             <div className="col-12 col-lg-7">
               <div className="section-heading text-center">
-                <h2 className="mb-0">Our Articles and News</h2>
+                <h2 className="mb-0" style={{fontFamily: 'Roundo, sans-serif', letterSpacing:"0.036em"}}>Our Articles and News</h2>
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@ const BlogArea = () => {
                     <div className="dot"></div>
                     <a href="#">Wills</a>
                   </div>
-                  <Link className="post-title" href="/blog-details">
+                  <Link className="post-title" href="/blog-details" >
                     Why Every Family Should Have a Legally Valid Will
                   </Link>
                 </div>
