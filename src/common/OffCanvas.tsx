@@ -11,13 +11,13 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
           <div>
             <img
   className="dark-logo img-fluid"
-  src="/assets/img/core-img/fulltextlogo.png"
+  src="/assets/img/bg-img/fullnewLogo.png"
   alt="Lexington Ashworth Logo"
   style={{ maxWidth: '220px', width: '100%', height: 'auto' }}
 />
 <img
   className="light-logo img-fluid"
-  src="/assets/img/core-img/fulltextlogo.png"
+  src="/assets/img/bg-img/fullnewLogo.png"
   alt="Lexington Ashworth Logo"
   style={{ maxWidth: '220px', width: '100%', height: 'auto' }}
 />

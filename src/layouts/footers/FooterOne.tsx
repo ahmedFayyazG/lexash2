@@ -19,8 +19,8 @@ const FooterOne = ({ style_2 }: any) => {
               <div className="footer-card">
 
                 <a href="#">
-                  <img className="dark-logo" src="/assets/img/core-img/fulltextlogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
-                  <img className="light-logo" src="/assets/img/core-img/fulltextlogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
+                  <img className="dark-logo" src="/assets/img/bg-img/fullnewLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
+                  <img className="light-logo" src="/assets/img/bg-img/fullnewLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
                 </a>
 
                 <div className="social-nav">
