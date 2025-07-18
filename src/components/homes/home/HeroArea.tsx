@@ -80,13 +80,14 @@ const HeroArea = () => {
                   licence solutions across the UK.
                 </p>
                 <a
-                  href="#"
-                  className="btn btn-primary wow fadeInUp"
+                  href="/appointment"
+                  className="btn btn-primary2 wow fadeInUp"
                   data-wow-duration="1000ms"
                   data-wow-delay="1200ms"
                 >
-                  <span>CONTACT US</span>
-                  <span>CONTACT US</span>
+                  <span style={{ padding: "7px" }}>Get an Appointment</span>
+                             <span style={{ padding: "5px" }}>Get an Appointment</span>
+
                 </a>
               </div>
             </div>
