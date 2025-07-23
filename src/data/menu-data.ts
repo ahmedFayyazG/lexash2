@@ -72,7 +72,10 @@ const menu_data = [
     id: 3,
     title: "About Us",
     link: "/about-us",
-    has_dropdown: false,
+    has_dropdown: true,
+    sub_menus: [
+      { link: "/ourteam", title: "Our Team", },
+    ]
   },
   {
     id: 4,

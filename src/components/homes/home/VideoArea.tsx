@@ -29,10 +29,9 @@ const VideoArea = ({ style_2 }: VideoAreaProps) => {
           <h2
             style={{
               fontSize: '55px',
-              fontWeight: 800,
+              fontWeight: 400,
               color: '#111827',
-              lineHeight: '1.3',
-              fontFamily: 'Roundo, sans-serif',
+              fontFamily: 'poppins, sans-serif',
             }}
           >
             Why We Exist
@@ -42,7 +41,7 @@ const VideoArea = ({ style_2 }: VideoAreaProps) => {
               color: 'black',
               fontSize: '18px',
               lineHeight: '1.7',
-              fontWeight: '400',
+              fontWeight: '300',
               fontFamily: 'Poppins, sans-serif',
             }}
           >

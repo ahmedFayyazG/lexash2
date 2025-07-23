@@ -31,8 +31,8 @@ const MissionArea = () => {
 
             <div className="col-12 col-lg-6">
               <div className="mission-vision-content">
-                <h2 style={{ fontFamily: 'Roundo',
-    fontWeight: 900, // or 800, 900 depending on what's available
+                <h2 style={{ fontFamily: 'poppins',
+    fontWeight: 400, // or 800, 900 depending on what's available
     fontSize: '3.5rem',
 
                 }}
@@ -41,7 +41,7 @@ const MissionArea = () => {
                 
                 
                 >Why Choose Us</h2>
-                <p className="mb-4">  Lexington Ashworth delivers expert legal guidance with a personal touch. We combine decades of experience with a client-first approach you can trust.</p>
+                <p className="mb-4" style={{fontFamily:"poppins", fontWeight:"300"}}>  Lexington Ashworth delivers expert legal guidance with a personal touch. We combine decades of experience with a client-first approach you can trust.</p>
 
                 {/* <div className="mission-vision-accordion">
                   <div className="accordion" id="missionVision">
@@ -117,7 +117,7 @@ const MissionArea = () => {
           data-bs-target="#collapseOne"
           aria-expanded="true"
           aria-controls="collapseOne"
-          style={{ fontFamily: 'Roundo, sans-serif', fontSize: '1.25rem', fontWeight: 700 }}
+          style={{ fontFamily: 'poppins, sans-serif', fontWeight: 400 }}
         >
           Experienced Team
         </button>
@@ -127,7 +127,7 @@ const MissionArea = () => {
         className="accordion-collapse collapse show"
         data-bs-parent="#missionVision"
       >
-        <div className="accordion-body" style={{ fontFamily: 'Roundo, sans-serif' }}>
+        <div className="accordion-body" style={{ fontFamily: 'poppins, sans-serif', fontWeight: 300 }}>
           Each of our solicitors has over 15 years of experience in immigration and estate law,
           offering deep knowledge and a proven track record of success.
         </div>
@@ -143,7 +143,8 @@ const MissionArea = () => {
           data-bs-target="#collapseTwo"
           aria-expanded="false"
           aria-controls="collapseTwo"
-          style={{ fontFamily: 'Roundo, sans-serif', fontSize: '1.25rem', fontWeight: 700 }}
+          style={{ fontFamily: 'poppins, sans-serif', fontWeight: 400 }}
+
         >
           Responsive Service
         </button>
@@ -153,7 +154,7 @@ const MissionArea = () => {
         className="accordion-collapse collapse"
         data-bs-parent="#missionVision"
       >
-        <div className="accordion-body" style={{ fontFamily: 'Roundo, sans-serif' }}>
+        <div className="accordion-body" style={{ fontFamily: 'poppins, sans-serif', fontWeight: 300  }}>
           We prioritise clear, responsive communication. Clients benefit from prompt updates and
           practical advice at every stage, backed by a dedicated, client-focused approach.
         </div>
@@ -169,7 +170,8 @@ const MissionArea = () => {
           data-bs-target="#collapseThree"
           aria-expanded="false"
           aria-controls="collapseThree"
-          style={{ fontFamily: 'Roundo, sans-serif', fontSize: '1.25rem', fontWeight: 700 }}
+          style={{ fontFamily: 'poppins, sans-serif', fontWeight: 400 }}
+
         >
           Cross-Jurisdictional Insight
         </button>
@@ -179,7 +181,7 @@ const MissionArea = () => {
         className="accordion-collapse collapse"
         data-bs-parent="#missionVision"
       >
-        <div className="accordion-body" style={{ fontFamily: 'Roundo, sans-serif' }}>
+        <div className="accordion-body" style={{ fontFamily: 'poppins, sans-serif', fontWeight: 300  }}>
           Our team’s international backgrounds give us a global perspective. We handle cross-border
           and multi-jurisdiction cases seamlessly, guiding clients through complex international
           issues.
@@ -196,7 +198,8 @@ const MissionArea = () => {
           data-bs-target="#collapseFour"
           aria-expanded="false"
           aria-controls="collapseFour"
-          style={{ fontFamily: 'Roundo, sans-serif', fontSize: '1.25rem', fontWeight: 700 }}
+          style={{ fontFamily: 'poppins, sans-serif', fontWeight: 400 }}
+
         >
           Free Consultation
         </button>
@@ -206,7 +209,7 @@ const MissionArea = () => {
         className="accordion-collapse collapse"
         data-bs-parent="#missionVision"
       >
-        <div className="accordion-body" style={{ fontFamily: 'Roundo, sans-serif' }}>
+        <div className="accordion-body" style={{ fontFamily: 'Roundo, sans-serif' , fontWeight: 300 }}>
           Begin with a complimentary, no-obligation consultation. Discuss your situation with our
           solicitors and receive clear, straightforward advice on your best options.
         </div>

@@ -25,13 +25,13 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
           </div>
 
           <button type="button" className="btn-close btn-close-white shadow-lg" data-bs-dismiss="offcanvas"
-            aria-label="Close" onClick={() => setOpenCavas(false)}></button>
+            aria-label="Close" onClick={() => setOpenCavas(false)} style={{backgroundColor:"white"}}></button>
         </div>
 
 
         <div className="offcanvas-body">
-          <h4 className="mb-3" style={{ fontFamily: 'Poppins, sans-serif',}}>Reach Out Us!</h4>
-          <p style={{ fontFamily: 'Poppins, sans-serif',}}>Ready to take the first step towards unlocking opportunity realizing goals.</p>
+          <h4 className="mb-3" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>Reach Out Us!</h4>
+          <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"300"}}>Ready to take the first step towards unlocking opportunity realizing goals.</p>
 
 
           <div className="contact-info">
@@ -53,8 +53,8 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
               </div>
 
               <div>
-                <p style={{ fontFamily: 'Poppins, sans-serif',}}>Phone number</p>
-                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif',}}>+44 ---- ----- ---</h5>
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"300"}}>Phone number</p>
+                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>+44 ---- ----- ---</h5>
               </div>
             </div>
 
@@ -69,8 +69,8 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
               </div>
 
               <div>
-                <p style={{ fontFamily: 'Poppins, sans-serif',}}>Email address</p>
-                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif',}}>info@lexingtonashworth<br/>.com</h5>
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"300"}}>Email address</p>
+                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>info@lexingtonashworth<br/>.com</h5>
               </div>
             </div>
 
@@ -85,13 +85,13 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
               </div>
 
               <div>
-                <p style={{ fontFamily: 'Poppins, sans-serif',}}>Office Address</p>
-                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif',}}>Peter House, Oxford St, Manchester M1 5AN, UK.</h5>
+                <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"300"}}>Office Address</p>
+                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>Peter House, Oxford St, Manchester M1 5AN, UK.</h5>
               </div>
             </div>
           </div>
 
-          <h4 className="mb-3" style={{ fontFamily: 'Poppins, sans-serif',}}>Social Networks</h4>
+          <h4 className="mb-3" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>Social Networks</h4>
 
 
           <div className="social-nav">
@@ -127,7 +127,7 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
 
 
           <div className="cta-btn">
-            <Link href="/contact" style={{ fontFamily: 'Poppins, sans-serif',}}>Let's Talk <br /> with us</Link>
+            <Link href="/appointment" style={{ fontFamily: 'Poppins, sans-serif',fontWeight:"500"}}>Let's Book <br /> An Appointment</Link>
           </div>
         </div>
       </div>

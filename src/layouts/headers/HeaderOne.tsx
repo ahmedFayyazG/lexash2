@@ -194,32 +194,81 @@ const HeaderOne = ({ style_2 }: any) => {
               </ul>
 
               <div className="d-flex align-items-center">
-                <div className="header-search-btn" id="searchButton" style={{ paddingTop: '5px' }}>
-                  <button
-                    className="btn"
-                    onClick={() => setSearchOpen(!isSearchOpen)}
-                    style={{ color: '#FFFFFF', padding: 0, border: 'none', background: 'transparent' }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 24 24" style={{ fill: '#FFFFFF' }}>
-                      <path d="M10.5 2C6.91 2 4 4.91 4 8.5C4 12.09 6.91 15 10.5 15C12.09 15 13.54 14.41 14.63 13.45L19.39 18.21L20.8 16.8L16.04 12.04C17 10.95 17.59 9.5 17.59 8C17.59 4.91 14.68 2 11.09 2H10.5ZM6 8.5C6 6.57 7.57 5 9.5 5C11.43 5 13 6.57 13 8.5C13 10.43 11.43 12 9.5 12C7.57 12 6 10.43 6 8.5Z" />
-                    </svg>
-                  </button>
-                </div>
+           <div className="header-search-btn" id="searchButton" style={{ paddingTop: '5px' }}>
+  <button
+    className="btn"
+    onClick={() => setSearchOpen(!isSearchOpen)}
+    style={{
+      color: '#FFFFFF',
+      padding: 0,
+      border: 'none',
+      background: 'transparent',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="29"
+      height="29"
+      viewBox="0 0 24 24"
+      fill="white" // ✅ This sets the main color
+      style={{
+        color: '#FFFFFF',
+        fill: '#FFFFFF', // ✅ Ensures all browsers render it white
+        stroke: 'none',
+      }}
+    >
+      <path d="M10.5 2C6.91 2 4 4.91 4 8.5C4 12.09 6.91 15 10.5 15C12.09 15 13.54 14.41 14.63 13.45L19.39 18.21L20.8 16.8L16.04 12.04C17 10.95 17.59 9.5 17.59 8C17.59 4.91 14.68 2 11.09 2H10.5ZM6 8.5C6 6.57 7.57 5 9.5 5C11.43 5 13 6.57 13 8.5C13 10.43 11.43 12 9.5 12C7.57 12 6 10.43 6 8.5Z" />
+    </svg>
+  </button>
+</div>
 
                 <button id="theme-toggle" onClick={toggleTheme} className={`theme-btn ${theme === 'light-mode' ? '' : 'light-mode-active'}`}>
                   <span className="material-symbols-outlined moon" style={{ color: 'white' }}>clear_day</span>
                   <span className="material-symbols-outlined sun" style={{ color: 'white' }}>bedtime</span>
                 </button>
+<div className="mb-3 mb-lg-0" id="sideMenuButton">
+  <a
+    onClick={() => setOpenCavas(!openCanvas)}
+    role="button"
+    className="btn btn-primary sideMenuButton"
+    style={{
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+      border: 'none',
+      cursor: 'pointer',
+      padding: '8px'
+    }}
+  >
+    <div
+      style={{
+        backgroundColor: '#EBBF7D',
+        borderRadius: '50%',
+        width: '42px',
+        height: '42px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        fill="black"
+        width="20"
+        height="20"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        <path d="M391.1 351.1c-13.3-13.3-33.6-13.3-46.9 0l-36.5 36.5c-41.2-22.6-74.7-56.2-97.3-97.3l36.5-36.5c13.3-13.3 13.3-33.6 0-46.9L174.1 86.7c-13.3-13.3-33.6-13.3-46.9 0l-45.2 45.2c-26.6 26.6-35.5 65.6-23.7 101.6 34.6 105.3 116.4 187 221.7 221.7 35.9 11.8 74.9 2.9 101.6-23.7l45.2-45.2c13.3-13.3 13.3-33.6 0-46.9l-70.7-70.7z" />
+      </svg>
+    </div>
+  </a>
+</div>
 
-                <div className="mb-3 mb-lg-0" id="sideMenuButton">
-                  <a onClick={() => setOpenCavas(!openCanvas)} role="button" className="btn btn-primary sideMenuButton" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', border: 'none', cursor: 'pointer', padding: '8px' }}>
-                    <div style={{ backgroundColor: '#EBBF7D', borderRadius: '50%', width: '42px', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512" fill="black">
-                        <path d="M391.1 351.1c-13.3-13.3-33.6-13.3-46.9 0l-36.5 36.5c-41.2-22.6-74.7-56.2-97.3-97.3l36.5-36.5c13.3-13.3 13.3-33.6 0-46.9L174.1 86.7c-13.3-13.3-33.6-13.3-46.9 0l-45.2 45.2c-26.6 26.6-35.5 65.6-23.7 101.6 34.6 105.3 116.4 187 221.7 221.7 35.9 11.8 74.9 2.9 101.6-23.7l45.2-45.2c13.3-13.3 13.3-33.6 0-46.9l-70.7-70.7z" />
-                      </svg>
-                    </div>
-                  </a>
-                </div>
               </div>
             </div>
           </div>

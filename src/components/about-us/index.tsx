@@ -20,7 +20,6 @@ const Aboutus = () => {
       <HeaderOne />
       <Breacrumb title="About us" subtitle="About" />
       <AboutArea />
-      <VideoArea style_2={true} />
       <WorkprocessArea />
       <VideoAreaHomeOne />
       <TeamArea />

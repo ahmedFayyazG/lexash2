@@ -40,8 +40,8 @@ const services = [
 const ServiceArea = () => {
   return (
     <>
-      <div className="latest-service-wrapper bg-secondary">
-        <div className="divider"></div>
+   <div className="latest-service-wrapper" style={{ backgroundColor: '#FBF0DF' }}>
+        {/* <div className="divider"></div> */}
 
         <div className="container">
           <div className="row justify-content-center">
@@ -51,10 +51,11 @@ const ServiceArea = () => {
                   className="mb-0"
                   style={{
                     fontFamily: 'Roundo, sans-serif',
-                    fontWeight: 900
+                    fontWeight: 900,
+                    paddingTop: '3rem'
                   }}
                 >
-                  Our Services 
+                  Our Services
                 </h2>
               </div>
             </div>
@@ -102,8 +103,8 @@ const ServiceArea = () => {
                   <div className="icon-wrapper" style={{backgroundColor:"#EBBF7D"}}>{service.icon}</div>
                   <h2
                     style={{
-                      fontFamily: 'Roundo, sans-serif',
-                      fontWeight: 900,
+                      fontFamily: 'Poppins, sans-serif',
+                      fontWeight: 400,
                     }}
                   >
                     {service.title}
@@ -111,21 +112,23 @@ const ServiceArea = () => {
                   <p
                     className="mb-0"
                     style={{
-                      fontFamily: 'Roundo, sans-serif',
-                      fontWeight: 500,
+                      fontFamily: 'Poppins, sans-serif',
+                      fontWeight: 300,
+                      paddingTop: '1rem',
                     }}
                   >
                     {service.content}
                   </p>
                 </Link>
               </SwiperSlide>
+              
             ))}
 
-            <div className="swiper-pagination-2"></div>
+            <div className="swiper-pagination-2" style={{paddingBottom:"2rem"}}></div>
           </Swiper>
         </div>
 
-        <div className="divider"></div>
+        {/* <div className="divider"></div> */}
       </div>
     </>
   );

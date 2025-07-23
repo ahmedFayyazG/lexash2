@@ -1329,6 +1329,16 @@ picture.jarallax-img img {
 }
 .about-us-thumbnail > img {
   border-radius: 20px;
+  width: 100%;
+  height: auto;
+}
+
+/* Apply smaller height only on medium (desktop) and above */
+@media (min-width: 768px) {
+  .about-us-thumbnail > img {
+    height: 550px !important;
+    object-fit: cover;
+  }
 }
 .about-us-thumbnail .top-content {
   position: absolute;
@@ -5423,7 +5433,7 @@ form .btn {
   color: #0E0E0E;
 }
 .light-mode .header-search-btn .btn svg path {
-  fill: #0E0E0E;
+  fill: #ffffff;
 }
 .light-mode .btn-link {
   color: #0E0E0E;

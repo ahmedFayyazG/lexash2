@@ -4,7 +4,7 @@ import Link from 'next/link';
 const PriceArea = ({ style_2 }: any) => {
   return (
     <>
-      <div className={`price-table-wrapper ${style_2 ? "" : "bg-secondary"}`}>
+      <div className={`price-table-wrapper ${style_2 ? "" : "bg-#FBF0DF"}`}>
         <div className="divider"></div>
 
         <div className="container">
@@ -14,8 +14,8 @@ const PriceArea = ({ style_2 }: any) => {
                 <h2
                   className="mb-4"
                   style={{
-                    fontFamily: 'Roundo, sans-serif',
-                    fontWeight: 900,
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
                   Ready to discuss your case?
@@ -23,8 +23,8 @@ const PriceArea = ({ style_2 }: any) => {
                 <p
                   className="mb-4"
                   style={{
-                    fontFamily: 'Roundo, sans-serif',
-                    fontWeight: 500,
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 300,
                     fontSize: '1.25rem',
                   }}
                 >
@@ -33,10 +33,6 @@ const PriceArea = ({ style_2 }: any) => {
                 <Link
                   href="/contact"
                   className="btn btn-primary"
-                  style={{
-                    fontFamily: 'Roundo, sans-serif',
-                    fontWeight: 700,
-                  }}
                 >
                   Contact Us
                 </Link>

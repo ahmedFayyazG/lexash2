@@ -6,7 +6,7 @@ const SearchArea = ({setSearchOpen, isSearchOpen} : any) => {
     <>
       <div className={`search-bg-overlay ${isSearchOpen ? 'open' : ''}`} id="searchOverlay" onClick={() => setSearchOpen(false)}></div>
       <div className={`search-form-popup ${isSearchOpen ? 'open' : ''}`}>
-        <h2 className="mb-4" style={{fontFamily:"Poppins"}}>Ask me anything...</h2>
+        <h2 className="mb-4" style={{fontFamily:"Poppins"}}>How can we help you...</h2>
         <button type="button" className="close-btn" id="searchClose" aria-label="Close" onClick={() => setSearchOpen(false)}>
           &times;
         </button>

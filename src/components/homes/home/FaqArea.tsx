@@ -13,8 +13,8 @@ const FaqArea = ({ style_2 }: any) => {
                 <h2
                   className="mb-0"
                   style={{
-                    fontFamily: 'Roundo, sans-serif',
-                    fontWeight: 900,
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 400,
                   }}
                 >
                   Frequently Asked Questions
@@ -28,13 +28,13 @@ const FaqArea = ({ style_2 }: any) => {
                 <div className="faq-info d-flex align-items-center">
                   <h2
                     className="mb-0"
-                    style={{ fontFamily: 'Roundo, sans-serif', fontWeight: 900 }}
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}
                   >
                     A.I
                   </h2>
                   <p
                     className="mb-0"
-                    style={{ fontFamily: 'Roundo, sans-serif', fontWeight: 600 }}
+                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}
                   >
                     powered
                   </p>
@@ -88,8 +88,8 @@ const FaqArea = ({ style_2 }: any) => {
                           aria-expanded={id === 1 ? 'true' : 'false'}
                           aria-controls={`faqQuestion${id}`}
                           style={{
-                            fontFamily: 'Roundo, sans-serif',
-                            fontWeight: 900,
+                            fontFamily: 'poppins, sans-serif',
+                            fontWeight: 400,
                           }}
                         >
                           {question}
@@ -102,7 +102,7 @@ const FaqArea = ({ style_2 }: any) => {
                       >
                         <div
                           className="accordion-body pt-0"
-                          style={{ fontFamily: 'Roundo, sans-serif', fontWeight: 500 }}
+                          style={{ fontFamily: 'poppins, sans-serif', fontWeight: 300 }}
                         >
                           {answer}
                         </div>

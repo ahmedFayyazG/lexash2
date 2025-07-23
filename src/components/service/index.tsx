@@ -12,7 +12,7 @@ const Service = () => {
   return (
     <>
     <HeaderOne />
-    <Breacrumb title="Services" subtitle="Services" />
+    <Breacrumb title="Our Services" subtitle="Our Services" />
     <ServiceArea />
     {/* <ServiceAbout /> */}
     <PriceArea style_2={true} />

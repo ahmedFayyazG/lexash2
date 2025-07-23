@@ -23,10 +23,10 @@ const HomeTwo = () => {
       <MissionArea />
       <ServiceArea />
       <ProjectArea />
-      <CategoryArea />
       <ProcessArea />
       <TeamArea />
       <PriceArea />
+      <CategoryArea />
       <FaqArea />
       <TestimonialArea />
       <BlogArea />
