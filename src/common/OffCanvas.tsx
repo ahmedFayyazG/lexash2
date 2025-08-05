@@ -54,7 +54,7 @@ const OffCanvas = ({openCanvas, setOpenCavas} : any) => {
 
               <div>
                 <p style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"300"}}>Phone number</p>
-                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>+44 ---- ----- ---</h5>
+                <h5 className="mb-0" style={{ fontFamily: 'Poppins, sans-serif', fontWeight:"400"}}>+44 7774 264578</h5>
               </div>
             </div>
 

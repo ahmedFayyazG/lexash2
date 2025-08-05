@@ -13,7 +13,7 @@ const menu_data = [
   {
     id: 2,
     title: "Expertise",
-    link: "#",
+    link: "/service",
     has_dropdown: true,
     sub_menus: [
       // {
@@ -31,16 +31,16 @@ const menu_data = [
         title: "Services",
         has_inner_dropdown: false, 
       },
-      // {
-      //   link: "#",
-      //   title: "Authentification",
-      //   has_inner_dropdown: true,
-      //   inner_submenu: [
-      //     { link: "/register", title: "Register" }, 
-      //     { link: "/login", title: "Login" }, 
+      {
+        link: "#",
+        title: "Authentification",
+        has_inner_dropdown: true,
+        inner_submenu: [
+          { link: "/register", title: "Register" }, 
+          { link: "/login", title: "Login" }, 
 
-      //   ]
-      // },
+        ]
+      },
       // {
       //   link: "/pricing-plan",
       //   title: "Pricing Plan",
@@ -70,7 +70,7 @@ const menu_data = [
   },
   {
     id: 3,
-    title: "About Us",
+    title: "About",
     link: "/about-us",
     has_dropdown: true,
     sub_menus: [
@@ -81,6 +81,15 @@ const menu_data = [
     id: 4,
     title: "Blog",
     link: "#",
+    has_dropdown: true,
+    sub_menus: [
+      { link: "/blog", title: "Blog", }
+    ]
+  },
+   {
+    id: 4,
+    title: "Contact Us",
+    link: "/contact",
     has_dropdown: true,
     sub_menus: [
       { link: "/blog", title: "Blog", }

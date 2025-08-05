@@ -18,12 +18,12 @@ const FooterOne = ({ style_2 }: any) => {
             <div className="col-12 col-md-6 col-xl">
               <div className="footer-card">
 
-                <a href="#">
-                  <img className="dark-logo" src="/assets/img/bg-img/fullnewLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
-                  <img className="light-logo" src="/assets/img/bg-img/fullnewLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
+                <a href="/">
+                  <img className="dark-logo" src="/assets/img/bg-img/justLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
+                  <img className="light-logo" src="/assets/img/bg-img/justLogo.png"  style={{ width: '210px', height: 'auto' }} alt="" />
                 </a>
 
-                <div className="social-nav">
+                <div className="social-nav" style={{ display: 'flex', gap: '10px', marginTop: '-60px' }}>
                   <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                       className="bi bi-facebook" viewBox="0 0 16 16">

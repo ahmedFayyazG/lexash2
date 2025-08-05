@@ -1,5 +1,5 @@
-// tailwind.config.js
 module.exports = {
+  // ✅ This block can stay even in Tailwind v4 (it's optional if using @source, but still works)
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -11,9 +11,7 @@ module.exports = {
         gold: "#E3B77A",
       },
       fontFamily: {
-        // chakra: ['Roundo', 'sans-serif'],
-      roundo: ['"Roundo"', 'sans-serif'],
-
+        poppins: ['"Poppins"', 'sans-serif'],
       },
     },
   },

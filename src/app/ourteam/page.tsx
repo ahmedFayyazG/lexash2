@@ -30,7 +30,7 @@ const OurTeamPage = () => {
     },
     {
       name: "Javeria Zain",
-      position: "Business Developer",
+      position: "Bussines Support Manager",
       image: "https://workik-widget-assets.s3.amazonaws.com/widget-assets/images/ft12.svg",
     },
     {
