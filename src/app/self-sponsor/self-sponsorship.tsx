@@ -1,10 +1,21 @@
 
-'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
+import React, { useState, useEffect, ReactNode } from 'react';
 
+// --- MOCK COMPONENTS & TYPES ---
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>
+    {children}
+  </a>
+);
+
+// --- INTERFACES ---
 interface FAQItem {
   question: string;
   answer: string;
@@ -13,7 +24,7 @@ interface FAQItem {
 interface Requirement {
   title: string;
   description: string;
-  icon: JSX.Element;
+  icon: ReactNode;
 }
 
 interface ProcessStep {
