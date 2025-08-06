@@ -1,5 +1,5 @@
 
-
+"use client";
 import React, { useState, useEffect, ReactNode } from 'react';
 
 // --- MOCK COMPONENTS & TYPES ---
