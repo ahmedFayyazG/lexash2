@@ -20,7 +20,7 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 interface Guarantee {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 interface FAQItem {
