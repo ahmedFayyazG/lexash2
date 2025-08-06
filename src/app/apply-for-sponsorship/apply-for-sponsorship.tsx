@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
 // --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
   </a>
@@ -18,7 +24,7 @@ interface ProcessStep {
 interface Guarantee {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 // --- COMPONENT DATA ---
@@ -44,6 +50,23 @@ const guarantees: Guarantee[] = [
 
 // --- MAIN PAGE COMPONENT ---
 const WhyChooseUsPage = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+    return () => {
+        elementsToAnimate.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <>
       <div className="pageWrapper">
@@ -62,25 +85,82 @@ const WhyChooseUsPage = () => {
           }
         `}</style>
         <style>{`
+          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+          .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+          .delay-1 { transition-delay: 0.1s; }
+          .delay-2 { transition-delay: 0.2s; }
+          .delay-3 { transition-delay: 0.3s; }
+          
           .hero-section {
             background-color: #212C3C;
             color: white;
             padding: 7rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
           }
-          .hero-content { max-width: 800px; margin: 0 auto; }
-          .hero-content h1 { color: #fff; }
+          .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+          }
+          .gradient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.25;
+          }
+          .blob1 {
+            width: 600px;
+            height: 600px;
+            background: #EBBF7D;
+            top: -200px;
+            left: -200px;
+            animation: moveBlob 20s infinite alternate;
+          }
+          .blob2 {
+            width: 500px;
+            height: 500px;
+            background: #4A5568;
+            bottom: -150px;
+            right: -150px;
+            animation: moveBlob 25s infinite alternate-reverse;
+          }
+          @keyframes moveBlob {
+            0% { transform: scale(1) translate(0, 0) rotate(0deg); }
+            100% { transform: scale(1.3) translate(150px, 80px) rotate(180deg); }
+          }
+          .hero-content { 
+            max-width: 800px; 
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+          }
+          .hero-content h1 { 
+            color: #fff; 
+            animation: fadeInDown 1s ease-out 0.2s backwards;
+          }
           .hero-content p {
             font-size: 1.1rem;
             margin: 1.5rem 0 2.5rem;
             color: rgba(255, 255, 255, 0.85);
+            animation: fadeInDown 1s ease-out 0.4s backwards;
           }
+          @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
           .cta-group {
             display: flex;
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
             margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+          }
+           @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
           .cta-button {
             background: #EBBF7D;
@@ -100,6 +180,7 @@ const WhyChooseUsPage = () => {
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.8s backwards;
           }
           .hero-benefit-item {
             display: flex;
@@ -231,9 +312,13 @@ const WhyChooseUsPage = () => {
         `}</style>
 
         <section className="hero-section">
+            <div className="hero-background">
+                <div className="gradient-blob blob1"></div>
+                <div className="gradient-blob blob2"></div>
+            </div>
           <div className="container">
             <div className="hero-content">
-              <h1>Simplify Your Sponsor Licence Application Process with Experts & Their Support</h1>
+              <h1>Simplify Your Sponsor Licence Application Process with Experts &amp; Their Support</h1>
               <p>
                 We know how important this is for you. Achieve Sponsorship Licence success with our legal experts by your side, guiding you at every step.
               </p>
@@ -253,16 +338,16 @@ const WhyChooseUsPage = () => {
         <section className="section">
             <div className="container">
                 <div className="intro-grid">
-                    <div className="intro-content">
+                    <div className="intro-content animate-on-scroll">
                         <h2>Navigate The Complex System With A UK Immigration Solicitor That Cares</h2>
                         <p>The UK offers many opportunities for individuals and businesses. But the immigration system is notoriously complex. One administrative oversight could mean a major setback for your plans, which can sometimes take years to resolve. That's a pressure you can do without—and it's why we believe immigration representation shouldn't keep you awake at night. At Lexington Ashworth, we make sure it doesn't.</p>
                         <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
                     </div>
                     <div className="why-us-grid">
-                        <div className="why-us-card"><h4>Proven Expertise</h4><p>Over a decade helping UK employers secure and maintain Sponsor Licences.</p></div>
-                        <div className="why-us-card"><h4>End-to-End Support</h4><p>From eligibility checks to post-grant compliance, our team guides you every step.</p></div>
-                        <div className="why-us-card"><h4>Tailored Approach</h4><p>We customise advice to your organisation’s size and sector to ensure compliance.</p></div>
-                        <div className="why-us-card"><h4>Fast Communication</h4><p>Clear timelines, proactive reminders, and direct access to your case manager.</p></div>
+                        <div className="why-us-card animate-on-scroll delay-1"><h4>Proven Expertise</h4><p>Over a decade helping UK employers secure and maintain Sponsor Licences.</p></div>
+                        <div className="why-us-card animate-on-scroll delay-2"><h4>End-to-End Support</h4><p>From eligibility checks to post-grant compliance, our team guides you every step.</p></div>
+                        <div className="why-us-card animate-on-scroll delay-3"><h4>Tailored Approach</h4><p>We customise advice to your organisation’s size and sector to ensure compliance.</p></div>
+                        <div className="why-us-card animate-on-scroll delay-4"><h4>Fast Communication</h4><p>Clear timelines, proactive reminders, and direct access to your case manager.</p></div>
                     </div>
                 </div>
             </div>
@@ -270,11 +355,11 @@ const WhyChooseUsPage = () => {
 
         <section id="process" className="section bg-light">
             <div className="container">
-                <div className="section-header">
+                <div className="section-header animate-on-scroll">
                     <div className="subtitle">OUR PROVEN METHOD</div>
                     <h2>The 10-Step Process We Follow for Your Immigration Matter</h2>
                 </div>
-                <div className="process-section-container">
+                <div className="process-section-container animate-on-scroll">
                     <div className="process-checklist">
                         <div className="process-header">
                             <h3>10-STEP CHECKLIST – Your UK Immigration Matter</h3>
@@ -304,14 +389,14 @@ const WhyChooseUsPage = () => {
 
         <section id="guarantees" className="section bg-light">
             <div className="container">
-                <div className="section-header">
+                <div className="section-header animate-on-scroll">
                     <div className="subtitle">OUR COMMITMENT</div>
                     <h2>Need Expert Legal Guidance?</h2>
                     <p>We have more than 1,200 positive client reviews and a listing in The Legal 500 best UK law firms, so you can rest assured your immigration challenges are in safe hands.</p>
                 </div>
                 <div className="guarantee-grid">
                     {guarantees.map((item, index) => (
-                        <div key={index} className="guarantee-card">
+                        <div key={index} className="guarantee-card animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
                             <h4><div className="guarantee-icon">{item.icon}</div>{item.title}</h4>
                             <p>{item.description}</p>
                         </div>
