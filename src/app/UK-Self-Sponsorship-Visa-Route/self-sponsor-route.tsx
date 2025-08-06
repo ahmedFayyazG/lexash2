@@ -1,14 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
+
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  children: ReactNode;
+}
 // --- MOCK COMPONENTS TO FIX RESOLVE ERRORS ---
-const Link = ({ href, children, ...props }) => (
+const Link: React.FC<LinkProps> = ({ href, children, ...props }) => (
   <a href={href} {...props}>
     {children}
   </a>
 );
-
 // --- INTERFACES ---
 interface FAQItem {
   question: string;
@@ -18,7 +22,7 @@ interface FAQItem {
 interface Requirement {
   title: string;
   description: string;
-  icon: JSX.Element;
+  icon: ReactNode;
 }
 
 interface ProcessStep {
