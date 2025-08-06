@@ -812,22 +812,45 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
                         }}
                       >
                         <Link
-                          href={item.link}
-                          style={{ fontFamily: 'Roundo', fontWeight: 700, fontSize: '1rem', color: 'white', whiteSpace: 'nowrap', display: 'flex', alignItems: 'center' }}
-                          onClick={(e) => {
-                            if (window.innerWidth <= 991) {
-                              e.preventDefault();
-                              openMobileMenu(item.title);
-                            }
-                          }}
-                          onMouseEnter={(e) => (e.currentTarget.style.color = '#EBBF7D')}
-                          onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}
-                        >
-                          {item.title}
-                          <svg className="dropdown-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
-                          </svg>
-                        </Link>
+  href={item.link}
+  style={{
+    fontFamily: 'Roundo',
+    fontWeight: 700,
+    fontSize: '1rem',
+    color: 'white',
+    whiteSpace: 'nowrap',
+    display: 'flex',
+    alignItems: 'center'
+  }}
+  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.innerWidth <= 991) {
+      e.preventDefault();
+      openMobileMenu(item.title);
+    }
+  }}
+  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = '#EBBF7D';
+  }}
+  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = 'white';
+  }}
+>
+  {item.title}
+  <svg
+    className="dropdown-arrow-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+  >
+    <path
+      d="m6 9 6 6 6-6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
+  </svg>
+</Link>
+
 
                         {/* --- DESKTOP MEGA MENU --- */}
                         <div className={`desktop-expertise-mega-menu ${showExpertiseDropdown ? 'show' : ''}`}>
@@ -984,17 +1007,28 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
                   return (
                     <li key={i} className="vorix-dd" onMouseEnter={() => setNavTitle(item.title)} onMouseLeave={() => setNavTitle('')}>
                       <Link
-                        href={item.link}
-                        style={{ fontFamily: 'Roundo', fontWeight: 700, fontSize: '1rem', color: 'white', whiteSpace: 'nowrap' }}
-                        onClick={(e) => {
-                            if (item.has_dropdown && window.innerWidth <= 991) {
-                                e.preventDefault();
-                                openMobileMenu(item.title);
-                            }
-                        }}
-                        onMouseEnter={(e) => (e.currentTarget.style.color = '#EBBF7D')}
-                        onMouseLeave={(e) => (e.currentTarget.style.color = 'white')}
-                      >
+  href={item.link}
+  style={{
+    fontFamily: 'Roundo',
+    fontWeight: 700,
+    fontSize: '1rem',
+    color: 'white',
+    whiteSpace: 'nowrap'
+  }}
+  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (item.has_dropdown && window.innerWidth <= 991) {
+      e.preventDefault();
+      openMobileMenu(item.title);
+    }
+  }}
+  onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = '#EBBF7D';
+  }}
+  onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.currentTarget.style.color = 'white';
+  }}
+>
+
                         {item.title}
                       </Link>
                       {item.has_dropdown && item.sub_menus && (
