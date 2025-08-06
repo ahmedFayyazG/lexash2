@@ -3,6 +3,7 @@ import React from 'react';
 import { useContactForm } from './useContactForm';
 import { ContactInfoCard } from './ContactInfoCard';
 import { InputField } from './InputField';
+import { useMediaQuery } from './useMediaQuery'; // <<< 1. IMPORT THE NEW HOOK
 
 // --- Theme Colors and Styles defined once ---
 const theme = {
@@ -25,6 +26,9 @@ const ContactArea = () => {
     handleSubmit
   } = useContactForm();
 
+  // <<< 2. USE THE HOOK TO DETECT SCREEN SIZE
+  const isDesktop = useMediaQuery('(min-width: 992px)');
+
   const pageStyle: React.CSSProperties = {
     fontFamily: "'Poppins', sans-serif",
     background: theme.background,
@@ -32,6 +36,18 @@ const ContactArea = () => {
     color: theme.text,
     minHeight: '100vh',
     padding: 'clamp(4rem, 10vw, 8rem) 2rem',
+  };
+
+  // <<< 3. DEFINE RESPONSIVE STYLES
+  const formSectionStyle: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: '1fr', // Default for mobile
+    gap: '5rem',
+    alignItems: 'flex-start',
+    // Apply desktop styles conditionally
+    ...(isDesktop && {
+      gridTemplateColumns: '1fr 1.2fr',
+    }),
   };
 
   const buttonStyle: React.CSSProperties = {
@@ -109,7 +125,8 @@ const ContactArea = () => {
           {cardData.map(card => <ContactInfoCard key={card.title} {...card} />)}
         </section>
 
-        <section style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '5rem', alignItems: 'flex-start', '@media (min-width: 992px)': { gridTemplateColumns: '1fr 1.2fr' } }}>
+        {/* <<< 4. APPLY THE STYLE OBJECT HERE */}
+        <section style={formSectionStyle}>
           <aside>
             <h2 style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1.2, color: theme.text, borderLeft: `4px solid ${theme.accent}`, paddingLeft: '1.5rem', marginBottom: '2rem' }}>
               Your Inquiry
