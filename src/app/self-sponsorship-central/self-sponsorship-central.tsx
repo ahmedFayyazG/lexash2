@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect } from 'react';
 
+
 interface LinkProps {
   href: string;
   children: ReactNode;
@@ -9,11 +10,8 @@ interface LinkProps {
 }
 
 const Link = ({ href, children, ...props }: LinkProps) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
+  <a href={href} {...props}>{children}</a>
 );
-
 // --- INTERFACES ---
 interface Benefit {
     title: string;
