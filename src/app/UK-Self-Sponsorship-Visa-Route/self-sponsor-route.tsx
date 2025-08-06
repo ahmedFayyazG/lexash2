@@ -2,372 +2,152 @@
 
 import React, { useState, useEffect, ReactNode } from 'react';
 
-
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+// --- MOCK COMPONENTS ---
+interface LinkProps {
   href: string;
   children: ReactNode;
+  [key: string]: any;
 }
-// --- MOCK COMPONENTS TO FIX RESOLVE ERRORS ---
-const Link: React.FC<LinkProps> = ({ href, children, ...props }) => (
+
+const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
   </a>
 );
+
 // --- INTERFACES ---
+interface Guarantee {
+    title: string;
+    description: string;
+    icon: JSX.Element;
+}
+
 interface FAQItem {
-  question: string;
-  answer: string;
-}
-
-interface Requirement {
-  title: string;
-  description: string;
-  icon: ReactNode;
-}
-
-interface ProcessStep {
-  title: string;
-  description: string;
+    question: string;
+    answer: string;
 }
 
 // --- COMPONENT DATA ---
-const eligibilityRequirements: Requirement[] = [
-  {
-    title: 'Age & English Proficiency',
-    description: 'Be at least 18 years old and hold a CEFR B1 English qualification (e.g., IELTS 6.0) to ensure effective communication.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>,
-  },
-  {
-    title: 'Valid Passport',
-    description: 'Hold a valid passport from a country requiring a UK visa. Ensure it has at least six months of validity remaining.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>,
-  },
-  {
-    title: 'Active UK Business',
-    description: 'You must own a genuine, actively trading UK company or commit to acquiring one as part of your application.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="6" y1="22" x2="6" y2="12"></line><line x1="18" y1="22" x2="18" y2="12"></line><path d="M12 22V8.8c0-1.4 1.2-2.8 2.5-2.8s2.5 1.4 2.5 2.8V22"></path><path d="M12 22V8.8c0-1.4-1.2-2.8-2.5-2.8S7 7.4 7 8.8V22"></path><path d="M5 12H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h3v6zm14 0h3a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-3v6z"></path></svg>,
-  },
-  {
-    title: 'Business Experience',
-    description: 'Demonstrate serious entrepreneurial ambition or proven experience in your industry to confidently run the UK company.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 16 12 12 8 16"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path><polyline points="16 16 12 12 8 16"></polyline></svg>,
-  },
-  {
-    title: 'Authorising Officer (AO)',
-    description: 'Appoint a UK-settled individual to act as your Authorising Officer for Home Office correspondence.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>,
-  },
-  {
-    title: 'Sponsor Licence Documents',
-    description: 'Prepare bank statements, Employer’s Liability insurance, PAYE registration, VAT certificate, and a detailed cover letter.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>,
-  },
-  {
-    title: 'Salary Threshold',
-    description: 'Your role must pay at least £41,700 per year or the going rate for its SOC code, whichever is higher.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>,
-  },
-  {
-    title: 'Operating Budget',
-    description: 'Budget at least £150,000 for first-year costs like rent, salaries, and equipment. A detailed cost breakdown is crucial.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>,
-  },
-  {
-    title: 'Legal Fees',
-    description: 'Be prepared to cover all legal service fees for the Sponsor Licence, CoS allocation, and Skilled Worker visa processing.',
-    icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>,
-  },
-];
-
-const processSteps: ProcessStep[] = [
-  {
-    title: 'Sponsor Licence Application',
-    description: 'We guide your Sponsor Licence application preparation and filing.',
-  },
-  {
-    title: 'HR Compliance Setup',
-    description: 'We create your HR compliance policies and train your team.',
-  },
-  {
-    title: 'Certificate of Sponsorship',
-    description: 'We manage your CoS allocation quickly and accurately.',
-  },
-  {
-    title: 'Skilled Worker Visa Support',
-    description: 'We support your Skilled Worker visa application from start to finish.',
-  },
-  {
-    title: 'Ongoing Compliance Services',
-    description: 'We handle your ongoing sponsor duties, audits and reporting.',
-  },
+const guarantees: Guarantee[] = [
+    { title: 'Expert Service', description: 'Bad advice can lead to delays and refusals. We assign a subject matter expert to manage your case throughout.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
+    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours or we refund 20% of your fees.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
+    { title: 'Fixed Fees', description: 'Our services have fixed fees so you know exactly how much you need to pay, with no nasty surprises down the line.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> },
 ];
 
 const faqItems: FAQItem[] = [
-    {
-      question: 'How much money is needed for a self-sponsorship visa in the UK?',
-      answer: 'You should budget at least £150,000 for first-year operating costs, plus funds to meet the minimum salary requirement (at least £41,700) and cover all legal fees.',
-    },
-    {
-      question: 'What are the requirements for UK visa sponsorship?',
-      answer: 'Key requirements include having a genuine UK business, obtaining a Sponsor Licence, meeting the English language and age criteria, and ensuring the sponsored role meets the minimum skill and salary levels.',
-    },
-    {
-      question: 'Can I apply for a UK visa by myself?',
-      answer: 'While you can apply by yourself, the self-sponsorship route is highly complex. Using an experienced immigration solicitor is strongly recommended to avoid common pitfalls and maximize your chances of success.',
-    },
-    {
-      question: 'Who is eligible for work in the UK without sponsorship?',
-      answer: 'Individuals with certain types of visas (like a Spouse Visa or Ancestry Visa), those with settled status, or British citizens do not require sponsorship to work in the UK.',
-    },
-    {
-      question: 'What if I change my role’s duties or salary post-grant?',
-      answer: 'If you change to a job with a different occupation code or your new salary no longer meets the threshold, you must submit a new Skilled Worker visa application with a new Certificate of Sponsorship.',
-    },
+    { question: 'What is Paragraph 322(5)?', answer: 'Paragraph 322(5) of the Immigration Rules is a general ground for refusal. It is often used by the Home Office when they have concerns about an applicant\'s character or conduct, including discrepancies in their tax history which may suggest deception.' },
+    { question: 'How can I challenge an ILR refusal due to tax issues?', answer: 'The best approach is typically to submit a new, well-prepared application that directly addresses the Home Office\'s concerns. This involves providing comprehensive evidence, a detailed explanation for any amendments, and strong legal representations to demonstrate your good character.' },
+    { question: 'Why choose Lexington Ashworth for a tax-related ILR refusal?', answer: 'Our team has extensive experience in successfully overturning ILR refusals based on tax amendments. We meticulously review your entire immigration and financial history to build a robust case that pre-emptively resolves the Home Office\'s concerns, giving you the best possible chance of success.' },
 ];
 
 
-// --- LOADING COMPONENT ---
-const LoadingScreen = ({ isLoading }: { isLoading: boolean }) => (
-  <div className={`loadingScreen ${!isLoading ? 'hide' : ''}`} style={{
-    position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', background: '#ffffff',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999,
-    transition: 'opacity 0.3s ease-in-out, visibility 0.3s ease-in-out',
-    opacity: isLoading ? 1 : 0, visibility: isLoading ? 'visible' : 'hidden',
-    pointerEvents: isLoading ? 'auto' : 'none'
-  }}>
-    <div style={{ textAlign: 'center' }}>
-      <div style={{
-        width: '60px', height: '60px', margin: '0 auto 1.5rem', border: '3px solid #f0f0f0',
-        borderTop: '3px solid #EBBF7D', borderRadius: '50%', animation: 'spin 0.8s linear infinite'
-      }} />
-      <p style={{ color: '#2c3e50', fontSize: '1.1rem', fontWeight: 500, fontFamily: "'Poppins', sans-serif" }}>Loading...</p>
-    </div>
-    <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
-  </div>
-);
-
 // --- MAIN PAGE COMPONENT ---
-const SelfSponsorshipPage = () => {
-  const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isMounted, setIsMounted] = useState(false);
+const ILRTaxRefusalPage = () => {
+    const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
 
-  useEffect(() => {
-    setIsMounted(true);
-    const timer = setTimeout(() => setIsLoading(false), 500);
-    return () => clearTimeout(timer);
+    const toggleFAQ = (index: number) => {
+        setActiveFAQ(activeFAQ === index ? null : index);
+    };
+
+    useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+    return () => {
+        elementsToAnimate.forEach(el => observer.unobserve(el));
+    };
   }, []);
-
-  // --- ANIMATION OBSERVER EFFECT ---
-  useEffect(() => {
-    if (!isLoading) {
-      const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                  entry.target.classList.add('is-visible');
-              }
-          });
-      }, { threshold: 0.1 });
-
-      const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-      elementsToAnimate.forEach(el => observer.observe(el));
-
-      return () => {
-          elementsToAnimate.forEach(el => observer.unobserve(el));
-      };
-    }
-  }, [isLoading]);
-
-  if (!isMounted) {
-    return <LoadingScreen isLoading={true} />;
-  }
-
-  const toggleFAQ = (index: number) => {
-    setActiveFAQ(activeFAQ === index ? null : index);
-  };
 
   return (
     <>
-      <LoadingScreen isLoading={isLoading} />
-
-      <div className={`pageWrapper ${!isLoading ? 'loaded' : ''}`} style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.4s ease-in-out' }}>
+      <div className="pageWrapper">
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-          body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.6; color: #333; background: #fff; }
+          body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; background: #fff; font-weight: 300; }
           * { box-sizing: border-box; }
           .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-          h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: #2c3e50; }
-          h1 { font-size: 3rem; font-weight: 700; line-height: 1.2; }
-          h2 { font-size: 2.25rem; font-weight: 600; margin-bottom: 2rem; text-align: center; }
-          h3 { font-size: 1.5rem; font-weight: 600; }
+          h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: #212C3C; font-weight: 400; }
+          h1 { font-size: 3rem; line-height: 1.25; }
+          h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+          p { color: #555; font-size: 1rem; }
           @media (max-width: 768px) {
             h1 { font-size: 2.25rem; }
-            h2 { font-size: 1.75rem; }
+            h2 { font-size: 2rem; }
           }
         `}</style>
         <style>{`
+          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+          .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+          .delay-1 { transition-delay: 0.1s; }
+          .delay-2 { transition-delay: 0.2s; }
+          .delay-3 { transition-delay: 0.3s; }
+          
           .hero-section {
-            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+            background-color: #212C3C;
             color: white;
-            padding: 6rem 0 4rem;
+            padding: 7rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
           }
-          .hero-content p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 1rem auto 2rem;
-            opacity: 0.9;
+          .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
+          .gradient-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; }
+          .blob1 { width: 600px; height: 600px; background: #EBBF7D; top: -200px; left: -200px; animation: moveBlob 20s infinite alternate; }
+          .blob2 { width: 500px; height: 500px; background: #c0392b; bottom: -150px; right: -150px; animation: moveBlob 25s infinite alternate-reverse; }
+          @keyframes moveBlob {
+            0% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
+            100% { transform: scale(1.4) translate(120px, 80px) rotate(180deg); }
           }
-          .cta-button-group {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-          }
-          .cta-button {
-            background: #EBBF7D;
-            color: #2c3e50;
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-          }
-          .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(235, 191, 125, 0.4);
-          }
-          .cta-button.secondary {
-            background: transparent;
-            color: #EBBF7D;
-            border: 2px solid #EBBF7D;
-          }
+          .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+          .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; }
+          .hero-content p { font-size: 1.1rem; margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
+          @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+          .cta-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeInUp 1s ease-out 0.6s backwards; }
+          @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+          .cta-button { background: #EBBF7D; color: #212C3C; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+          .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(235, 191, 125, 0.4); }
+          .cta-button.secondary { background: transparent; color: #EBBF7D; border: 1px solid #EBBF7D; }
+          
           .section { padding: 5rem 0; }
           .section.bg-light { background: #f8f9fa; }
-          .intro-text {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 3.5rem;
-            font-size: 1.1rem;
-            color: #555;
-          }
-          
-          /* --- NEW ANIMATED REQUIREMENTS SECTION --- */
-          .requirements-list {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-          }
-          .requirement-item {
-            display: flex;
-            align-items: center;
-            background: #fff;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-            border: 1px solid #e9ecef;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          .requirement-item.is-visible {
-            opacity: 1;
-            transform: translateX(0);
-          }
-          .requirement-item:nth-child(2) { transition-delay: 0.1s; }
-          .requirement-item:nth-child(3) { transition-delay: 0.2s; }
-          .requirement-item:nth-child(4) { transition-delay: 0.3s; }
-          .requirement-item:nth-child(5) { transition-delay: 0.4s; }
-          .requirement-item:nth-child(6) { transition-delay: 0.5s; }
-          .requirement-item:nth-child(7) { transition-delay: 0.6s; }
-          .requirement-item:nth-child(8) { transition-delay: 0.7s; }
-          .requirement-item:nth-child(9) { transition-delay: 0.8s; }
+          .section-header { text-align: center; max-width: 800px; margin: 0 auto 3.5rem; }
+          .section-header .subtitle { color: #EBBF7D; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
-          .requirement-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(44, 62, 80, 0.12);
-            border-color: #EBBF7D;
-          }
-          .requirement-icon-wrapper {
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f8f9fa;
-            border-right: 1px solid #e9ecef;
-            border-top-left-radius: 12px;
-            border-bottom-left-radius: 12px;
-          }
-          .requirement-icon {
-            width: 48px;
-            height: 48px;
-            color: #EBBF7D;
-          }
-          .requirement-icon svg { width: 100%; height: 100%; }
-          .requirement-content {
-            padding: 1.5rem 2rem;
-          }
-          .requirement-content h4 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-          .requirement-content p { color: #6c757d; font-size: 0.95rem; margin: 0; }
-          
-          .process-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-          .process-steps {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            width: 100%;
-            margin-top: 3rem;
-            position: relative;
-          }
-          .process-steps::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 10%;
-            right: 10%;
-            height: 2px;
-            background: #e0e0e0;
-            z-index: 1;
-          }
-          .step {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-          }
-          .step-number {
-            width: 60px;
-            height: 60px;
-            background: #fff;
-            color: #EBBF7D;
-            border: 2px solid #EBBF7D;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin: 0 auto 1rem;
-            transition: all 0.3s ease;
-          }
-          .step:hover .step-number {
-            background: #EBBF7D;
-            color: #2c3e50;
-            transform: scale(1.1);
-          }
-          .step h4 { font-size: 1.1rem; margin-bottom: 0.5rem; }
-          .step p { font-size: 0.9rem; color: #6c757d; }
+          .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+          .intro-content h2 { text-align: left; }
+          .intro-image { border-radius: 12px; max-width: 100%; }
 
+          .testimonial-card { background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(44, 62, 80, 0.1); max-width: 800px; margin: 3rem auto; padding: 2.5rem; }
+          .testimonial-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+          .testimonial-header h4 { margin: 0; }
+          .stars { color: #f1c40f; }
+          .testimonial-body { font-style: italic; color: #555; }
+          .testimonial-author { font-weight: 500; margin-top: 1.5rem; text-align: right; }
+
+          .guarantee-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+          .guarantee-card { background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid #e9ecef; }
+          .guarantee-card h4 { display: flex; align-items: center; gap: 0.75rem; }
+          .guarantee-icon { color: #EBBF7D; }
+          
           .faq-container { max-width: 800px; margin: 0 auto; }
           .faq-item {
             background: #fff;
             margin-bottom: 1rem;
             border-radius: 8px;
             border: 1px solid #e5e5e5;
+            transition: all 0.3s ease;
+          }
+          .faq-item.active {
+             border-color: #EBBF7D;
+             box-shadow: 0 5px 20px rgba(235, 191, 125, 0.2);
           }
           .faq-question {
             padding: 1.5rem;
@@ -375,7 +155,7 @@ const SelfSponsorshipPage = () => {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 600;
+            font-weight: 500;
             color: #2c3e50;
             background: none;
             border: none;
@@ -384,100 +164,117 @@ const SelfSponsorshipPage = () => {
             font-size: 1.1rem;
           }
           .faq-answer {
-            padding: 0 1.5rem;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.4s ease-in-out;
+            transition: max-height 0.5s ease-in-out;
+          }
+          .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: #555;
           }
           .faq-item.active .faq-answer {
-            padding: 0 1.5rem 1.5rem;
             max-height: 500px;
           }
-          .faq-icon { transition: transform 0.3s ease; }
+          .faq-icon { transition: transform 0.3s ease; font-size: 1.5rem; }
           .faq-item.active .faq-icon { transform: rotate(45deg); color: #EBBF7D; }
 
-          @media (max-width: 992px) {
-            .process-steps { grid-template-columns: 1fr; gap: 2rem; }
-            .process-steps::before { display: none; }
-          }
-          @media (max-width: 768px) {
-            .requirement-item { flex-direction: column; text-align: center; }
-            .requirement-icon-wrapper { border-right: none; border-bottom: 1px solid #e9ecef; width: 100%; border-radius: 12px 12px 0 0; }
-            .requirement-content { padding: 1.5rem; }
-          }
+          @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
         `}</style>
 
         <section className="hero-section">
+          <div className="hero-background">
+            <div className="gradient-blob blob1"></div>
+            <div className="gradient-blob blob2"></div>
+          </div>
           <div className="container">
             <div className="hero-content">
-              <h1>UK Self-Sponsorship Visa Route Requirements - 2025 Eligibility</h1>
+              <h1>Our Experienced Lawyers Will Prevent Any ILR Refusal Due To Tax Amendments</h1>
               <p>
-                This route is designed for ambitious entrepreneurs with relevant business experience, ready to base their business in the UK. Ensure you have sufficient capital to cover the required salary, operating costs, and legal fees.
+                We Will Carefully Evaluate And Ensure Your ILR Won’t Get Refused Anymore Due To Tax Amendments.
               </p>
-              <div className="cta-button-group">
-                <Link href="#eligibility" className="cta-button">Check Your Eligibility</Link>
-                <Link href="#costs" className="cta-button secondary">Explore Costs</Link>
+              <div className="cta-group">
+                <Link href="#contact" className="cta-button">Contact Our Team</Link>
+                <Link href="#guide" className="cta-button secondary">Get ILR Checklist Now</Link>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="eligibility" className="section bg-light">
-          <div className="container">
-            <h2 style={{fontWeight:"400"}}>Non-Negotiable Eligibility Requirements</h2>
-            <p className="intro-text" style={{fontWeight:"300"}}>Before applying, you must satisfy these core requirements to be considered for the Self-Sponsorship route.</p>
-            <div className="requirements-list">
-              {eligibilityRequirements.map((req, index) => (
-                <div key={index} className="requirement-item animate-on-scroll">
-                  <div className="requirement-icon-wrapper">
-                      <div className="requirement-icon">{req.icon}</div>
-                  </div>
-                  <div className="requirement-content">
-                    <h4 style={{fontWeight:"400"}}>{req.title}</h4>
-                    <p>{req.description}</p>
-                  </div>
+        <section className="section">
+            <div className="container">
+                <div className="intro-grid">
+                    <div className="intro-content animate-on-scroll">
+                        <h2>No More ILR Refusals Due to Tax Amendments</h2>
+                        <p>For any skilled migrant in the UK, experiencing ILR refusals due to tax amendments can be confusing and stressful. Discrepancies in past tax returns can impact the applicant's character, and the UK Home Office can refuse their ILR application. Our immigration team has proven its ability to diminish these challenging situations quickly. We legally represent you to the Home Office, resolve concerns about deception, and highlight your value to the community.</p>
+                        <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
+                    </div>
+                    <div className="animate-on-scroll delay-1">
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Legal professionals in a meeting" className="intro-image" />
+                    </div>
                 </div>
-              ))}
             </div>
-          </div>
         </section>
 
-        <section id="process" className="section">
-          <div className="container process-section">
-            <h2 style={{fontWeight:"400"}}>How Lexington Ashworth Solicitors Will Guide You</h2>
-            <div className="process-steps">
-              {processSteps.map((step, index) => (
-                <div key={index} className="step">
-                  <div className="step-number">{index + 1}</div>
-                  <h4 style={{fontWeight:"400"}}>{step.title}</h4>
-                  <p>{step.description}</p>
+        <section id="reviews" className="section bg-light">
+            <div className="container">
+                <div className="testimonial-card animate-on-scroll">
+                    <div className="testimonial-header">
+                        <div>
+                            <h4>Lexington Ashworth</h4>
+                            <div className="stars">★★★★★ 4.9 | 1,317 Reviews</div>
+                        </div>
+                        <Link href="#" className="cta-button secondary">View Review</Link>
+                    </div>
+                    <p className="testimonial-body">"I lack words to show how happy I am to have met Lexington Ashworth. You've proven beyond doubt that you're the best. You've been supportive from the first day to the last, not minding my shortcomings, and you have patiently assisted us down to this day. Our visa applications were all approved, none were denied, courtesy of your relentless efforts. I'll recommend you over and over again."</p>
+                    <p className="testimonial-author">- Jane Onyekachi</p>
                 </div>
-              ))}
             </div>
-          </div>
+        </section>
+
+        <section id="guarantees" className="section">
+            <div className="container">
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">OUR COMMITMENT</div>
+                    <h2>Expertise, Speed, and Transparency</h2>
+                </div>
+                <div className="guarantee-grid">
+                    {guarantees.map((item, index) => (
+                        <div key={index} className="guarantee-card animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <h4><div className="guarantee-icon">{item.icon}</div>{item.title}</h4>
+                            <p>{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </section>
 
         <section id="faq" className="section bg-light">
-          <div className="container">
-            <h2 style={{fontWeight:"400"}}>Frequently Asked Questions</h2>
-            <div className="faq-container">
-              {faqItems.map((faq, index) => (
-                <div key={index} className={`faq-item ${activeFAQ === index ? 'active' : ''}`}>
-                  <button className="faq-question" onClick={() => toggleFAQ(index)} aria-expanded={activeFAQ === index} style={{fontWeight:"400"}}>
-                    {faq.question}
-                    <span className="faq-icon">+</span>
-                  </button>
-                  <div className="faq-answer">
-                    <p style={{fontWeight:"300"}}>{faq.answer}</p>
-                  </div>
+            <div className="container">
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">COMMON QUESTIONS</div>
+                    <h2>Your Answers to Questions About ILR Refusals Due to Tax Amendments</h2>
                 </div>
-              ))}
+                <div className="faq-container">
+                    {faqItems.map((item, index) => (
+                        <div key={index} className={`faq-item animate-on-scroll ${activeFAQ === index ? 'active' : ''}`} style={{transitionDelay: `${index * 0.05}s`}}>
+                            <div className="faq-question" onClick={() => toggleFAQ(index)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') toggleFAQ(index); }} aria-expanded={activeFAQ === index}>
+                                {item.question}
+                                <span className="faq-icon">+</span>
+                            </div>
+                            <div className="faq-answer">
+                                <div className="faq-answer-content">
+                                    <p>{item.answer}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-          </div>
         </section>
+
       </div>
     </>
   );
 };
 
-export default SelfSponsorshipPage;
+export default ILRTaxRefusalPage;
