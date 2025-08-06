@@ -1,6 +1,7 @@
 
 "use client";
 import React, { useState, useEffect, ReactNode } from 'react';
+import Head from "next/head";
 
 // --- MOCK COMPONENTS & TYPES ---
 interface LinkProps {
