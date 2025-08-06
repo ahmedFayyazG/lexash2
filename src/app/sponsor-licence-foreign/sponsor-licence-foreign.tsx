@@ -1,14 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , ReactNode} from 'react';
 
-// --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
+
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any; // allows extra props
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>{children}</a>
 );
-
 // --- INTERFACES ---
 interface TableOfContentsItem {
     title: string;
@@ -29,7 +32,7 @@ interface ProcessStep {
 interface Requirement {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 // --- COMPONENT DATA ---
