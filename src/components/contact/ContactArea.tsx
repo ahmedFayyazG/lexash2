@@ -3,7 +3,7 @@ import React from 'react';
 import { useContactForm } from './useContactForm';
 import { ContactInfoCard } from './ContactInfoCard';
 import { InputField } from './InputField';
-import { useMediaQuery } from './useMediaQuery'; // <<< 1. IMPORT THE NEW HOOK
+import { useMediaQuery } from './useMediaQuery';// <<< 1. IMPORT THE NEW HOOK
 
 // --- Theme Colors and Styles defined once ---
 const theme = {
