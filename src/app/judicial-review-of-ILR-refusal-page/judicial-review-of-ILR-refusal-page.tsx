@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode } from 'react';
-
+// --- MOCK COMPONENTS2 ---
 // --- MOCK COMPONENTS ---
 interface LinkProps {
   href: string;
