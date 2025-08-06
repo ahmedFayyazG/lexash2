@@ -240,7 +240,7 @@
 // ServiceDetailsPage.module.css
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect , ReactNode} from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 
@@ -252,7 +252,7 @@ interface FAQItem {
 interface Requirement {
   title: string;
   description: string;
-  icon: JSX.Element;
+  icon: ReactNode;
 }
 
 interface ProcessStep {
