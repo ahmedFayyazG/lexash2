@@ -1,19 +1,25 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+'use client';
 
-// --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
+import React, { useState, useEffect , ReactNode} from 'react';
+
+
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any; // allows extra props
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>{children}</a>
 );
 
 // --- INTERFACES ---
 interface Guarantee {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 interface Service {
