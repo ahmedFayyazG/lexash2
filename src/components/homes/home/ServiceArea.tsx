@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useEffect, useRef, useState } from 'react';
 import { UserCheck, BriefcaseBusiness, ScrollText, Building2 } from 'lucide-react';
@@ -30,40 +31,52 @@ const services = [
 ];
 
 const ServiceArea = () => {
-  const [activeCard, setActiveCard] = useState(null);
-  const serviceRefs = useRef([]);
+  // Correctly typed state
+  const [activeCard, setActiveCard] = useState<number | null>(null);
+  // Correctly typed ref for the div elements
+  const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Simple scroll animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
-          if (entry.isIntersecting) {
+        entries.forEach((entry) => {
+          // FIX: Check if the target is an HTMLElement before accessing .style
+          if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+            const targetElement = entry.target;
             setTimeout(() => {
-              entry.target.style.opacity = '1';
-              entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
+              targetElement.style.opacity = '1';
+              targetElement.style.transform = 'translateY(0)';
+            }, 100); // A small delay can be kept for staggering if needed
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 } // Changed threshold slightly for earlier trigger
     );
 
-    serviceRefs.current.forEach(ref => {
+    const currentRefs = serviceRefs.current;
+    currentRefs.forEach(ref => {
       if (ref) observer.observe(ref);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      currentRefs.forEach(ref => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
   }, []);
 
-  const handleServiceClick = (link, title) => {
+  // Correctly typed function parameters
+  const handleServiceClick = (link: string, title: string) => {
+    // This could navigate the user, e.g., using Next.js router
+    // For now, it just logs to the console.
     console.log(`Navigating to: ${link} - ${title}`);
+    // Example: window.location.href = link;
   };
 
   return (
     <section style={{
       background: '#ffffff',
-      padding: '8rem 0',
+      padding: 'clamp(5rem, 10vw, 8rem) 0',
       position: 'relative'
     }}>
       <div style={{
@@ -71,14 +84,13 @@ const ServiceArea = () => {
         margin: '0 auto',
         padding: '0 2rem'
       }}>
-        {/* Simple Header */}
         <div style={{
           textAlign: 'center',
           marginBottom: '5rem'
         }}>
           <h2 style={{
             fontSize: 'clamp(2.5rem, 4vw, 3.5rem)',
-            fontWeight: '300',
+            fontWeight: 300,
             fontFamily: 'Poppins, sans-serif',
             color: '#2c3e50',
             marginBottom: '1.5rem',
@@ -94,14 +106,13 @@ const ServiceArea = () => {
             maxWidth: '600px',
             margin: '0 auto',
             lineHeight: '1.6',
-            fontWeight: '300',
+            fontWeight: 300,
             fontFamily: 'Poppins, sans-serif'
           }}>
             Comprehensive legal solutions delivered with excellence and expertise
           </p>
         </div>
 
-        {/* Clean Services Grid */}
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -110,7 +121,10 @@ const ServiceArea = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              ref={el => serviceRefs.current[index] = el}
+              // Add the ref to the array
+              ref={el => {
+                if (el) serviceRefs.current[index] = el;
+              }}
               onClick={() => handleServiceClick(service.link, service.title)}
               onMouseEnter={() => setActiveCard(index)}
               onMouseLeave={() => setActiveCard(null)}
@@ -122,14 +136,13 @@ const ServiceArea = () => {
                 textAlign: 'center',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                opacity: 0,
-                transform: 'translateY(20px)',
+                opacity: 0, // Initial state for animation
+                transform: 'translateY(20px)', // Initial state for animation
                 boxShadow: activeCard === index ? 
                   '0 8px 40px rgba(0, 0, 0, 0.08)' : 
                   '0 2px 12px rgba(0, 0, 0, 0.04)'
               }}
             >
-              {/* Simple Icon */}
               <div style={{
                 width: '60px',
                 height: '60px',
@@ -145,10 +158,9 @@ const ServiceArea = () => {
                 {service.icon}
               </div>
 
-              {/* Title */}
               <h3 style={{
                 fontSize: '1.3rem',
-                fontWeight: '500',
+                fontWeight: 500,
                 fontFamily: 'Poppins, sans-serif',
                 color: '#2c3e50',
                 marginBottom: '1rem',
@@ -157,23 +169,21 @@ const ServiceArea = () => {
                 {service.title}
               </h3>
 
-              {/* Description */}
               <p style={{
                 fontSize: '0.95rem',
                 color: '#6c757d',
                 lineHeight: '1.6',
-                fontWeight: '300',
+                fontWeight: 300,
                 fontFamily: 'Poppins, sans-serif',
                 marginBottom: '1.5rem'
               }}>
                 {service.content}
               </p>
 
-              {/* Simple Link */}
               <div style={{
                 color: '#dab173',
                 fontSize: '0.9rem',
-                fontWeight: '500',
+                fontWeight: 500,
                 fontFamily: 'Poppins, sans-serif',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -190,30 +200,6 @@ const ServiceArea = () => {
           ))}
         </div>
       </div>
-
-      {/* Minimal CSS */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          section {
-            padding: 5rem 0 !important;
-          }
-          
-          .services-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1.5rem !important;
-          }
-          
-          .service-card {
-            padding: 2rem 1.5rem !important;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            transition: none !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
