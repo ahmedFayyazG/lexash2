@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
 // --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
   </a>
@@ -13,19 +19,19 @@ const Link = ({ href, children, ...props }) => (
 interface Guarantee {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 // --- COMPONENT DATA ---
 const guarantees: Guarantee[] = [
-    { title: 'Expert Service', description: 'Bad advice can lead to delays and refusals. We assign a subject matter expert to manage your case throughout.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
-    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours or we refund 20% of your fees.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
+    { title: 'Expert Service', description: 'Bad advice can lead to delays and refusals. We assign a subject matter expert to manage your case throughout.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
+    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours or we refund 20% of your fees.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
     { title: 'Fixed Fees', description: 'Our services have fixed fees so you know exactly how much you need to pay, with no nasty surprises down the line.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const LongResidenceILRPage = () => {
+const ILRPage = () => {
     useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -133,13 +139,13 @@ const LongResidenceILRPage = () => {
           </div>
           <div className="container">
             <div className="hero-content">
-              <h1>Long Residence in the UK: Successfully Apply for Indefinite Leave to Remain (ILR)</h1>
+              <h1>Indefinite Leave To Remain (ILR): We Will Apply And Get It Approved For You</h1>
               <p>
-                Our Team of Immigration Solicitors Are Here to Ensure You Submit an Error-Free Indefinite Leave To Remain Application.
+                Our Immigration Solicitors Have Successfully Mastered The Application Process For Indefinite Leave To Remain (ILR).
               </p>
               <div className="cta-group">
                 <Link href="#contact" className="cta-button">Contact Our Team</Link>
-                <Link href="#guide" className="cta-button secondary">Get ILR Checklist Now</Link>
+                <Link href="#guide" className="cta-button secondary">Download Free Checklist</Link>
               </div>
             </div>
           </div>
@@ -149,12 +155,12 @@ const LongResidenceILRPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Make Your Long UK Residence into a Permanent UK Settlement</h2>
-                        <p>When you've lived in the UK for more than a decade, it's normal to want to stay here permanently. Unfortunately, the government has made it difficult for migrants to obtain Indefinite Leave to Remain, especially under the long residence route. That's where our experts come in. We'll help you convert your long-term residence into a permanent UK settlement in an easy, stress-free way.</p>
+                        <h2>Are You Worried About The Approval Of Your ILR Application?</h2>
+                        <p>The dream of settling in the UK is becoming increasingly challenging because your application can get rejected for a single day of absence exceeding the allowed limit. There should be no room for error. Lexington Ashworth will flawlessly handle your application at every step. Our team has a forensic understanding of ILR requirements, and they will give you the best chance of success.</p>
                         <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
                     </div>
                     <div className="animate-on-scroll delay-1">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Professional discussing plans" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Professional discussing plans" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -170,8 +176,8 @@ const LongResidenceILRPage = () => {
                         </div>
                         <Link href="#" className="cta-button secondary">View Review</Link>
                     </div>
-                    <p className="testimonial-body">"They are one of the best immigration solicitors around. Perfect and professional, they help you out in every step of the process and guide you very professionally. We took our case to other solicitors but no one succeeded but Lexington Ashworth solved it in one go. After entry clearance, we received FLR M with them again. Special thanks to Diana who was with us from day 1, with a super complicated entry clearance application till ILR. Highly recommended."</p>
-                    <p className="testimonial-author">- Abida Ali</p>
+                    <p className="testimonial-body">"If you are struggling with any immigration issues, I can strongly recommend Lexington Ashworth. One phone call we made to them has changed our lives. We thought of going back to India when we got a refusal for ILR, but after speaking to their team, the best option was to make a fresh application. They took over our case and within five months we got the result. We can’t thank them enough for the support, assurance, and respect they give to clients."</p>
+                    <p className="testimonial-author">- Nithinkumar & Ajitha Thota</p>
                 </div>
             </div>
         </section>
@@ -195,8 +201,8 @@ const LongResidenceILRPage = () => {
         
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Whatever Your Immigration Challenge – We Can Help You</h2>
-                <p>We are specialists in immigration law and have supported more than 4,000 business owners and professionals around the globe to successfully navigate the UK system. We also handle complex cases of appeal, administrative reviews, and judicial reviews.</p>
+                <h2>Transparent & Professional Assistance for ILR Applicants - No Extra Fees</h2>
+                <p>Our immigration solicitors have years of experience assisting people from around the globe by ensuring their Indefinite Leave to Remain application meets the Home Office requirements. Our services have fixed fees, so you won’t get any nasty surprises later.</p>
                 <Link href="#contact" className="cta-button">Contact Our Team</Link>
             </div>
         </section>
@@ -206,4 +212,4 @@ const LongResidenceILRPage = () => {
   );
 };
 
-export default LongResidenceILRPage;
+export default ILRPage;
