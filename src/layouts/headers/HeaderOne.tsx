@@ -945,17 +945,19 @@
 
 // export default HeaderOne;
 'use client';
+import React, { useState, useEffect , ReactNode} from 'react';
 
-import React, { useEffect, useState } from 'react';
 
-// --- MOCK DATA & COMPONENTS TO FIX RESOLVE ERRORS ---
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any; // allows extra props
+}
 
-// Mock for 'next/link'
-const Link = ({ href, children, ...props }) => (
-  <a href={href} {...props}>
-    {children}
-  </a>
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>{children}</a>
 );
+
 
 // Mock for menu_data
 const menu_data = [
