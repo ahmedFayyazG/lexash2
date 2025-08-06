@@ -29,7 +29,7 @@ interface Package {
 interface Differentiator {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 // --- COMPONENT DATA ---
