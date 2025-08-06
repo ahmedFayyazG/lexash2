@@ -1,19 +1,22 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 
-// --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
+interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  href: string;
+  children: ReactNode;
+}
+
+const Link: React.FC<LinkProps> = ({ href, children, ...props }) => (
   <a href={href} {...props}>
     {children}
   </a>
 );
-
 // --- INTERFACES ---
 interface Reason {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 interface Alternative {
@@ -25,7 +28,7 @@ interface Alternative {
 
 interface Benefit {
     title: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 interface Advantage {
