@@ -1,9 +1,15 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
 // --- MOCK COMPONENTS ---
-const Link = ({ href, children, ...props }) => (
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
   </a>
@@ -13,7 +19,11 @@ const Link = ({ href, children, ...props }) => (
 interface Guarantee {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
+}
+
+interface Requirement {
+    text: string;
 }
 
 // --- COMPONENT DATA ---
@@ -23,9 +33,19 @@ const guarantees: Guarantee[] = [
     { title: 'Fixed Fees', description: 'Our services have fixed fees so you know exactly how much you need to pay, with no nasty surprises down the line.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> },
 ];
 
+const eligibilityRequirements: Requirement[] = [
+    { text: 'Have legally lived in the UK for at least five years.' },
+    { text: 'Hold EU Settled Status.' },
+    { text: 'Meet the continuous residency requirements.' },
+    { text: 'Prove English language proficiency.' },
+    { text: 'Pass the ‘Life in the UK’ test.' },
+    { text: 'Be of good character.' },
+    { text: 'Plan to live in the UK permanently.' },
+];
+
 
 // --- MAIN PAGE COMPONENT ---
-const BritishCitizenship = () => {
+const BritishCitizenshipPage = () => {
     useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -114,16 +134,37 @@ const BritishCitizenship = () => {
           .guarantee-card h4 { display: flex; align-items: center; gap: 0.75rem; }
           .guarantee-icon { color: #EBBF7D; }
           
-          .cta-section {
-            background: #212C3C;
+          .eligibility-card {
+            background: linear-gradient(135deg, #2c3e50, #212C3C);
             color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            max-width: 900px;
+            margin: 3rem auto;
+          }
+          .eligibility-card h3 { color: #EBBF7D; }
+          .eligibility-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+          }
+          .eligibility-list li { display: flex; align-items: center; gap: 0.75rem; font-weight: 300; color: rgba(255,255,255,0.9); }
+          .eligibility-list li svg { color: #EBBF7D; flex-shrink: 0; }
+
+          .cta-section {
+            background: #f8f9fa;
             padding: 4rem 0;
             text-align: center;
           }
-          .cta-section h2 { color: white; }
-          .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto 2rem; }
+          .cta-section p { max-width: 600px; margin: 1.5rem auto 2rem; }
 
-          @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
+          @media (max-width: 992px) { 
+            .intro-grid { grid-template-columns: 1fr; }
+            .eligibility-list { grid-template-columns: 1fr; }
+          }
         `}</style>
 
         <section className="hero-section" style={{paddingTop:"15rem"}}>
@@ -133,9 +174,9 @@ const BritishCitizenship = () => {
           </div>
           <div className="container">
             <div className="hero-content">
-              <h1>Expert Guidance on Your British Citizenship Application From Start To Finish</h1>
+              <h1>Expert Legal Guidance on UK Citizenship For EU Nationals</h1>
               <p>
-                Your British Citizenship Solicitor Will Help You Fulfil Your Dream Of Living, Working And Travelling As A UK Citizen.
+                Personal Immigration Solicitors supporting EEA and EU citizens in UK citizenship applications.
               </p>
               <div className="cta-group">
                 <Link href="#contact" className="cta-button">Contact Our Team</Link>
@@ -149,8 +190,8 @@ const BritishCitizenship = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Give Your Citizenship Application The Best Chance Of Success</h2>
-                        <p>Achieving British citizenship can be the culmination of many years of hard work and planning. Success depends on navigating a long, often complicated, set of processes and procedures – a path where one wrong move can leave you back at the start. Walking that path alone can be frustrating and leave you floundering. Ultimately you risk being denied citizenship, which can be devastating for you and your loved ones.</p>
+                        <h2>Confused by UK Citizenship Requirements for EU citizens?</h2>
+                        <p>Brexit left many EU and EEA nationals confused about how to apply for British citizenship. The process is lengthy and involved. At Lexington Ashworth, we understand the insecurity felt by EU and EEA nationals. Our Personal Immigration team can take all the anxiety away and present you with a straightforward, understandable path toward British citizenship.</p>
                         <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
                     </div>
                     <div className="animate-on-scroll delay-1">
@@ -170,13 +211,26 @@ const BritishCitizenship = () => {
                         </div>
                         <Link href="#" className="cta-button secondary">View Review</Link>
                     </div>
-                    <p className="testimonial-body">"They are one of the best immigration solicitors around. Perfect and professional, they help you out in every step of the process and guide you very professionally. We took our case to other solicitors and no-one succeeded but Lexington Ashworth solved it in one go. Highly recommended."</p>
-                    <p className="testimonial-author">- Abida Ali</p>
+                    <p className="testimonial-body">"Blown away by the services provided by Lexington Ashworth. A special mention to Amy Felix-George who has always gone above and beyond in all of our applications and ensured that the process has been smooth for us. She is very knowledgeable in her field and strives for perfection. I would have no issues in recommending this firm to anyone considering immigration services. Thank you!"</p>
+                    <p className="testimonial-author">- Simi Sandhu</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="eligibility" className="section">
+            <div className="container">
+                 <div className="eligibility-card animate-on-scroll">
+                    <h3>To be eligible for British Citizenship as an EEA national, you must:</h3>
+                    <ul className="eligibility-list">
+                        {eligibilityRequirements.map((req, index) => (
+                            <li key={index}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>{req.text}</li>
+                        ))}
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="guarantees" className="section">
+        <section id="guarantees" className="section bg-light">
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">OUR COMMITMENT</div>
@@ -192,18 +246,10 @@ const BritishCitizenship = () => {
                 </div>
             </div>
         </section>
-        
-        <section className="cta-section">
-            <div className="container animate-on-scroll">
-                <h2>Whatever Your Immigration Challenge – We Can Help You</h2>
-                <p>We are specialists in immigration law and have supported more than 4,000 business owners and professionals around the globe to successfully navigate the UK system. We also handle complex cases of appeal, administrative reviews, and judicial reviews.</p>
-                <Link href="#contact" className="cta-button">Contact Our Team</Link>
-            </div>
-        </section>
 
       </div>
     </>
   );
 };
 
-export default BritishCitizenship;
+export default BritishCitizenshipPage;
