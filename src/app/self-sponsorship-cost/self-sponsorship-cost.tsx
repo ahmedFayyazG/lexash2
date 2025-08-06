@@ -26,7 +26,7 @@ interface Fee {
 interface Tip {
     title: string;
     description: string;
-    icon: JSX.Element;
+    icon: ReactNode;
 }
 
 interface Comparison {
