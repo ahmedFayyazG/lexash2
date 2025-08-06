@@ -9,7 +9,7 @@ export default function AppointmentBookingPage() {
 
     return (
         <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#FFFFF', position: 'relative' }}>
-            <HeaderOne style_2={true} />
+            <HeaderOne/>
 
             <div className="divider2"></div>
             <div className="divider2"></div>
