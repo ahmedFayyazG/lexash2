@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
-// --- MOCK COMPONENTS ---
 interface LinkProps {
   href: string;
   children: ReactNode;
