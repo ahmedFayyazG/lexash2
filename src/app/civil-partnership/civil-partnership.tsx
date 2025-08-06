@@ -280,3 +280,4 @@ const CivilPartnershipPage = () => {
 };
 
 export default CivilPartnershipPage;
+`

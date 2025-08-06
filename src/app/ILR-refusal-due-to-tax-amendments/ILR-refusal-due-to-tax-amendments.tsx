@@ -15,10 +15,11 @@ const Link: React.FC<LinkProps> = ({ href, children, ...props }) => (
 
 // --- INTERFACES ---
 interface Guarantee {
-    title: string;
-    description: string;
-    icon: JSX.Element;
+  title: string;
+  description: string;
+  icon: ReactNode;
 }
+
 
 interface FAQItem {
     question: string;
