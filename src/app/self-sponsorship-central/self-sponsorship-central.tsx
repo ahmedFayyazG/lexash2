@@ -1,8 +1,12 @@
-import { ReactNode } from "react";
+'use client';
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+import React, { useState, useEffect, ReactNode } from 'react';
+
+// --- MOCK COMPONENTS ---
+interface LinkProps {
   href: string;
   children: ReactNode;
+  [key: string]: any;
 }
 
 const Link = ({ href, children, ...props }: LinkProps) => (
@@ -10,6 +14,7 @@ const Link = ({ href, children, ...props }: LinkProps) => (
     {children}
   </a>
 );
+
 // --- INTERFACES ---
 interface Benefit {
     title: string;
