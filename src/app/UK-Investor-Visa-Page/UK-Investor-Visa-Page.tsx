@@ -1,7 +1,8 @@
 'use client';
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect} from 'react';
 
+// --- MOCK COMPONENTS ---
 interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: ReactNode;
