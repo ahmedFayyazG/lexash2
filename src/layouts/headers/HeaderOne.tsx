@@ -1077,18 +1077,24 @@ const businessImmigrationCategories = [
   {
     title: 'Hiring Foreign Workers',
     links: [
-      { text: 'Apply for Sponsor Licence', href: '/apply-sponsor-licence' },
+      { text: 'Sponsor Licence', href: '/sponsor-licence-foreign' },
+      { text: 'Apply for Sponsor Licence', href: '/apply-for-sponsorship' },
       { text: 'Sponsor Licence Renewal', href: '/sponsor-licence-renewal' },
-      { text: 'Sponsor Licence Suspension / Revocation', href: '/sponsor-licence-suspension' },
+      { text: 'Sponsor Licence Suspension / Revocation', href: '/sponsorship-licence-suspended' },
+      { text: 'Sponsor Licence Rejected', href: '/self-sponsorship-rejected' },
+
+
+
       { text: 'Sponsor Licence Compliance Visits Support', href: '/sponsor-licence-compliance' },
     ]
   },
   {
     title: 'UK Settlement for Entrepreneurs',
     links: [
-      { text: 'Self-Sponsorship Route', href: '/self-sponsorship-route' },
-      { text: 'Self-Sponsorship Requirements', href: '/self-sponsorship-requirements' },
+      { text: 'Self-Sponsorship Route', href: '/self-sponsor' },
+      { text: 'Self-Sponsorship Requirements', href: '/UK-Self-Sponsorship-Visa-Route' },
       { text: 'Self-Sponsorship Cost', href: '/self-sponsorship-cost' },
+      { text: 'Self-Sponsorship Skilled Worker Visa', href: '/self-sponsorship-skilled-worker-visa' },
       { text: 'Apply for Self-Sponsorship', href: '/apply-self-sponsorship' },
     ]
   },
@@ -1097,14 +1103,14 @@ const businessImmigrationCategories = [
     links: [
       { text: 'Immigration Appeals Procedure', href: '/immigration-appeals' },
       { text: 'Spouse Visa Appeal', href: '/spouse-visa-appeal' },
-      { text: 'ILR /Settlement Visa Refusal Appeal', href: '/ilr-settlement-appeal' },
+      { text: 'ILR /Settlement Visa Refusal Appeal', href: '/long-residence-ILR-page' },
       { text: 'Administrative Review & Appeal', href: '/administrative-review' },
     ]
   },
   {
     title: 'UK Exploration Made Easy',
     links: [
-      { text: 'Standard Visitor Visa UK', href: '/standard-visitor-visa' },
+      { text: 'Standard Visitor Visa UK', href: '/standard-visit-visa' },
       { text: 'UK Visitor Visa Refusal', href: '/visitor-visa-refusal' },
     ]
   },
@@ -1133,30 +1139,30 @@ const personalImmigrationCategories = [
     title: 'Secure Permanent UK Residency',
     links: [
       { text: 'Indefinite Leave to Remain (ILR)', href: '/indefinite-leave-to-remain' },
-      { text: 'ILR Refusals Due to Tax Amendments', href: '/ilr-refusals-tax-amendments' },
-      { text: 'Judicial Review for ILR Refusal', href: '/judicial-review-ilr-refusal' },
-      { text: 'ILR /Settlement Visa Refusal Appeal', href: '/ilr-settlement-visa-refusal-appeal' },
+      { text: 'ILR Refusals Due to Tax Amendments', href: '/ILR-refusal-due-to-tax-amendments' },
+      { text: 'Judicial Review for ILR Refusal', href: '/judicial-review-of-ILR-refusal-page' },
+      { text: 'ILR /Settlement Visa Refusal Appeal', href: '/long-residence-ILR-page' },
     ]
   },
   {
     title: 'Path to UK Citizenship',
     links: [
-      { text: 'British Citizenship Application', href: '/british-citizenship-application' },
-      { text: 'British Citizenship for EU or EEA Nationals', href: '/british-citizenship-eu-eea' },
+      { text: 'British Citizenship Application', href: '/british-citizenship-application-page' },
+      { text: 'British Citizenship for EU or EEA Nationals', href: '/UK-citizenship-for-EU-nationals-page' },
       { text: 'Naturalise As A British Citizen - Form AN', href: '/naturalise-british-citizen-form-an' },
     ]
   },
     {
     title: 'UK Skilled Work Opportunity',
     links: [
-      { text: 'Skilled Worker Visa', href: '/skilled-worker-visa' },
+      { text: 'Skilled Worker Visa', href: '/tier-2-skilled-worker-administrative' },
       { text: 'Skilled Worker Visa Refusal', href: '/skilled-worker-visa-refusal' },
     ]
   },
   {
     title: 'Unlock UK Talent Opportunities',
     links: [
-      { text: 'Global Talent Visa', href: '/global-talent-visa' },
+      { text: 'Global Talent Visa', href: '/global-talent-visa-page' },
       { text: 'Global Talent Accelerator', href: '/global-talent-accelerator' },
       { text: 'Permanent visa for exceptionally talented', href: '/permanent-visa-exceptionally-talented' },
     ]
@@ -1807,9 +1813,9 @@ const HeaderOne = () => {
                               ) : hoveredExpertise === 'Self Sponsorship' ? (
                                 <div className="self-sponsorship-panel">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                                    <h3>Chart Your Own Course to the UK</h3>
-                                    <p>Discover the possibilities of the self-sponsorship route. A unique pathway for entrepreneurs and innovators.</p>
-                                    <Link href="/services/self-sponsorship" className="cta-button">
+                                    <h3 style={{color:"#FFFFFF"}}>Chart Your Own Course to the UK</h3>
+                                    <p style={{color:"#FFFFFF"}}>Discover the possibilities of the self-sponsorship route. A unique pathway for entrepreneurs and innovators.</p>
+                                    <Link href="/self-sponsorship-central" className="cta-button">
                                         Explore Self-Sponsorship
                                     </Link>
                                 </div>
