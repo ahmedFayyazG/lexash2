@@ -1,13 +1,16 @@
 'use client';
 
-import React, { ReactNode, useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
+
 // --- MOCK COMPONENTS ---
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+// Added type definitions for the component's props to resolve the TypeScript error.
+interface LinkProps {
   href: string;
   children: ReactNode;
+  [key: string]: any; // Allows for other props like style, className, etc.
 }
 
-const Link: React.FC<LinkProps> = ({ href, children, ...props }) => (
+const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
   </a>
@@ -28,19 +31,20 @@ interface FAQItem {
 // --- COMPONENT DATA ---
 const guarantees: Guarantee[] = [
     { title: 'Expert Service', description: 'Bad advice can lead to delays and refusals. We assign a subject matter expert to manage your case throughout.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
-    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours or we refund 20% of your fees.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
+    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours, ensuring you\'re always informed.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
     { title: 'Fixed Fees', description: 'Our services have fixed fees so you know exactly how much you need to pay, with no nasty surprises down the line.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> },
 ];
 
 const faqItems: FAQItem[] = [
-    { question: 'What is Paragraph 322(5)?', answer: 'Paragraph 322(5) of the Immigration Rules is a general ground for refusal. It is often used by the Home Office when they have concerns about an applicant\'s character or conduct, including discrepancies in their tax history which may suggest deception.' },
-    { question: 'How can I challenge an ILR refusal due to tax issues?', answer: 'The best approach is typically to submit a new, well-prepared application that directly addresses the Home Office\'s concerns. This involves providing comprehensive evidence, a detailed explanation for any amendments, and strong legal representations to demonstrate your good character.' },
-    { question: 'Why choose Lexington Ashworth for a tax-related ILR refusal?', answer: 'Our team has extensive experience in successfully overturning ILR refusals based on tax amendments. We meticulously review your entire immigration and financial history to build a robust case that pre-emptively resolves the Home Office\'s concerns, giving you the best possible chance of success.' },
+    { question: 'What is a civil partnership?', answer: 'A civil partnership is a legally recognized relationship between two people. It gives you added legal rights, as well as responsibilities.' },
+    { question: 'Who can register a civil partnership?', answer: 'You can register a civil partnership as long as you are both 18 or over, not already married or in a civil partnership, and not closely related.' },
+    { question: 'How do I register a civil partnership?', answer: 'To register a civil partnership, you must both give notice at your local register office. You must have lived in that registration district for at least the past 7 days.' },
+    { question: 'What is the cost of registering a civil partnership?', answer: 'The cost to give notice is £35 per person. The cost of the registration ceremony can vary depending on the venue.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const ILRTaxRefusalPage = () => {
+const CivilPartnershipPage = () => {
     const [activeFAQ, setActiveFAQ] = useState<number | null>(null);
 
     const toggleFAQ = (index: number) => {
@@ -99,7 +103,7 @@ const ILRTaxRefusalPage = () => {
           .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
           .gradient-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; }
           .blob1 { width: 600px; height: 600px; background: #EBBF7D; top: -200px; left: -200px; animation: moveBlob 20s infinite alternate; }
-          .blob2 { width: 500px; height: 500px; background: #c0392b; bottom: -150px; right: -150px; animation: moveBlob 25s infinite alternate-reverse; }
+          .blob2 { width: 500px; height: 500px; background: #4A5568; bottom: -150px; right: -150px; animation: moveBlob 25s infinite alternate-reverse; }
           @keyframes moveBlob {
             0% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
             100% { transform: scale(1.4) translate(120px, 80px) rotate(180deg); }
@@ -186,13 +190,13 @@ const ILRTaxRefusalPage = () => {
           </div>
           <div className="container">
             <div className="hero-content">
-              <h1>Our Experienced Lawyers Will Prevent Any ILR Refusal Due To Tax Amendments</h1>
+              <h1>A Comprehensive Guide Throughout Your Civil Partnership Journey</h1>
               <p>
-                We Will Carefully Evaluate And Ensure Your ILR Won’t Get Refused Anymore Due To Tax Amendments.
+                Our Immigration solicitor will help you immensely throughout your civil partnership journey.
               </p>
               <div className="cta-group">
                 <Link href="#contact" className="cta-button">Contact Our Team</Link>
-                <Link href="#guide" className="cta-button secondary">Get ILR Checklist Now</Link>
+                <Link href="#guide" className="cta-button secondary">Download Free Checklist</Link>
               </div>
             </div>
           </div>
@@ -202,12 +206,12 @@ const ILRTaxRefusalPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>No More ILR Refusals Due to Tax Amendments</h2>
-                        <p>For any skilled migrant, experiencing ILR refusals due to tax amendments can be confusing and stressful. Discrepancies in past tax returns can impact your character, leading the UK Home Office to refuse your application. Our immigration team has proven its ability to diminish these challenging situations quickly. We legally represent you to the Home Office, resolve concerns about deception, and highlight your value to the community.</p>
+                        <h2>Apply For Civil Partnership with Assurance</h2>
+                        <p>Applying for a civil partnership can be charged with difficulties. The Home Office is strict on granting visas and ensuring applicants meet the eligibility criteria. One wrong move and your application can be turned down, with disastrous consequences for your future plans. Our specialist immigration attorney team can guide you through that minefield and ensure your civil partnership application is as watertight as possible.</p>
                         <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
                     </div>
                     <div className="animate-on-scroll delay-1">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Legal professionals in a meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1542841841-6cc985354175?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="A happy couple together" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -250,7 +254,7 @@ const ILRTaxRefusalPage = () => {
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">COMMON QUESTIONS</div>
-                    <h2>Your Answers to Questions About ILR Refusals Due to Tax Amendments</h2>
+                    <h2>Your Answers to Questions About Civil Partnership</h2>
                 </div>
                 <div className="faq-container">
                     {faqItems.map((item, index) => (
@@ -275,4 +279,4 @@ const ILRTaxRefusalPage = () => {
   );
 };
 
-export default ILRTaxRefusalPage;
+export default CivilPartnershipPage;
