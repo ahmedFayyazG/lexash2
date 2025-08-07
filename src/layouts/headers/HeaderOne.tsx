@@ -15,10 +15,12 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 
 // Mock for menu_data
 const menu_data = [
-  { title: 'Home', link: '/', has_dropdown: false },
-  { title: 'Expertise', link: '/services', has_dropdown: true },
   { title: 'About Us', link: '/about', has_dropdown: false },
-  { title: 'Contact', link: '/contact', has_dropdown: false },
+  { title: 'Expertise', link: '/services', has_dropdown: true },
+  { title: 'News & Blogs', link: '/contact', has_dropdown: false },
+  { title: 'Join Our Team', link: '/contact', has_dropdown: false },
+  { title: 'Contact Us', link: '/contact', has_dropdown: false },
+
 ];
 
 // Mock for useSticky hook
@@ -110,7 +112,7 @@ const expertiseItems = [
   {
     title: 'Self Sponsorship',
     description: 'Independent routes to the UK',
-    link: '/services/self-sponsorship',
+    link: '/self-sponsorship-central',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>
@@ -1084,11 +1086,11 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
                     </svg>
                   </button>
                 </div>
-
+{/* 
                 <button id="theme-toggle" onClick={toggleTheme} className={`theme-btn ${theme === 'light-mode' ? '' : 'light-mode-active'}`}>
                   <span className="material-symbols-outlined moon" style={{ color: 'white' }}>clear_day</span>
                   <span className="material-symbols-outlined sun" style={{ color: 'white' }}>bedtime</span>
-                </button>
+                </button> */}
 
                 <div className="mb-3 mb-lg-0" id="sideMenuButton">
                   <a
