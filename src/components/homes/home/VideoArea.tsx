@@ -1,50 +1,99 @@
 'use client';
-
 import React from 'react';
 
-interface VideoAreaProps {
-  style_2?: boolean; // this allows <VideoArea style_2={true} /> to compile
-}
+const MissionArea = () => {
+  const sectionStyle: React.CSSProperties = {
+    position: 'relative',
+    height: '90vh',
+    minHeight: '600px',
+    width: '100%',
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start', // Align content to the left
+    padding: '2rem',
+  };
 
-const VideoArea = ({ style_2 }: VideoAreaProps) => {
+  const videoBackgroundStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 1,
+  };
+
+  const overlayStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(17, 24, 39, 0.5)',
+    zIndex: 2,
+  };
+
+  const contentWrapperStyle: React.CSSProperties = {
+    position: 'relative',
+    zIndex: 3,
+    display: 'flex',
+    justifyContent: 'flex-left',
+    alignItems: 'start',
+    width: '100%',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  };
+
+  const contentContainerStyle: React.CSSProperties = {
+    background: 'rgba(255, 255, 255, 0.43)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
+    padding: 'clamp(2rem, 6vw, 4rem)',
+    borderRadius: '24px',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    maxWidth: '700px',
+    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)',
+    marginLeft: '2rem',
+  };
+
+  const headingStyle: React.CSSProperties = {
+    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+    fontWeight: 300,
+    color: '#212C3C',
+    fontFamily: "'Poppins', sans-serif",
+    marginBottom: '1.5rem',
+    lineHeight: 1.2,
+  };
+
+  const paragraphStyle: React.CSSProperties = {
+    color: '#212C3C',
+    fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
+    lineHeight: 1.7,
+    fontWeight: 300,
+    fontFamily: "'Poppins', sans-serif",
+  };
+
   return (
-    <section
-      style={{
-        padding: '64px 16px',
-        backgroundColor: 'white',
-        fontFamily: 'Roundo, sans-serif',
-      }}
-    >
-      <div
-        style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          gap: '40px',
-        }}
-      >
-        {/* Right Column: Text */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', paddingLeft: '16px', paddingRight: '16px' }}>
-          <h2
-            style={{
-              fontSize: '55px',
-              fontWeight: 400,
-              color: '#111827',
-              fontFamily: 'poppins, sans-serif',
-            }}
-          >
-            Why We Exist
-          </h2>
-          <p
-            style={{
-              color: 'black',
-              fontSize: '18px',
-              lineHeight: '1.7',
-              fontWeight: '300',
-              fontFamily: 'Poppins, sans-serif',
-            }}
-          >
+    <section style={sectionStyle}>
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={videoBackgroundStyle}
+        src="/assets/img/whywe.mp4"
+      />
+
+
+
+      {/* Left-aligned content */}
+      <div style={contentWrapperStyle}>
+        <div style={contentContainerStyle}>
+          <h2 style={headingStyle}>Why We Exist</h2>
+          <p style={paragraphStyle}>
             Our mission is to deliver outstanding legal service guided by our core values of insight,
             integrity, and impact. We exist to simplify complex legal challenges, empowering clients
             with clear guidance and confidence. Each case we undertake is an opportunity to provide
@@ -52,51 +101,9 @@ const VideoArea = ({ style_2 }: VideoAreaProps) => {
             critical immigration decisions.
           </p>
         </div>
-
-        {/* Left Column: Video */}
-        <div
-          style={{
-            width: '100%',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            maxHeight: '400px',
-          }}
-        >
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '16px',
-            }}
-          >
-            <source src="/assets/img/core-img/BG.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
       </div>
-
-      <style>
-        {`
-          @media(min-width: 1024px) {
-            section > div {
-              grid-template-columns: 1fr 1fr !important;
-            }
-          }
-
-          @font-face {
-            font-family: 'Roundo';
-            src: url('/fonts/Roundo.ttf') format('truetype');
-            font-display: swap;
-          }
-        `}
-      </style>
     </section>
   );
 };
 
-export default VideoArea;
+export default MissionArea;
