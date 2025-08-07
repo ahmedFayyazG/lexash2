@@ -25,20 +25,6 @@ const FaqArea = ({ style_2 }: any) => {
 
               <div className="faq-image">
                 <img src="/assets/img/core-img/FaqImage.png" alt="FAQ Illustration" />
-                <div className="faq-info d-flex align-items-center">
-                  <h2
-                    className="mb-0"
-                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}
-                  >
-                    A.I
-                  </h2>
-                  <p
-                    className="mb-0"
-                    style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 400 }}
-                  >
-                    powered
-                  </p>
-                </div>
               </div>
             </div>
 
