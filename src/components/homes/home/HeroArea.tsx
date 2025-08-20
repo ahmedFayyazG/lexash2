@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 
 const HeroArea = () => {
@@ -66,19 +67,48 @@ const HeroArea = () => {
             </div>
 
             {/* Description and CTA */}
-            <div className="col-12 col-md-8 col-lg-4 col-xl-3">
+            <div className="col-12 col-md-8 col-lg-4 col-xl-3" style={{paddingTop: '20px'}}>
               <div className="hero-content home2">
-                <p
-                  className="my-5 wow fadeInUp text-black"
-                  data-wow-duration="1000ms"
-                  style={{ fontFamily: 'Poppins', letterSpacing: '0.08em' , lineHeight: '1.9',  textAlign: 'left',color: '#000' }}
-                  data-wow-delay="1100ms"
-                >
-                  Whether you are facing a Visa refusal, a Deportation order, or navigating complex
-                  compliance issues, Lexington Ashworth Solicitors offers clear, expert legal help.
-                  We specialise in appeals, human rights claims, family migration, and sponsor
-                  licence solutions across the UK.
-                </p>
+               <p
+  className="my-5 wow fadeInUp text-black description-paragraph"
+  data-wow-duration="1000ms"
+>
+  Whether you are facing a Visa refusal, a Deportation order, or navigating complex
+  compliance issues, Lexington Ashworth Solicitors offers clear, expert legal help.
+  We specialise in appeals, human rights claims, family migration, and sponsor
+  licence solutions across the UK.
+</p>
+
+<style jsx>{`
+  /* Base styles for the paragraph */
+  .description-paragraph {
+    font-family: 'Poppins';
+    letter-spacing: normal;
+    font-weight: 200;
+    font-size: 1.15rem;
+    line-height: 1.6;
+     text-align: justify;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+
+  /* ✅ ADD THIS LINE TO CONTROL HYPHENATION AGGRESSIVENESS */
+  /* Don't hyphenate words shorter than 6 chars, and leave at least 3 chars on each side of the hyphen. */
+  hyphenate-limit-chars: 6 3 3; 
+
+    color: #000;
+    margin: auto;
+    max-width: 600px;
+  }
+
+  /* ✅ Overrides for mobile screens */
+  @media (max-width: 640px) {
+    .description-paragraph {
+      font-size: 0.9rem;  /* Adjusted for better readability */
+      font-weight: 300;  /* 200 can be very thin, 300 is often better */
+    }
+  }
+`}</style>
                 <a
                   href="/appointment"
                   className="btn btn-primary2 wow fadeInUp"

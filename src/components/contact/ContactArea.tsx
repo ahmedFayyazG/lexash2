@@ -1,105 +1,176 @@
-"use client";
-import React from 'react';
-import { useContactForm } from './useContactForm';
-import { ContactInfoCard } from './ContactInfoCard';
-import { InputField } from './InputField';
-import { useMediaQuery } from './useMediaQuery';// <<< 1. IMPORT THE NEW HOOK
+'use client';
 
-// --- Theme Colors and Styles defined once ---
+import React, { useState, useEffect, ReactNode, useRef } from 'react';
+import { Phone, Mail, MapPin } from 'lucide-react';
+
+// --- Helper Hooks (assumed to exist from your code) ---
+const useContactForm = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const requiredFields = ['name', 'email', 'subject', 'message'];
+    const isValid = requiredFields.every(field => formData[field as keyof typeof formData].trim());
+    
+    if (!isValid) {
+      setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus(''), 3000);
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('sending');
+
+    setTimeout(() => {
+      setSubmitStatus('success');
+      setIsSubmitting(false);
+      setTimeout(() => {
+        setSubmitStatus('');
+        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      }, 3000);
+    }, 2000);
+  };
+
+  return { formData, isSubmitting, submitStatus, handleInputChange, handleSubmit };
+};
+
+const useMediaQuery = (query: string) => {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+        const media = window.matchMedia(query);
+        if (media.matches !== matches) {
+        setMatches(media.matches);
+        }
+        const listener = () => setMatches(media.matches);
+        window.addEventListener('resize', listener);
+        return () => window.removeEventListener('resize', listener);
+    }
+  }, [matches, query]);
+  return matches;
+};
+
+// --- Child Components ---
+interface ContactInfoCardProps {
+  icon: ReactNode;
+  title: string;
+  line1: ReactNode;
+  line2: string;
+}
+
+const ContactInfoCard: React.FC<ContactInfoCardProps> = ({ icon, title, line1, line2 }) => (
+    <div className="contact-info-card animate-on-scroll">
+        <div className="info-icon-wrapper">{icon}</div>
+        <div className="info-text-wrapper">
+            <h3>{title}</h3>
+            <p>{line1}</p>
+            <span>{line2}</span>
+        </div>
+    </div>
+);
+
+interface InputFieldProps {
+  id: string;
+  name: string;
+  label: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  type?: string;
+  required?: boolean;
+  error?: boolean;
+  options?: { value: string; label: string }[];
+}
+
+const InputField: React.FC<InputFieldProps> = ({ id, name, label, type = 'text', value, onChange, required, error, options }) => {
+    const hasValue = value && value.length > 0;
+    return (
+        <div className={`input-field ${hasValue ? 'has-value' : ''} ${error ? 'has-error' : ''}`}>
+            {type === 'textarea' ? (
+                <textarea id={id} name={name} value={value} onChange={onChange} required={required} rows={5} />
+            ) : type === 'select' ? (
+                <select id={id} name={name} value={value} onChange={onChange} required={required}>
+                    <option value="" disabled></option>
+                    {options?.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+                </select>
+            ) : (
+                <input id={id} name={name} type={type} value={value} onChange={onChange} required={required} />
+            )}
+            <label htmlFor={id}>{label}</label>
+        </div>
+    );
+};
+
+
+// --- Theme Colors ---
 const theme = {
   accent: '#B9946A',
-  text: '#2A2A2A',
-  lightText: '#5A5A5A',
-  background: '#FDFBF8',
-  border: '#D1D1D1',
+  text: '#212C3C',
+  lightText: '#5A6774',
+  background: '#FFFFFF',
+  lightBackground: '#F9F9F9',
+  border: '#EAE6E1',
   success: '#28a745',
   error: '#e53e3e',
 };
 
 // --- Main Component ---
 const ContactArea = () => {
-  const {
-    formData,
-    isSubmitting,
-    submitStatus,
-    handleInputChange,
-    handleSubmit
-  } = useContactForm();
-
-  // <<< 2. USE THE HOOK TO DETECT SCREEN SIZE
+  const { formData, isSubmitting, submitStatus, handleInputChange, handleSubmit } = useContactForm();
   const isDesktop = useMediaQuery('(min-width: 992px)');
+  const pageRef = useRef<HTMLDivElement>(null);
 
-  const pageStyle: React.CSSProperties = {
-    fontFamily: "'Poppins', sans-serif",
-    background: theme.background,
-    backgroundImage: `url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23EAE6E1" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')`,
-    color: theme.text,
-    minHeight: '100vh',
-    padding: 'clamp(4rem, 10vw, 8rem) 2rem',
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  // <<< 3. DEFINE RESPONSIVE STYLES
-  const formSectionStyle: React.CSSProperties = {
-    display: 'grid',
-    gridTemplateColumns: '1fr', // Default for mobile
-    gap: '5rem',
-    alignItems: 'flex-start',
-    // Apply desktop styles conditionally
-    ...(isDesktop && {
-      gridTemplateColumns: '1fr 1.2fr',
-    }),
-  };
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
 
-  const buttonStyle: React.CSSProperties = {
-    background: theme.text,
-    color: theme.accent,
-    border: `1px solid ${theme.text}`,
-    padding: '0.9rem 2.5rem',
-    borderRadius: '8px',
-    fontSize: '0.9rem',
-    fontWeight: 600,
-    letterSpacing: '0.8px',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-    outline: 'none',
-    textTransform: 'uppercase',
+    return () => {
+      elementsToAnimate.forEach(el => {
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, []);
+  
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if(!pageRef.current) return;
+    const heroSection = pageRef.current.querySelector('.hero-section');
+    if (heroSection) {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
+        const xPos = (clientX / offsetWidth) * 100;
+        const yPos = (clientY / offsetHeight) * 100;
+        heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+        heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+    }
   };
 
   const getButtonState = () => {
-    if (isSubmitting) {
-      return { text: 'SENDING...', style: { ...buttonStyle, cursor: 'wait' } };
-    }
-    switch (submitStatus) {
-      case 'success':
-        return { text: 'SENT SUCCESSFULLY ✓', style: { ...buttonStyle, background: theme.success, color: '#fff', borderColor: theme.success } };
-      case 'error':
-        return { text: 'PLEASE CHECK FIELDS *', style: { ...buttonStyle, background: theme.error, color: '#fff', borderColor: theme.error } };
-      default:
-        return { text: 'SEND INQUIRY', style: buttonStyle };
-    }
+    if (isSubmitting) return { text: 'SENDING...', className: 'submitting' };
+    if (submitStatus === 'success') return { text: 'SENT SUCCESSFULLY ✓', className: 'success' };
+    if (submitStatus === 'error') return { text: 'PLEASE CHECK FIELDS *', className: 'error' };
+    return { text: 'SEND INQUIRY', className: '' };
   };
   
-  const { text: buttonText, style: currentButtonStyle } = getButtonState();
+  const { text: buttonText, className: buttonClass } = getButtonState();
 
   const cardData = [
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
-      title: "Direct Line",
-      line1: <a href="tel:+441618189888" style={{color: 'inherit', textDecoration: 'none'}}>+44 161 818 9888</a>,
-      line2: "Available for urgent matters"
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>,
-      title: "Email Inquiry",
-      line1: <a href="mailto:consult@lexingtonashworth.com" style={{color: 'inherit', textDecoration: 'none'}}>consult@lexingtonashworth.com</a>,
-      line2: "Responses within one business day"
-    },
-    {
-      icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
-      title: "Office Location",
-      line1: "Peter House, Oxford St",
-      line2: "Manchester M1 5AN, UK"
-    },
+    { icon: <Phone size={24} />, title: "Direct Line", line1: <a href="tel:+441618189888">+44 161 818 9888</a>, line2: "Available for urgent matters" },
+    { icon: <Mail size={24} />, title: "Email Inquiry", line1: <a href="mailto:consult@lexingtonashworth.com">consult@lexingtonashworth.com</a>, line2: "Responses within one business day" },
+    { icon: <MapPin size={24} />, title: "Office Location", line1: "Peter House, Oxford St", line2: "Manchester M1 5AN, UK" },
   ];
 
   const subjectOptions = [
@@ -110,71 +181,262 @@ const ContactArea = () => {
   ];
 
   return (
-    <div style={pageStyle}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-        <header style={{ textAlign: 'center', marginBottom: '6rem' }}>
-          <h1 style={{ fontSize: 'clamp(2.8rem, 5vw, 4rem)', fontWeight: 700, color: theme.text, marginBottom: '1.5rem', lineHeight: 1.1 }}>
-            Contact Our Experts
-          </h1>
-          <p style={{ fontSize: 'clamp(1rem, 2vw, 1.25rem)', color: theme.lightText, maxWidth: '750px', margin: '0 auto' }}>
-            Initiate a confidential dialogue with our team. We are structured to provide clarity and strategic direction for your most pressing legal needs.
-          </p>
-        </header>
+    <>
+    <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        .contact-page-wrapper {
+            font-family: 'Poppins', sans-serif;
+            background: ${theme.background};
+            color: ${theme.text};
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        .animate-on-scroll { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); 
+        }
+        .animate-on-scroll.is-visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        .hero-section {
+            background-color: #1A202C;
+            color: white;
+            padding: 7rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--gradient-x, 50%) var(--gradient-y, 50%), rgba(185, 148, 106, 0.15), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.2s ease-out;
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; }
+        .hero-content p { font-size: clamp(1rem, 2vw, 1.15rem); margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-        <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '8rem' }}>
-          {cardData.map(card => <ContactInfoCard key={card.title} {...card} />)}
-        </section>
-
-        {/* <<< 4. APPLY THE STYLE OBJECT HERE */}
-        <section style={formSectionStyle}>
-          <aside>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: 700, lineHeight: 1.2, color: theme.text, borderLeft: `4px solid ${theme.accent}`, paddingLeft: '1.5rem', marginBottom: '2rem' }}>
-              Your Inquiry
-            </h2>
-            <p style={{ fontSize: '1.1rem', color: theme.lightText }}>
-              Please provide as much detail as possible. This allows our team to assess your situation and respond with the most relevant information.
-            </p>
-            <p style={{ fontSize: '1.1rem', color: theme.lightText }}>
-              All submissions are encrypted and treated with the strictest confidentiality, protected by attorney-client privilege from the outset.
-            </p>
-          </aside>
-
-          <form onSubmit={handleSubmit} noValidate>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '0 2rem' }}>
-                <InputField id="name" name="name" label="Full Name" value={formData.name} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.name}/>
-                <InputField id="email" name="email" label="Email Address" type="email" value={formData.email} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.email}/>
+        .contact-info-section {
+            padding: 6rem 2rem;
+        }
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+        .contact-info-card {
+            background: #fff;
+            border: 1px solid ${theme.border};
+            border-radius: 16px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .contact-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+            border-color: ${theme.accent};
+        }
+        .info-icon-wrapper {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            background: ${theme.lightBackground};
+            color: ${theme.accent};
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .contact-info-card:hover .info-icon-wrapper {
+            background: ${theme.accent};
+            color: #fff;
+        }
+        .info-text-wrapper h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 0 0 0.25rem;
+        }
+        .info-text-wrapper p, .info-text-wrapper a {
+            font-size: 1rem;
+            color: ${theme.text};
+            margin: 0;
+            text-decoration: none;
+            font-weight: 300;
+            word-break: break-word;
+        }
+        .info-text-wrapper span {
+            font-size: 0.9rem;
+            color: ${theme.lightText};
+            font-weight: 300;
+        }
+        .form-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: flex-start;
+        }
+        .form-intro h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            color: ${theme.text};
+            border-left: 4px solid ${theme.accent};
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .form-intro p {
+            font-size: 1.1rem;
+            color: ${theme.lightText};
+            font-weight: 300;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .input-field {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .input-field label {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            color: ${theme.lightText};
+            pointer-events: none;
+            transition: all 0.3s ease;
+            font-weight: 300;
+            background: #fff;
+            padding: 0 0.5rem;
+        }
+        .input-field input, .input-field textarea, .input-field select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid ${theme.border};
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            background: #fff;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .input-field input:focus, .input-field textarea:focus, .input-field select:focus {
+            border-color: ${theme.accent};
+        }
+        .input-field input:focus + label,
+        .input-field.has-value input + label,
+        .input-field textarea:focus + label,
+        .input-field.has-value textarea + label,
+        .input-field select:focus + label,
+        .input-field.has-value select + label {
+            top: -0.75rem;
+            font-size: 0.8rem;
+            color: ${theme.accent};
+        }
+        .input-field.has-error input, .input-field.has-error textarea, .input-field.has-error select {
+            border-color: ${theme.error};
+        }
+        .input-field.has-error label {
+            color: ${theme.error};
+        }
+        .submit-button {
+            background: ${theme.text};
+            color: #fff;
+            border: 1px solid ${theme.text};
+            padding: 0.9rem 2.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            text-transform: uppercase;
+        }
+        .submit-button:hover {
+            background: ${theme.accent};
+            border-color: ${theme.accent};
+        }
+        .submit-button.success { background: ${theme.success}; border-color: ${theme.success}; }
+        .submit-button.error { background: ${theme.error}; border-color: ${theme.error}; }
+        .submit-button.submitting { cursor: wait; }
+        
+        @media (max-width: 992px) {
+            .form-layout { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    `}</style>
+    <div className="contact-page-wrapper">
+      <section className="hero-section">
+          <div className="container">
+              <div className="hero-content animate-on-scroll">
+                  <h1 style={{fontFamily:"poppins", fontWeight:400}}>Contact Our Experts</h1>
+                  <p style={{fontFamily:"poppins", fontWeight:300}}>
+                      Initiate a confidential dialogue with our team. We are structured to provide clarity and strategic direction for your most pressing legal needs.
+                  </p>
+              </div>
+          </div>
+      </section>
+      
+      <section className="contact-info-section">
+        <div className="contact-container">
+            <div className="contact-info-grid">
+                {cardData.map((card, index) => <ContactInfoCard key={card.title} {...card} />)}
             </div>
-            <InputField id="phone" name="phone" label="Phone Number (Optional)" type="tel" value={formData.phone} onChange={handleInputChange} />
-            <InputField id="subject" name="subject" label="Subject Matter" type="select" options={subjectOptions} value={formData.subject} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.subject}/>
-            <InputField id="message" name="message" label="Detailed Message" type="textarea" value={formData.message} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.message}/>
-            
-            <div style={{ textAlign: 'left', marginTop: '1rem' }}>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                style={currentButtonStyle}
-                onMouseEnter={(e) => {
-                  if (!isSubmitting && submitStatus !== 'success' && submitStatus !== 'error') {
-                    e.currentTarget.style.background = theme.accent;
-                    e.currentTarget.style.color = theme.background;
-                    e.currentTarget.style.borderColor = theme.accent;
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isSubmitting && submitStatus !== 'success' && submitStatus !== 'error') {
-                    e.currentTarget.style.background = theme.text;
-                    e.currentTarget.style.color = theme.accent;
-                    e.currentTarget.style.borderColor = theme.text;
-                  }
-                }}
-              >
-                {buttonText}
-              </button>
-            </div>
-          </form>
-        </section>
-      </div>
+
+            <section className="form-layout">
+                <aside className="form-intro animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                    <h2>Your Inquiry</h2>
+                    <p>
+                    Please provide as much detail as possible. This allows our team to assess your situation and respond with the most relevant information.
+                    </p>
+                </aside>
+
+                <form onSubmit={handleSubmit} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
+                    <div className="form-grid">
+                        <InputField id="name" name="name" label="Full Name *" value={formData.name} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.name}/>
+                        <InputField id="email" name="email" label="Email Address *" type="email" value={formData.email} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.email}/>
+                    </div>
+                    <InputField id="phone" name="phone" label="Phone Number (Optional)" type="tel" value={formData.phone} onChange={handleInputChange} />
+                    <InputField id="subject" name="subject" label="Subject Matter *" type="select" options={subjectOptions} value={formData.subject} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.subject}/>
+                    <InputField id="message" name="message" label="Detailed Message *" type="textarea" value={formData.message} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.message}/>
+                    
+                    <div style={{ textAlign: 'left', marginTop: '1rem' }}>
+                    <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={`submit-button ${buttonClass}`}
+                    >
+                        {buttonText}
+                    </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+      </section>
     </div>
+    </>
   );
 };
 

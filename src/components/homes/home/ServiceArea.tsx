@@ -755,7 +755,7 @@ const ServiceAreaRedesigned: React.FC = () => {
         <div className="service-container">
           <div className="service-header">
             <h2>Our Areas of Expertise</h2>
-            <p>
+            <p style={{color:"black", fontFamily:"Poppins", fontWeight:"300"}}>
               We provide strategic counsel across a spectrum of immigration and personal law, ensuring clarity and confidence at every step.
             </p>
           </div>

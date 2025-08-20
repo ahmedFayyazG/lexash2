@@ -1,4 +1,5 @@
 'use client';
+import MissionArea from '@/components/homes/home/VideoArea';
 import React, { useState, useEffect , ReactNode} from 'react';
 
 
@@ -15,10 +16,18 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 
 // Mock for menu_data
 const menu_data = [
-  { title: 'About Us', link: '/about', has_dropdown: false },
   { title: 'Expertise', link: '/services', has_dropdown: true },
-  { title: 'News & Blogs', link: '/contact', has_dropdown: false },
-  { title: 'Join Our Team', link: '/contact', has_dropdown: false },
+  { 
+    title: 'About Us', 
+    link: '/about-us', 
+    has_dropdown: true,
+    sub_menus: [
+        { title: 'Our Team', link: '/ourteam', has_inner_dropdown: false},
+        { title: 'Our Mission', link: '/our-mission', has_inner_dropdown: false },
+    ]
+  },
+  { title: 'Insights', link: '/news-and-insights', has_dropdown: false },
+  { title: 'Join Our Team', link: '/JoinOurTeam', has_dropdown: false },
   { title: 'Contact Us', link: '/contact', has_dropdown: false },
 
 ];
@@ -231,13 +240,13 @@ const willsWritingOptions = [
     {
         title: 'Islamic Wills',
         description: 'Compliant with Sharia principles.',
-        href: '/services/wills-writing/islamic',
+        href: '/islamic-wills',
         icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
     },
     {
         title: 'Conventional Wills',
         description: 'Standard UK estate planning.',
-        href: '/services/wills-writing/conventional',
+        href: '/conventional-wills',
         icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     }
 ];
