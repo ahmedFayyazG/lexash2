@@ -112,8 +112,11 @@ const PersonalImmigrationPage = () => {
             const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
             const xPos = (clientX / offsetWidth) * 100;
             const yPos = (clientY / offsetHeight) * 100;
-            heroSection.style.setProperty('--gradient-x', `${xPos}%`);
-            heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+       const el = heroSection as HTMLElement | null;
+if (el) {
+  el.style.setProperty('--gradient-x', `${xPos}%`);
+  el.style.setProperty('--gradient-y', `${yPos}%`);
+}
         }
     };
 
