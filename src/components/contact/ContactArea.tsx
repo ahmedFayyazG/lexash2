@@ -473,7 +473,7 @@ const ContactArea = () => {
                     </p>
                 </aside>
 
-                <form onSubmit={(e) => handleSubmit(e, isRecaptchaVerified)} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
+                <form onSubmit={(e) => handleSubmit(e, )} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
                     <div className="form-grid">
                         <InputField id="name" name="name" label="Full Name *" value={formData.name} onChange={handleInputChange} required error={errors.name}/>
                         <InputField id="email" name="email" label="Email Address *" type="email" value={formData.email} onChange={handleInputChange} required error={errors.email}/>
@@ -493,11 +493,6 @@ const ContactArea = () => {
                     </div>
                     {errors.consent && <p className="error-message">{errors.consent}</p>}
 
-                    <div className="recaptcha-container">
-                        <div className="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" data-callback="onRecaptchaSuccess"></div>
-                        {errors.recaptcha && <p className="error-message">{errors.recaptcha}</p>}
-                    </div>
-                    
                     <div style={{ textAlign: 'left', marginTop: '1rem' }}>
                     <button
                         type="submit"
