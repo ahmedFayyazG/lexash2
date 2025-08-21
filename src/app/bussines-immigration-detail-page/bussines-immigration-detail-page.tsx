@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { Building, UserCheck, Shield, Search, Briefcase, ArrowRight, Users } from 'lucide-react';
+import React, { useEffect, ReactNode, useRef } from 'react';
+import { Building, UserCheck, Shield, Search, ArrowRight, Users } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -9,7 +9,6 @@ interface LinkProps {
   children: ReactNode;
   [key: string]: any;
 }
-
 const Link = ({ href, children, ...props }: LinkProps) => (
   <a href={href} {...props}>
     {children}
@@ -18,116 +17,110 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 
 // --- INTERFACES ---
 interface ServiceLink {
-    name: string;
-    description: string;
-    href: string;
+  name: string;
+  description: string;
+  href: string;
 }
-
 interface ServiceCategory {
-    title: string;
-    icon: ReactNode;
-    links: ServiceLink[];
+  title: string;
+  icon: ReactNode;
+  links: ServiceLink[];
 }
 
 // --- COMPONENT DATA ---
 const serviceCategories: ServiceCategory[] = [
-    {
-        title: 'Hiring Foreign Workers',
-        icon: <Users className="w-8 h-8" />,
-        links: [
-            { name: 'Sponsor Licence', description: 'Authority to hire foreign talent.', href: '#' },
-            { name: 'Apply for Sponsor Licence', description: 'Navigate the application process seamlessly.', href: '#' },
-            { name: 'Sponsor Licence Renewal', description: 'Maintain your ability to sponsor.', href: '#' },
-            { name: 'Sponsor Licence Suspension / Revocation', description: 'Expert defence against compliance actions.', href: '#' },
-            { name: 'Sponsor Licence Rejected', description: 'Overturn a negative decision.', href: '#' },
-            { name: 'Sponsor Licence Compliance Visits Support', description: 'Prepare for Home Office audits.', href: '#' },
-        ]
-    },
-    {
-        title: 'UK Settlement for Entrepreneurs',
-        icon: <UserCheck className="w-8 h-8" />,
-        links: [
-            { name: 'Self-Sponsorship Route', description: 'Your business, your visa.', href: '#' },
-            { name: 'Self-Sponsorship Requirements', description: 'Understand the eligibility criteria.', href: '#' },
-            { name: 'Self-Sponsorship Cost', description: 'A clear breakdown of investment.', href: '#' },
-            { name: 'Self-Sponsorship Skilled Worker Visa', description: 'Secure your personal visa.', href: '#' },
-            { name: 'Apply for Self-Sponsorship', description: 'Begin your application journey.', href: '#' },
-        ]
-    },
-    {
-        title: 'Challenge Decisions, Secure Rights',
-        icon: <Shield className="w-8 h-8" />,
-        links: [
-            { name: 'Immigration Appeals Procedure', description: 'Navigate the appeals process.', href: '#' },
-            { name: 'Spouse Visa Appeal', description: 'For partners of business professionals.', href: '#' },
-            { name: 'ILR /Settlement Visa Refusal Appeal', description: 'Challenge long-term residency refusals.', href: '#' },
-            { name: 'Administrative Review & Appeal', description: 'Correct caseworking errors.', href: '#' },
-        ]
-    },
-    {
-        title: 'UK Exploration Made Easy',
-        icon: <Search className="w-8 h-8" />,
-        links: [
-            { name: 'Standard Visitor Visa UK', description: 'For business meetings and exploration.', href: '#' },
-            { name: 'UK Visitor Visa Refusal', description: 'Overcome visitor visa rejections.', href: '#' },
-        ]
-    },
-    {
-        title: 'Business Expansion in UK',
-        icon: <Building className="w-8 h-8" />,
-        links: [
-            { name: 'Global Business Mobility Visa', description: 'Transfer key staff to the UK.', href: '#' },
-            { name: 'UK Expansion worker Visa', description: 'Establish your UK business presence.', href: '#' },
-            { name: 'Sole Representative Visa Extension', description: 'Extend your stay as a representative.', href: '#' },
-        ]
-    }
+  {
+    title: 'Hiring Foreign Workers',
+    icon: <Users className="w-8 h-8" />,
+    links: [
+      { name: 'Sponsor Licence', description: 'Authority to hire foreign talent.', href: '#' },
+      { name: 'Apply for Sponsor Licence', description: 'Navigate the application process seamlessly.', href: '#' },
+      { name: 'Sponsor Licence Renewal', description: 'Maintain your ability to sponsor.', href: '#' },
+      { name: 'Sponsor Licence Suspension / Revocation', description: 'Expert defence against compliance actions.', href: '#' },
+      { name: 'Sponsor Licence Rejected', description: 'Overturn a negative decision.', href: '#' },
+      { name: 'Sponsor Licence Compliance Visits Support', description: 'Prepare for Home Office audits.', href: '#' },
+    ],
+  },
+  {
+    title: 'UK Settlement for Entrepreneurs',
+    icon: <UserCheck className="w-8 h-8" />,
+    links: [
+      { name: 'Self-Sponsorship Route', description: 'Your business, your visa.', href: '#' },
+      { name: 'Self-Sponsorship Requirements', description: 'Understand the eligibility criteria.', href: '#' },
+      { name: 'Self-Sponsorship Cost', description: 'A clear breakdown of investment.', href: '#' },
+      { name: 'Self-Sponsorship Skilled Worker Visa', description: 'Secure your personal visa.', href: '#' },
+      { name: 'Apply for Self-Sponsorship', description: 'Begin your application journey.', href: '#' },
+    ],
+  },
+  {
+    title: 'Challenge Decisions, Secure Rights',
+    icon: <Shield className="w-8 h-8" />,
+    links: [
+      { name: 'Immigration Appeals Procedure', description: 'Navigate the appeals process.', href: '#' },
+      { name: 'Spouse Visa Appeal', description: 'For partners of business professionals.', href: '#' },
+      { name: 'ILR /Settlement Visa Refusal Appeal', description: 'Challenge long-term residency refusals.', href: '#' },
+      { name: 'Administrative Review & Appeal', description: 'Correct caseworking errors.', href: '#' },
+    ],
+  },
+  {
+    title: 'UK Exploration Made Easy',
+    icon: <Search className="w-8 h-8" />,
+    links: [
+      { name: 'Standard Visitor Visa UK', description: 'For business meetings and exploration.', href: '#' },
+      { name: 'UK Visitor Visa Refusal', description: 'Overcome visitor visa rejections.', href: '#' },
+    ],
+  },
+  {
+    title: 'Business Expansion in UK',
+    icon: <Building className="w-8 h-8" />,
+    links: [
+      { name: 'Global Business Mobility Visa', description: 'Transfer key staff to the UK.', href: '#' },
+      { name: 'UK Expansion worker Visa', description: 'Establish your UK business presence.', href: '#' },
+      { name: 'Sole Representative Visa Extension', description: 'Extend your stay as a representative.', href: '#' },
+    ],
+  },
 ];
-
 
 // --- MAIN PAGE COMPONENT ---
 const BusinessImmigrationPage = () => {
-    const pageRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-        elementsToAnimate.forEach(el => observer.observe(el));
-
-        return () => {
-            elementsToAnimate.forEach(el => {
-                if (el) observer.unobserve(el);
-            });
-        };
-    }, []);
-    
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if(!pageRef.current) return;
-        const heroSection = pageRef.current.querySelector('.hero-section');
-        if (heroSection) {
-            const { clientX, clientY } = e;
-            const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
-            const xPos = (clientX / offsetWidth) * 100;
-            const yPos = (clientY / offsetHeight) * 100;
-            heroSection.style.setProperty('--gradient-x', `${xPos}%`);
-            heroSection.style.setProperty('--gradient-y', `${yPos}%`);
-        }
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
+      { threshold: 0.1 }
+    );
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach((el) => observer.observe(el));
+    return () => {
+      elementsToAnimate.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
     };
+  }, []);
 
-    const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-    };
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const root = pageRef.current;
+    if (!root) return;
+
+    // ✅ Narrow to HTMLElement so .style exists
+    const heroSection = root.querySelector('.hero-section') as HTMLElement | null;
+    if (!heroSection) return;
+
+    // Use rect so the position is relative to the hero box
+    const rect = heroSection.getBoundingClientRect();
+    const xPos = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPos = ((e.clientY - rect.top) / rect.height) * 100;
+
+    heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+    heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+  };
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+  };
 
   return (
     <>
@@ -162,10 +155,7 @@ const BusinessImmigrationPage = () => {
           .hero-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             background: radial-gradient(circle at var(--gradient-x, 50%) var(--gradient-y, 50%), rgba(185, 148, 106, 0.15), transparent 40%);
             z-index: 1;
             pointer-events: none;
@@ -183,48 +173,15 @@ const BusinessImmigrationPage = () => {
           .section-header { text-align: center; max-width: 800px; margin: 0 auto 4rem; }
           .section-header .subtitle { color: #B9946A; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
-          .services-container {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-          }
-          .service-category-section {
-            padding-bottom: 4rem;
-            border-bottom: 1px solid #EAE6E1;
-          }
-          .service-category-section:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-          }
+          .services-container { display: flex; flex-direction: column; gap: 4rem; }
+          .service-category-section { padding-bottom: 4rem; border-bottom: 1px solid #EAE6E1; }
+          .service-category-section:last-child { border-bottom: none; padding-bottom: 0; }
 
-          .category-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
-          }
-          .category-icon {
-            width: 64px;
-            height: 64px;
-            flex-shrink: 0;
-            background: #f8f9fa;
-            color: #B9946A;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e9ecef;
-          }
-          .category-header h3 {
-            margin: 0;
-            font-size: 2rem;
-            line-height: 1.3;
-          }
-          .service-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-          }
+          .category-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+          .category-icon { width: 64px; height: 64px; flex-shrink: 0; background: #f8f9fa; color: #B9946A; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid #e9ecef; }
+          .category-header h3 { margin: 0; font-size: 2rem; line-height: 1.3; }
+          
+          .service-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
           .service-link-card {
             background: #F9F9F9;
             border-radius: 16px;
@@ -238,54 +195,21 @@ const BusinessImmigrationPage = () => {
           }
           .service-link-card::before {
             content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: absolute; inset: 0;
             border-radius: 16px;
             border: 1px solid transparent;
             background: radial-gradient(200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), #B9946A20, transparent 80%) border-box;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: destination-out;
             mask-composite: exclude;
-            transition: all 0.3s ease;
-            opacity: 0;
+            transition: all 0.3s ease; opacity: 0;
           }
-          .service-link-card:hover::before {
-            opacity: 1;
-          }
-          .service-link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-          }
-          .service-card-content h4 {
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin: 0 0 0.5rem;
-          }
-          .service-card-content p {
-            font-size: 0.9rem;
-            color: #5A6774;
-            margin-bottom: 2rem;
-            min-height: 50px;
-          }
-          .learn-more {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #B9946A;
-            font-weight: 500;
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-          }
-          .service-link-card:hover .learn-more {
-            opacity: 1;
-            transform: translateX(0);
-          }
+          .service-link-card:hover::before { opacity: 1; }
+          .service-link-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.05); }
+          .service-card-content h4 { font-size: 1.25rem; font-weight: 500; margin: 0 0 0.5rem; }
+          .service-card-content p { font-size: 0.9rem; color: #5A6774; margin-bottom: 2rem; min-height: 50px; }
+          .learn-more { display: flex; align-items: center; gap: 0.5rem; color: #B9946A; font-weight: 500; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; }
+          .service-link-card:hover .learn-more { opacity: 1; transform: translateX(0); }
         `}</style>
 
         <section className="hero-section">
@@ -293,52 +217,51 @@ const BusinessImmigrationPage = () => {
           <div className="container">
             <div className="hero-content">
               <h1>Business Immigration Services</h1>
-              <p>
-                Strategic legal solutions for businesses, entrepreneurs, and investors seeking to navigate the complexities of UK immigration law.
-              </p>
+              <p>Strategic legal solutions for businesses, entrepreneurs, and investors seeking to navigate the complexities of UK immigration law.</p>
               <Link href="#contact" className="cta-button">Consult Our Experts</Link>
             </div>
           </div>
         </section>
 
         <section id="services" className="section">
-            <div className="container">
-                <div className="section-header animate-on-scroll">
-                    <div className="subtitle">OUR EXPERTISE</div>
-                    <h2>How We Can Help</h2>
-                </div>
-                <div className="services-container">
-                    {serviceCategories.map((category, index) => (
-                        <div key={index} className="service-category-section animate-on-scroll" style={{transitionDelay: `${index * 0.15}s`}}>
-                            <div className="category-header">
-                                <div className="category-icon">{category.icon}</div>
-                                <h3>{category.title}</h3>
-                            </div>
-                            <div className="service-links-grid">
-                                {category.links.map((link, linkIndex) => (
-                                    <Link 
-                                        key={linkIndex} 
-                                        href={link.href} 
-                                        className="service-link-card"
-                                        onMouseMove={handleCardMouseMove}
-                                    >
-                                        <div className="service-card-content">
-                                            <h4>{link.name}</h4>
-                                            <p>{link.description}</p>
-                                            <div className="learn-more">
-                                                <span>Learn More</span>
-                                                <ArrowRight size={20} />
-                                            </div>
-                                        </div>
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+          <div className="container">
+            <div className="section-header animate-on-scroll">
+              <div className="subtitle">OUR EXPERTISE</div>
+              <h2>How We Can Help</h2>
             </div>
-        </section>
 
+            <div className="services-container">
+              {serviceCategories.map((category, index) => (
+                <div key={index} className="service-category-section animate-on-scroll" style={{ transitionDelay: `${index * 0.15}s` }}>
+                  <div className="category-header">
+                    <div className="category-icon">{category.icon}</div>
+                    <h3>{category.title}</h3>
+                  </div>
+
+                  <div className="service-links-grid">
+                    {category.links.map((link, linkIndex) => (
+                      <Link
+                        key={linkIndex}
+                        href={link.href}
+                        className="service-link-card"
+                        onMouseMove={handleCardMouseMove}
+                      >
+                        <div className="service-card-content">
+                          <h4>{link.name}</h4>
+                          <p>{link.description}</p>
+                          <div className="learn-more">
+                            <span>Learn More</span>
+                            <ArrowRight size={20} />
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
