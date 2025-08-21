@@ -54,7 +54,8 @@ const SpouseVisaBlogPostPage = () => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if(!pageRef.current) return;
     const heroSection = pageRef.current.querySelector('.hero-section');
-    if (heroSection && heroSection instanceof HTMLElement) { // FIX: Check if it's an HTMLElement
+    // FIX: Check if heroSection is an HTMLElement to ensure it has a .style property
+    if (heroSection && heroSection instanceof HTMLElement) { 
         const { clientX, clientY } = e;
         const { offsetWidth, offsetHeight } = heroSection;
         const xPos = (clientX / offsetWidth) * 100;
