@@ -528,25 +528,25 @@ const services: Service[] = [
   {
     title: "Personal Immigration",
     icon: <UserCheck className="w-8 h-8" />,
-    link: "/personal-immigration",
+    link: "/personal-immigration-detail-page",
     content: "Tailored legal support for all UK personal immigration matters, including visa applications, ILR, and complex human rights cases."
   },
   {
     title: "Business Immigration",
     icon: <BriefcaseBusiness className="w-8 h-8" />,
-    link: "/business-immigration",
+    link: "/bussines-immigration-detail-page",
     content: "Strategic visa support for businesses and entrepreneurs, including Skilled Worker Visas, Sponsor Licences, and Innovator Founder routes."
   },
     {
     title: "Self-Sponsorship",
     icon: <Building2 className="w-8 h-8" />,
-    link: "/self-sponsorship",
+    link: "/self-sponsorship-central",
     content: "Empower yourself to relocate via your own UK business. We handle setup, sponsor licensing, and Skilled Worker visa applications."
   },
   {
     title: "Will Writing",
     icon: <ScrollText className="w-8 h-8" />,
-    link: "/will-writing",
+    link: "/wills-writing-detail-service-page",
     content: "Expert will writing services tailored to your values, including Shariah-compliant Islamic wills, with fixed-fee clarity."
   }
 

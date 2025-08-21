@@ -1,0 +1,273 @@
+'use client';
+
+import React, { useState, useEffect, ReactNode, useRef } from 'react';
+import { Facebook, Twitter, Linkedin, Calendar, User } from 'lucide-react';
+
+// --- MOCK COMPONENTS ---
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>
+    {children}
+  </a>
+);
+
+// --- COMPONENT DATA ---
+const articleData = {
+    type: 'Self-Sponsorship',
+    title: 'The Rise of Self-Sponsorship: Your Pathway to UK Entrepreneurship',
+    summary: 'The UK\'s immigration landscape is constantly evolving. This article explores the increasingly popular Self-Sponsorship route, a powerful option for entrepreneurs looking to establish a business and build a life in the UK.',
+    author: 'Muhammad Ahmed Fayyaz',
+    date: 'August 25, 2025',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop',
+    href: '#',
+};
+
+
+// --- MAIN PAGE COMPONENT ---
+const SelfSponsorshipBlogPostPage = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+    return () => {
+        elementsToAnimate.forEach(el => {
+            if (el) observer.unobserve(el);
+        });
+    };
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if(!pageRef.current) return;
+    const heroSection = pageRef.current.querySelector('.hero-section');
+    if (heroSection) {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
+        const xPos = (clientX / offsetWidth) * 100;
+        const yPos = (clientY / offsetHeight) * 100;
+        heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+        heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+    }
+  };
+
+  return (
+    <>
+      <div className="pageWrapper" ref={pageRef} onMouseMove={handleMouseMove}>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+          body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; background: #fff; font-weight: 300; }
+          * { box-sizing: border-box; }
+          .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+          h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: #212C3C; font-weight: 400; }
+          h1 { font-size: 3rem; line-height: 1.25; }
+          h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+          p { color: #555; font-size: 1rem; }
+          @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            h2 { font-size: 2rem; }
+          }
+        `}</style>
+        <style>{`
+          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+          .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+          
+          .hero-section {
+            background-color: #1A202C;
+            color: white;
+            padding: 7rem 0;
+            padding-top: 15rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+          }
+          .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--gradient-x, 50%) var(--gradient-y, 50%), rgba(185, 148, 106, 0.15), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.2s ease-out;
+          }
+          .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+          .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; }
+          .hero-content p { font-size: 1.1rem; margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
+          @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+          
+          .section { padding: 5rem 0; }
+          .section-header { text-align: center; max-width: 800px; margin: 0 auto 4rem; }
+          .section-header .subtitle { color: #B9946A; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+
+          .article-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: flex-start;
+          }
+          .article-content {
+            font-size: 1.1rem;
+            line-height: 1.9;
+          }
+          .article-content h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+          }
+          .article-content p {
+            margin-bottom: 1.5rem;
+          }
+          .article-content blockquote {
+            border-left: 4px solid #B9946A;
+            padding-left: 2rem;
+            margin: 2.5rem 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #5A6774;
+          }
+
+          .sidebar {
+            position: sticky;
+            top: 100px;
+          }
+          .author-card, .share-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border: 1px solid #e9ecef;
+          }
+          .author-card h3, .share-card h3 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+          }
+          .author-details {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+          }
+          .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          .author-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+          .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #5A6774;
+          }
+          
+          .share-links {
+            display: flex;
+            gap: 1rem;
+          }
+          .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: #fff;
+            color: #212C3C;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+          }
+          .social-link:hover {
+            background-color: #B9946A;
+            color: #fff;
+            transform: translateY(-3px);
+          }
+          
+          @media (max-width: 992px) {
+            .article-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+          }
+        `}</style>
+
+        <section className="hero-section">
+          <div className="hero-background"></div>
+          <div className="container">
+            <div className="hero-content">
+              <h1>{articleData.title}</h1>
+              <p>{articleData.summary}</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="article" className="section">
+            <div className="container">
+                <div className="article-layout">
+                    <main className="article-content animate-on-scroll">
+                        <p>For ambitious entrepreneurs and business leaders around the world, the dream of establishing a presence in the UK has often been met with complex immigration hurdles. However, the closure of the Tier 1 Investor visa has led to the rise of a powerful alternative: the Self-Sponsorship route. This pathway, while not a direct replacement, offers a unique and flexible approach for individuals to take control of their immigration journey by leveraging their own business.</p>
+                        
+                        <h2>What is the Self-Sponsorship Route?</h2>
+                        <p>The Self-Sponsorship route is not an official visa category in itself, but rather a strategic combination of two existing immigration processes: obtaining a Sponsor Licence for your UK company, and then using that licence to sponsor your own Skilled Worker visa. This innovative approach allows you to be both the owner of your business and its employee, creating a direct and secure path to living and working in the UK.</p>
+                        
+                        <blockquote>
+                            "Self-Sponsorship is about empowerment. It puts you in the driver's seat of your immigration journey, tying your success to the growth of your own business."
+                        </blockquote>
+                        
+                        <h2>Who is This Route For?</h2>
+                        <p>This route is ideal for individuals with a proven track record in business and the capital to invest in a genuine, trading UK company. It is particularly well-suited for those who want to take an active role in running a business, rather than being a passive investor. The Home Office places a strong emphasis on the "genuineness" of the business and the role you will undertake, so it is crucial to have a solid business plan and a clear vision for your company's future in the UK.</p>
+                    </main>
+                    <aside className="sidebar">
+                        <div className="author-card animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                            <h3>About the Author</h3>
+                            <div className="author-details">
+                                <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Author" className="author-avatar" />
+                                <div className="author-info">
+                                    <h4>{articleData.author}</h4>
+                                    <p>Immigration Solicitor</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="share-card animate-on-scroll" style={{transitionDelay: '0.3s'}}>
+                            <h3>Share This Article</h3>
+                            <div className="share-links">
+                                <Link href="#" className="social-link"><Twitter size={20} /></Link>
+                                <Link href="#" className="social-link"><Facebook size={20} /></Link>
+                                <Link href="#" className="social-link"><Linkedin size={20} /></Link>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+      </div>
+    </>
+  );
+};
+
+export default SelfSponsorshipBlogPostPage;

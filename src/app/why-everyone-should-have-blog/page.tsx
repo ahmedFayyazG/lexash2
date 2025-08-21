@@ -5,18 +5,18 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 import React from 'react';
 import Cta2Area from '../../components/homes/home-3/Cta2Area';
 import FooterOne from '@/layouts/footers/FooterOne';
-import CivilPartnershipPage from './civil-partnership';
+import WillsBlogPostPage from './why-everyone-should-blog';
 
 
 
-
+// import ServiceDetailsArea from './ServiceDetailsArea';
 
 
 const SelfSponsorshipDetails = () => {
   return (
     <>
       <HeaderOne />
-        <CivilPartnershipPage />
+   <WillsBlogPostPage />
       <Cta2Area />
       <FooterOne />
     </>

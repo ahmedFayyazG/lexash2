@@ -1,61 +1,76 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { Phone, Mail, MapPin } from 'lucide-react';
+import { Phone, Mail, MapPin, Check } from 'lucide-react';
 
-// --- Helper Hooks (assumed to exist from your code) ---
+// --- Helper Hook for Form State & Submission ---
 const useContactForm = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '', consent: false });
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState('');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    const isCheckbox = type === 'checkbox';
+    setFormData(prev => ({ ...prev, [name]: isCheckbox ? (e.target as HTMLInputElement).checked : value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const requiredFields = ['name', 'email', 'subject', 'message'];
-    const isValid = requiredFields.every(field => formData[field as keyof typeof formData].trim());
     
+    const newErrors: { [key: string]: string } = {};
+    if (!formData.name) newErrors.name = 'Full Name is required.';
+    if (!formData.email) {
+      newErrors.email = 'Email Address is required.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email address is invalid.';
+    }
+    if (!formData.subject) newErrors.subject = 'Subject Matter is required.';
+    if (!formData.message) newErrors.message = 'Message is required.';
+    if (!formData.consent) newErrors.consent = 'You must consent to the terms.';
+    
+    setErrors(newErrors);
+    const isValid = Object.keys(newErrors).length === 0;
+
     if (!isValid) {
       setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus(''), 3000);
+      setTimeout(() => setSubmitStatus(''), 4000);
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus('sending');
 
-    setTimeout(() => {
-      setSubmitStatus('success');
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, to: 'ahmedchoudary@gmail.com' })
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setTimeout(() => {
+          setSubmitStatus('');
+          setFormData({ name: '', email: '', phone: '', subject: '', message: '', consent: false });
+          setErrors({});
+        }, 3000);
+      } else {
+        throw new Error('Failed to send email');
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus('error');
+      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+    } finally {
       setIsSubmitting(false);
-      setTimeout(() => {
-        setSubmitStatus('');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
-      }, 3000);
-    }, 2000);
+    }
   };
 
-  return { formData, isSubmitting, submitStatus, handleInputChange, handleSubmit };
+  return { formData, errors, isSubmitting, submitStatus, handleInputChange, handleSubmit };
 };
 
-const useMediaQuery = (query: string) => {
-  const [matches, setMatches] = useState(false);
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-        const media = window.matchMedia(query);
-        if (media.matches !== matches) {
-        setMatches(media.matches);
-        }
-        const listener = () => setMatches(media.matches);
-        window.addEventListener('resize', listener);
-        return () => window.removeEventListener('resize', listener);
-    }
-  }, [matches, query]);
-  return matches;
-};
 
 // --- Child Components ---
 interface ContactInfoCardProps {
@@ -84,7 +99,7 @@ interface InputFieldProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   type?: string;
   required?: boolean;
-  error?: boolean;
+  error?: string;
   options?: { value: string; label: string }[];
 }
 
@@ -103,6 +118,7 @@ const InputField: React.FC<InputFieldProps> = ({ id, name, label, type = 'text',
                 <input id={id} name={name} type={type} value={value} onChange={onChange} required={required} />
             )}
             <label htmlFor={id}>{label}</label>
+            {error && <span className="error-message">{error}</span>}
         </div>
     );
 };
@@ -122,8 +138,7 @@ const theme = {
 
 // --- Main Component ---
 const ContactArea = () => {
-  const { formData, isSubmitting, submitStatus, handleInputChange, handleSubmit } = useContactForm();
-  const isDesktop = useMediaQuery('(min-width: 992px)');
+  const { formData, errors, isSubmitting, submitStatus, handleInputChange, handleSubmit } = useContactForm();
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -169,7 +184,7 @@ const ContactArea = () => {
 
   const cardData = [
     { icon: <Phone size={24} />, title: "Direct Line", line1: <a href="tel:+441618189888">+44 161 818 9888</a>, line2: "Available for urgent matters" },
-    { icon: <Mail size={24} />, title: "Email Inquiry", line1: <a href="mailto:consult@lexingtonashworth.com">consult@lexingtonashworth.com</a>, line2: "Responses within one business day" },
+    { icon: <Mail size={24} />, title: "Email Inquiry", line1: <a href="mailto:info@lexingtonashworth.com">info@lexingtonashworth.com</a>, line2: "Responses within one business day" },
     { icon: <MapPin size={24} />, title: "Office Location", line1: "Peter House, Oxford St", line2: "Manchester M1 5AN, UK" },
   ];
 
@@ -315,7 +330,7 @@ const ContactArea = () => {
         }
         .input-field {
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         .input-field label {
             position: absolute;
@@ -358,6 +373,46 @@ const ContactArea = () => {
         .input-field.has-error label {
             color: ${theme.error};
         }
+        .error-message {
+            color: ${theme.error};
+            font-size: 0.8rem;
+            padding-top: 0.25rem;
+        }
+        .consent-checkbox {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 1px solid ${theme.border};
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        .custom-checkbox.checked {
+            background: ${theme.accent};
+            border-color: ${theme.accent};
+        }
+        .custom-checkbox.has-error {
+            border-color: ${theme.error};
+        }
+        .consent-label {
+            font-size: 0.9rem;
+            color: ${theme.lightText};
+        }
+        .consent-label a {
+            color: ${theme.accent};
+            text-decoration: none;
+        }
+        .recaptcha-container {
+            margin: 1.5rem 0;
+        }
         .submit-button {
             background: ${theme.text};
             color: #fff;
@@ -391,8 +446,8 @@ const ContactArea = () => {
       <section className="hero-section">
           <div className="container">
               <div className="hero-content animate-on-scroll">
-                  <h1 style={{fontFamily:"poppins", fontWeight:400}}>Contact Our Experts</h1>
-                  <p style={{fontFamily:"poppins", fontWeight:300}}>
+                  <h1 style={{fontFamily:"Poppins, sans-serif", fontWeight:600}}>Contact Our Experts</h1>
+                  <p style={{fontFamily:"Poppins, sans-serif", fontWeight:300}}>
                       Initiate a confidential dialogue with our team. We are structured to provide clarity and strategic direction for your most pressing legal needs.
                   </p>
               </div>
@@ -400,7 +455,7 @@ const ContactArea = () => {
       </section>
       
       <section className="contact-info-section">
-        <div className="contact-container">
+        <div className="container">
             <div className="contact-info-grid">
                 {cardData.map((card, index) => <ContactInfoCard key={card.title} {...card} />)}
             </div>
@@ -413,14 +468,30 @@ const ContactArea = () => {
                     </p>
                 </aside>
 
-                <form onSubmit={handleSubmit} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
+                <form onSubmit={(e) => handleSubmit(e, isRecaptchaVerified)} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
                     <div className="form-grid">
-                        <InputField id="name" name="name" label="Full Name *" value={formData.name} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.name}/>
-                        <InputField id="email" name="email" label="Email Address *" type="email" value={formData.email} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.email}/>
+                        <InputField id="name" name="name" label="Full Name *" value={formData.name} onChange={handleInputChange} required error={errors.name}/>
+                        <InputField id="email" name="email" label="Email Address *" type="email" value={formData.email} onChange={handleInputChange} required error={errors.email}/>
                     </div>
                     <InputField id="phone" name="phone" label="Phone Number (Optional)" type="tel" value={formData.phone} onChange={handleInputChange} />
-                    <InputField id="subject" name="subject" label="Subject Matter *" type="select" options={subjectOptions} value={formData.subject} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.subject}/>
-                    <InputField id="message" name="message" label="Detailed Message *" type="textarea" value={formData.message} onChange={handleInputChange} required error={submitStatus === 'error' && !formData.message}/>
+                    <InputField id="subject" name="subject" label="Subject Matter *" type="select" options={subjectOptions} value={formData.subject} onChange={handleInputChange} required error={errors.subject}/>
+                    <InputField id="message" name="message" label="Detailed Message *" type="textarea" value={formData.message} onChange={handleInputChange} required error={errors.message}/>
+                    
+                    <div className="consent-checkbox">
+                        <input type="checkbox" id="consent" name="consent" checked={formData.consent} onChange={handleInputChange} style={{ display: 'none' }} />
+                        <label htmlFor="consent" className={`custom-checkbox ${formData.consent ? 'checked' : ''} ${errors.consent ? 'has-error' : ''}`}>
+                            {formData.consent && <Check size={14} color="#fff" />}
+                        </label>
+                        <label htmlFor="consent" className="consent-label">
+                            I consent to the&nbsp;<a href="/terms">Terms of Business</a>&nbsp;and&nbsp;<a href="/privacy">Privacy Policy</a>.
+                        </label>
+                    </div>
+                    {errors.consent && <p className="error-message">{errors.consent}</p>}
+
+                    <div className="recaptcha-container">
+                        <div className="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" data-callback="onRecaptchaSuccess"></div>
+                        {errors.recaptcha && <p className="error-message">{errors.recaptcha}</p>}
+                    </div>
                     
                     <div style={{ textAlign: 'left', marginTop: '1rem' }}>
                     <button

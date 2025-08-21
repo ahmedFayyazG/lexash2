@@ -31,7 +31,7 @@ const BlogArea = () => {
                     <div className="dot"></div>
                     <a href="#" style={{fontFamily:"poppins"}}>Immigration</a>
                   </div>
-                  <Link className="post-title" href="/blog-details" style={{fontFamily:"poppins"}}>
+                  <Link className="post-title" href="/Spouse-Visa-Blog" style={{fontFamily:"poppins"}}>
                     Navigating UK Spouse Visa Requirements in 2025
                   </Link>
                 </div>
@@ -47,7 +47,7 @@ const BlogArea = () => {
                     <div className="dot"></div>
                     <a href="#" style={{fontFamily:"poppins"}}>Wills</a>
                   </div>
-                  <Link className="post-title" href="/blog-details"  style={{fontFamily:"poppins"}}>
+                  <Link className="post-title" href="/why-everyone-should-have-blog"  style={{fontFamily:"poppins"}}>
                     Why Every Family Should Have a Legally Valid Will
                   </Link>
                 </div>
@@ -63,7 +63,7 @@ const BlogArea = () => {
                     <div className="dot"></div>
                     <a href="#" style={{fontFamily:"poppins"}}>Self-Sponsorship</a>
                   </div>
-                  <Link className="post-title" href="/blog-details" style={{fontFamily:"poppins"}}>
+                  <Link className="post-title" href="/blog-self-sponsorship" style={{fontFamily:"poppins"}}>
                     Self-Sponsorship: A Game-Changer for Entrepreneurs in the UK
                   </Link>
                 </div>
