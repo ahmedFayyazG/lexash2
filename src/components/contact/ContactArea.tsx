@@ -224,6 +224,7 @@ const ContactArea = () => {
             background-color: #1A202C;
             color: white;
             padding: 7rem 0;
+            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -446,7 +447,7 @@ const ContactArea = () => {
       <section className="hero-section">
           <div className="container">
               <div className="hero-content animate-on-scroll">
-                  <h1 style={{fontFamily:"Poppins, sans-serif", fontWeight:600}}>Contact Our Experts</h1>
+                  <h1 style={{fontFamily:"Poppins, sans-serif", fontWeight:300}}>Contact Our Experts</h1>
                   <p style={{fontFamily:"Poppins, sans-serif", fontWeight:300}}>
                       Initiate a confidential dialogue with our team. We are structured to provide clarity and strategic direction for your most pressing legal needs.
                   </p>
