@@ -161,17 +161,21 @@ const ContactArea = () => {
   }, []);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if(!pageRef.current) return;
-    const heroSection = pageRef.current.querySelector('.hero-section');
-    if (heroSection) {
-        const { clientX, clientY } = e;
-        const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
-        const xPos = (clientX / offsetWidth) * 100;
-        const yPos = (clientY / offsetHeight) * 100;
-        heroSection.style.setProperty('--gradient-x', `${xPos}%`);
-        heroSection.style.setProperty('--gradient-y', `${yPos}%`);
-    }
-  };
+  if (!pageRef.current) return;
+  const heroSection = pageRef.current.querySelector('.hero-section') as HTMLElement | null;
+  if (heroSection) {
+    const { left, top, width, height } = heroSection.getBoundingClientRect();
+
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+
+    const xPos = (x / width) * 100;
+    const yPos = (y / height) * 100;
+
+    heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+    heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+  }
+};
 
   const getButtonState = () => {
     if (isSubmitting) return { text: 'SENDING...', className: 'submitting' };
