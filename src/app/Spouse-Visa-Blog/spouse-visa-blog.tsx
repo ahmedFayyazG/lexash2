@@ -54,9 +54,9 @@ const SpouseVisaBlogPostPage = () => {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if(!pageRef.current) return;
     const heroSection = pageRef.current.querySelector('.hero-section');
-    if (heroSection) {
+    if (heroSection && heroSection instanceof HTMLElement) { // FIX: Check if it's an HTMLElement
         const { clientX, clientY } = e;
-        const { offsetWidth, offsetHeight } = heroSection as HTMLElement;
+        const { offsetWidth, offsetHeight } = heroSection;
         const xPos = (clientX / offsetWidth) * 100;
         const yPos = (clientY / offsetHeight) * 100;
         heroSection.style.setProperty('--gradient-x', `${xPos}%`);
@@ -89,7 +89,6 @@ const SpouseVisaBlogPostPage = () => {
             background-color: #1A202C;
             color: white;
             padding: 7rem 0;
-            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
