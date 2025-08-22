@@ -1,15 +1,9 @@
+import HeaderOne from "@/layouts/headers/HeaderOne";
+import FooterOne from "@/layouts/footers/FooterOne";
+import Cta2Area from "@/components/homes/home-3/Cta2Area";
+import SelfSponsorship from "./self-sponsorship";
 
-
-import Breacrumb from '@/common/Breacrumb';
-import HeaderOne from '@/layouts/headers/HeaderOne';
-import React from 'react';
-import Cta2Area from '../../components/homes/home-3/Cta2Area';
-import FooterOne from '@/layouts/footers/FooterOne';
-import SelfSponsorship from './self-sponsorship';
-// import ServiceDetailsArea from './ServiceDetailsArea';
-
-
-const SelfSponsorshipDetails = () => {
+export default function SelfSponsorshipDetails() {
   return (
     <>
       <HeaderOne />
@@ -18,6 +12,4 @@ const SelfSponsorshipDetails = () => {
       <FooterOne />
     </>
   );
-};
-
-export default SelfSponsorshipDetails;
+}

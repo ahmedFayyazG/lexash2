@@ -1,0 +1,102 @@
+/* Layout & base */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section{margin-bottom:3rem}
+/* was: p{} — CSS Modules require local class */
+.paragraph{margin:0 0 1.5rem;color:#555;line-height:1.8;font-size:1.05rem}
+
+/* Headings */
+.h1{font-size:3rem;font-weight:700;margin:0 0 1rem;line-height:1.2;color:#fff}
+.h2{font-size:2rem;color:#2c3e50;margin:0 0 1.5rem;position:relative;padding-left:1rem;font-weight:600}
+.h2::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:80%;background:#EBBF7D;border-radius:2px}
+
+/* Hero */
+.heroSection{background:linear-gradient(135deg,#2c3e50 0%,#3a4a5c 100%);color:#fff;padding:4rem 0;position:relative;overflow:hidden}
+.heroSection::before{
+  content:"";position:absolute;inset:0;
+  background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>')
+    no-repeat bottom / cover;
+}
+.heroContent{position:relative;z-index:1;padding-top:6rem}
+.heroDescription{font-size:1.25rem;opacity:.95;max-width:800px;line-height:1.8;color:#fff}
+
+/* Breadcrumb */
+.breadcrumb{display:flex;align-items:center;gap:.5rem;margin-bottom:2rem;font-size:.9rem;opacity:.9}
+.breadcrumb a{color:#EBBF7D;text-decoration:none}
+
+/* Main grid */
+.main{display:grid;grid-template-columns:1fr 350px;gap:3rem;padding:4rem 0}
+.contentArea{background:#fff}
+
+/* Requirements */
+.requirementsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin:2rem 0}
+.requirementCard{background:#f8f9fa;padding:2rem;border-radius:12px;border-left:4px solid #EBBF7D;transition:transform .3s, box-shadow .3s}
+.requirementCard:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.1)}
+.requirementCard h4{color:#2c3e50;font-size:1.25rem;margin:0 0 1rem;display:flex;align-items:center;gap:.5rem}
+.requirementIcon{width:40px;height:40px;background:#EBBF7D;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.requirementIcon svg{width:20px;height:20px;stroke:#2c3e50}
+
+/* Steps */
+.processSteps{margin:2rem 0}
+.step{display:flex;align-items:flex-start;margin-bottom:2rem;position:relative}
+.step:not(:last-child)::after{content:"";position:absolute;left:30px;top:60px;bottom:-20px;width:2px;background:#e5e5e5}
+.stepNumber{width:60px;height:60px;background:#EBBF7D;color:#2c3e50;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;flex-shrink:0;margin-right:1.5rem}
+.stepContent h4{color:#2c3e50;font-size:1.25rem;margin:0 0 .5rem}
+
+/* Benefits */
+.benefitsList{list-style:none;margin:2rem 0;padding:0}
+.benefitsList li{padding:1rem 0 1rem 3rem;position:relative;border-bottom:1px solid #e5e5e5;transition:padding-left .3s, background .3s}
+.benefitsList li:hover{background:#f8f9fa;padding-left:3.5rem}
+.benefitsList li::before{content:"✓";position:absolute;left:1rem;top:1rem;width:24px;height:24px;background:#EBBF7D;color:#2c3e50;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* Sidebar */
+.sidebar{position:sticky;top:2rem;height:fit-content}
+.ctaCard{background:linear-gradient(135deg,#EBBF7D 0%,#f4e4c1 100%);padding:2.5rem;border-radius:16px;text-align:center;margin-bottom:2rem;box-shadow:0 10px 30px rgba(235,191,125,.3)}
+.ctaCard h3{color:#2c3e50;font-size:1.75rem;margin:0 0 1rem}
+.ctaCard p{color:#2c3e50;margin:0 0 1.5rem;font-weight:500}
+.ctaButton{display:inline-flex;align-items:center;gap:.5rem;background:#2c3e50;color:#fff;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:transform .2s, box-shadow .2s;box-shadow:0 4px 15px rgba(44,62,80,.3)}
+.ctaButton:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,62,80,.4)}
+
+.quickLinks{background:#f8f9fa;padding:2rem;border-radius:12px;margin-bottom:2rem}
+.quickLinks h4{color:#2c3e50;font-size:1.25rem;margin:0 0 1.5rem;padding-bottom:1rem;border-bottom:2px solid #EBBF7D}
+.quickLinks ul{list-style:none;margin:0;padding:0}
+.quickLinks li{margin-bottom:1rem}
+.quickLink{color:#555;text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:.3s;padding:.5rem;border-radius:6px}
+.quickLink:hover{color:#EBBF7D;background:#fff;padding-left:1rem}
+.quickLink::before{content:"→";color:#EBBF7D;font-weight:700}
+
+.downloadBox{background:#2c3e50;color:#fff;padding:2rem;border-radius:12px;text-align:center}
+.downloadButton{display:inline-flex;align-items:center;gap:.5rem;background:#EBBF7D;color:#2c3e50;padding:.75rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:600;margin-top:1rem;transition:transform .15s, box-shadow .15s}
+.downloadButton:hover{transform:scale(1.05);box-shadow:0 5px 15px rgba(235,191,125,.4)}
+
+/* Below-the-fold visual section */
+.belowFold{position:relative;min-height:60vh}
+
+/* FAQ container (styles reused by client island) */
+.faqItem{background:#f8f9fa;margin-bottom:1rem;border-radius:8px;overflow:hidden;border:1px solid #e5e5e5}
+.faqQuestion{padding:1.5rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;color:#2c3e50;background:none;border:none;width:100%;text-align:left;font-size:1rem;transition:background .3s,color .3s}
+.faqQuestion:hover{background:#EBBF7D;color:#fff}
+.faqAnswer{padding:0 1.5rem;max-height:0;overflow:hidden;transition:max-height .25s ease, padding .25s ease}
+.faqItemActive .faqAnswer{padding:1.5rem;max-height:500px}
+.faqIcon{transition:transform .3s}
+.faqItemActive .faqIcon{transform:rotate(180deg)}
+
+/* Responsive */
+@media(max-width:968px){
+  .main{grid-template-columns:1fr}
+  .h1{font-size:2rem}
+  .sidebar{position:static}
+  .requirementsGrid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  .heroSection{padding:3rem 0}
+  .heroDescription{font-size:1.1rem}
+  .step{flex-direction:column;text-align:center}
+  .stepNumber{margin:0 auto 1rem}
+  .step:not(:last-child)::after{display:none}
+}
+
+/* Motion safety (scoped to local wrapper to satisfy CSS Modules) */
+.motionSafe{} /* marker class; apply it on a top-level wrapper */
+@media (prefers-reduced-motion: reduce){
+  .motionSafe *{animation:none !important;transition:none !important}
+}
