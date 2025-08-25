@@ -5,9 +5,7 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 import React from 'react';
 import Cta2Area from '../../components/homes/home-3/Cta2Area';
 import FooterOne from '@/layouts/footers/FooterOne';
-import AdminReviewPage from './tier-2(Skilled Worker)-administrative';
-
-
+import SpouseVisaExtensionPage from './spouse-civil-partnership-visa-extension';
 
 
 
@@ -19,7 +17,7 @@ const SelfSponsorshipDetails = () => {
   return (
     <>
       <HeaderOne />
-      <AdminReviewPage  />
+      <SpouseVisaExtensionPage />
       <Cta2Area />
       <FooterOne />
     </>

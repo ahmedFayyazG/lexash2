@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Award, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Global Talent Visa UK | Immigration Solicitors Manchester',
+//   description: 'Apply for the UK Global Talent Visa with Lexington Ashworth Solicitors, Manchester. Immigration lawyers helping leaders in tech, science, arts, and academia secure endorsement and citizenship.',
 // };
 
 
@@ -36,34 +36,31 @@ interface Step {
 }
 
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const whoCanApply: ListItem[] = [
+    { text: 'Academia or Research – Scientists, researchers, and academics with significant contributions.' },
+    { text: 'Arts and Culture – Artists, film-makers, musicians, fashion designers, architects, and more.' },
+    { text: 'Digital Technology – Innovators, software engineers, product developers, and digital entrepreneurs.' },
 ];
 
 const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
+    { text: 'Eligibility Review – Confirming whether you meet the criteria before applying.', icon: <Search size={20} /> },
+    { text: 'Evidence Preparation – Structuring your portfolio of achievements, awards, and references.', icon: <FileText size={20} /> },
+    { text: 'Endorsement Application – Submitting your case to the appropriate endorsing body.', icon: <UserCheck size={20} /> },
+    { text: 'Visa Application Support – Preparing and submitting your Home Office application once endorsed.', icon: <Shield size={20} /> },
+    { text: 'Ongoing Immigration Planning – Guiding you towards ILR and eventual British citizenship.', icon: <Award size={20} /> },
 ];
 
 const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+    { number: '01', title: 'Initial Consultation', description: 'We review your career history and achievements.' },
+    { number: '02', title: 'Endorsement Preparation', description: 'We prepare strong evidence and submit it to the relevant endorsing body.' },
+    { number: '03', title: 'Visa Application', description: 'Once endorsed, we file your Global Talent Visa application with the Home Office.' },
+    { number: '04', title: 'Decision & Entry', description: 'You receive your visa and begin your journey in the UK.' },
+    { number: '05', title: 'Settlement', description: 'We assist with ILR and citizenship applications once you qualify.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const GlobalTalentVisaPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -235,11 +232,11 @@ const AdminReviewPage = () => {
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Global Talent Visa UK – Global Talent Accelerator</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                The UK Global Talent Visa is designed to attract the world’s brightest and most skilled individuals to the United Kingdom. It provides a flexible immigration route for leaders and emerging leaders in various fields.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Start Your Application</Link>
             </div>
           </div>
         </section>
@@ -248,19 +245,19 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <h2>Who Can Apply for the Global Talent Visa?</h2>
+                        <p>You may be eligible if you are recognised as a leader or potential leader in one of the following areas:</p>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
+                            {whoCanApply.map((item, index) => (
                                 <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
                                     <span>{item.text}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop" alt="A diverse group of professionals collaborating" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -287,7 +284,7 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
+                    <h2>Step-by-Step Process</h2>
                 </div>
                 <div className="timeline">
                     {stepByStep.map((step, index) => (
@@ -305,9 +302,9 @@ const AdminReviewPage = () => {
 
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>Start Your Global Talent Visa Application Today</h2>
+                <p>The UK is actively seeking world-class talent. If you are a leader, innovator, or skilled professional, the Global Talent Visa could be your route to a successful career and permanent settlement in the UK.</p>
+                <Link href="#contact" className="cta-button">Book a Consultation</Link>
             </div>
         </section>
 
@@ -316,4 +313,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default GlobalTalentVisaPage;

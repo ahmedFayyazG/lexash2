@@ -5,11 +5,7 @@ import HeaderOne from '@/layouts/headers/HeaderOne';
 import React from 'react';
 import Cta2Area from '../../components/homes/home-3/Cta2Area';
 import FooterOne from '@/layouts/footers/FooterOne';
-import AdminReviewPage from './tier-2(Skilled Worker)-administrative';
-
-
-
-
+import SameSexPartnerVisaPage from './same-gender-marriage';
 
 
 // import ServiceDetailsArea from './ServiceDetailsArea';
@@ -19,7 +15,7 @@ const SelfSponsorshipDetails = () => {
   return (
     <>
       <HeaderOne />
-      <AdminReviewPage  />
+        <SameSexPartnerVisaPage />
       <Cta2Area />
       <FooterOne />
     </>

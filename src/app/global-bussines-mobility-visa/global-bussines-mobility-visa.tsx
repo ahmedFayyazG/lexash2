@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Building, Users, UserCheck, CheckCircle, ArrowRight } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Global Business Mobility Visa UK | Immigration Solicitors Manchester',
+//   description: 'Apply for a UK Global Business Mobility Visa with Lexington Ashworth Solicitors, Manchester. Expert business immigration lawyers helping companies expand, transfer staff, and secure sponsor licences.',
 // };
 
 
@@ -29,41 +29,30 @@ interface ListItem {
     text: string;
 }
 
-interface Step {
-    number: string;
-    title: string;
-    description: string;
+interface ServiceItem {
+    text: string;
 }
 
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const whoCanApply: ListItem[] = [
+    { text: 'Senior or Specialist Worker – For employees of multinational companies being transferred to a UK branch.' },
+    { text: 'Graduate Trainee – For international graduates being placed in a UK office as part of training programmes.' },
+    { text: 'UK Expansion Worker – For overseas businesses sending senior representatives to set up a new UK branch or subsidiary.' },
+    { text: 'Service Supplier – For overseas service providers working under international trade agreements.' },
+    { text: 'Secondment Worker – For workers seconded to the UK as part of a high-value contract or investment.' },
 ];
 
-const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
-];
-
-const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+const howWeHelp: ServiceItem[] = [
+    { text: 'Preparing and submitting visa applications in all GBM subcategories' },
+    { text: 'Helping overseas companies obtain a UK sponsor licence' },
+    { text: 'Advising on compliance with Home Office sponsorship duties' },
+    { text: 'Assisting entrepreneurs with UK Expansion Worker visas to set up new branches' },
+    { text: 'Providing ongoing legal support for renewals, extensions, and staff mobility' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const GlobalBusinessMobilityPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -176,46 +165,6 @@ const AdminReviewPage = () => {
             margin-top: 5px;
           }
           
-          .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-          }
-          .timeline-item {
-            padding: 1rem 3rem 2rem 5rem;
-            position: relative;
-            background-color: inherit;
-            width: 100%;
-          }
-          .timeline-icon {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            left: 0;
-            background-color: #fff;
-            border: 3px solid #B9946A;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #B9946A;
-          }
-          .timeline-content {
-            padding: 1.5rem;
-            background-color: #fff;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            flex-grow: 1;
-          }
-          .timeline-content h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-          }
-
           .cta-section {
             background: #212C3C;
             color: white;
@@ -226,20 +175,17 @@ const AdminReviewPage = () => {
           .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto 2rem; }
 
           @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
-          @media (max-width: 768px) {
-            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; }
-          }
         `}</style>
 
         <section className="hero-section">
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Global Business Mobility Visa: Expand Your Business into the UK</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                A category of UK work visas designed to help overseas businesses and professionals establish, grow, and manage their presence in the United Kingdom.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Start Your Application</Link>
             </div>
           </div>
         </section>
@@ -248,19 +194,19 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <h2>Who Can Apply?</h2>
+                        <p>The Global Business Mobility route includes several subcategories:</p>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
+                            {whoCanApply.map((item, index) => (
                                 <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
                                     <span>{item.text}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop" alt="A diverse business team in a meeting" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -275,7 +221,7 @@ const AdminReviewPage = () => {
                 <ul className="support-list" style={{maxWidth: '800px', margin: '0 auto'}}>
                     {howWeHelp.map((item, index) => (
                         <li key={index} className="support-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="support-icon">{item.icon}</div>
+                            <div className="support-icon"><CheckCircle size={20} /></div>
                             <span>{item.text}</span>
                         </li>
                     ))}
@@ -283,31 +229,11 @@ const AdminReviewPage = () => {
             </div>
         </section>
         
-        <section id="process" className="section">
-            <div className="container">
-                <div className="section-header animate-on-scroll">
-                    <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
-                </div>
-                <div className="timeline">
-                    {stepByStep.map((step, index) => (
-                        <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="timeline-icon">{step.number}</div>
-                            <div className="timeline-content">
-                                <h3>{step.title}</h3>
-                                <p>{step.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>Next Steps: Apply with Confidence</h2>
+                <p>If you are an overseas company planning to send staff to the UK, or an entrepreneur expanding your business internationally, the Global Business Mobility Visa may be the right route for you.</p>
+                <Link href="#contact" className="cta-button">Book a Consultation</Link>
             </div>
         </section>
 
@@ -316,4 +242,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default GlobalBusinessMobilityPage;

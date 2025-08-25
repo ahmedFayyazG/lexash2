@@ -94,6 +94,7 @@ const JudicialReviewILRPage = () => {
             background-color: #212C3C;
             color: white;
             padding: 7rem 0;
+            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;

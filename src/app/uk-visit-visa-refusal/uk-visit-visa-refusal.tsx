@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { XCircle, CheckCircle, ArrowRight, Phone, Mail, MapPin, Search, FileText, Gavel, UserCheck } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'UK Visitor Visa Refusal Solicitors in Manchester | Reapply With Confidence',
+//   description: 'Has your UK Visitor Visa been refused? Lexington Ashworth Solicitors help you understand the reasons, build a stronger case, and reapply with confidence.',
 // };
 
 
@@ -37,33 +37,32 @@ interface Step {
 
 // --- COMPONENT DATA ---
 const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+    { text: 'Lack of evidence showing strong ties to your home country (employment, property, or family)' },
+    { text: 'Insufficient financial documents to prove you can afford your trip' },
+    { text: 'Concerns that you may overstay in the UK' },
+    { text: 'Incomplete or inconsistent application forms' },
+    { text: 'Previous immigration history or visa refusals' },
 ];
 
-const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
+const howWeHelp: ListItem[] = [
+    { text: 'Review your refusal letter in detail and explain your options' },
+    { text: 'Identify exactly why your application was refused' },
+    { text: 'Prepare stronger evidence such as financial records, employment letters, or property documents' },
+    { text: 'Draft a tailored legal strategy for re-application or Administrative Review' },
+    { text: 'Handle the full process from start to finish until your visa is approved' },
 ];
 
 const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+    { number: '01', title: 'Consultation', description: 'Speak to our immigration solicitors about your refusal.' },
+    { number: '02', title: 'Case Review', description: 'We analyse your Home Office decision and advise on next steps.' },
+    { number: '03', title: 'Application Strategy', description: 'We create a plan to correct weaknesses and strengthen your evidence.' },
+    { number: '04', title: 'Submission', description: 'We prepare and file your new application or Administrative Review.' },
+    { number: '05', title: 'Outcome', description: 'We support you until your Visitor Visa is granted.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const VisitorVisaRefusalPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -123,7 +122,6 @@ const AdminReviewPage = () => {
             background-color: #1A202C;
             color: white;
             padding: 7rem 0;
-            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -235,11 +233,11 @@ const AdminReviewPage = () => {
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>UK Visitor Visa Refusal: Challenge and Reapply With Confidence</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                A Visitor Visa refusal does not have to mean the end of your journey. With the right legal support, you can understand why your application was refused, address the issues, and submit a much stronger re-application.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Reapply With Confidence</Link>
             </div>
           </div>
         </section>
@@ -248,8 +246,8 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <h2>Common Reasons for Visitor Visa Refusals</h2>
+                        <p>Most refusals happen because the Home Office is not satisfied that the applicant will leave the UK at the end of their visit.</p>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
                             {refusalReasons.map((item, index) => (
                                 <li key={index} className="support-item">
@@ -260,13 +258,31 @@ const AdminReviewPage = () => {
                         </ul>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1518619713589-09a25b1848b3?q=80&w=2070&auto=format&fit=crop" alt="A person looking at a passport and travel documents" className="intro-image" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="support" className="section bg-light">
+        <section id="options" className="section bg-light">
+            <div className="container">
+                <div className="intro-grid">
+                    <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                        <img src="/assets/img/legal/documents.jpg" alt="Reviewing legal documents" className="intro-image" />
+                    </div>
+                    <div className="intro-content animate-on-scroll">
+                        <h2>Can You Appeal a Visitor Visa Refusal?</h2>
+                        <p>In most cases, you cannot appeal a Visitor Visa refusal. However, you may still have options:</p>
+                        <ul className="support-list" style={{marginTop: '2rem'}}>
+                            <li className="support-item"><div className="support-icon" style={{color: '#27ae60'}}><CheckCircle size={20} /></div><span><b>Administrative Review</b> – In limited cases where the Home Office made a clear error in law or fact.</span></li>
+                            <li className="support-item"><div className="support-icon" style={{color: '#27ae60'}}><CheckCircle size={20} /></div><span><b>Fresh Application</b> – The most common solution. A new, carefully prepared application that addresses the refusal reasons.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="support" className="section">
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">OUR EXPERTISE</div>
@@ -275,7 +291,7 @@ const AdminReviewPage = () => {
                 <ul className="support-list" style={{maxWidth: '800px', margin: '0 auto'}}>
                     {howWeHelp.map((item, index) => (
                         <li key={index} className="support-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="support-icon">{item.icon}</div>
+                            <div className="support-icon"><CheckCircle size={20} /></div>
                             <span>{item.text}</span>
                         </li>
                     ))}
@@ -283,11 +299,11 @@ const AdminReviewPage = () => {
             </div>
         </section>
         
-        <section id="process" className="section">
+        <section id="process" className="section bg-light">
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
+                    <h2>Step-by-Step After a Refusal</h2>
                 </div>
                 <div className="timeline">
                     {stepByStep.map((step, index) => (
@@ -305,9 +321,9 @@ const AdminReviewPage = () => {
 
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>The Importance of Acting Quickly</h2>
+                <p>A Visitor Visa refusal can delay your plans, but it doesn’t have to end them. With Lexington Ashworth Solicitors guiding your next steps, you can rebuild your case, reapply with confidence, and finally get the approval you need.</p>
+                <Link href="#contact" className="cta-button">Start Your New Application Today</Link>
             </div>
         </section>
 
@@ -316,4 +332,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default VisitorVisaRefusalPage;

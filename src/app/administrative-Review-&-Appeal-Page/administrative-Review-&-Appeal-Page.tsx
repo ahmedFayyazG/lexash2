@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Search, FileText, Gavel, Shield, CheckCircle, XCircle } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Skilled Worker Visa Administrative Review | Challenge Home Office Refusals',
+//   description: 'Expert solicitors in Manchester specialising in Administrative Reviews for Skilled Worker Visa refusals. We help you challenge Home Office errors and secure your visa.',
 // };
 
 
@@ -48,9 +48,8 @@ const refusalReasons: ListItem[] = [
 const howWeHelp: { text: string; icon: ReactNode }[] = [
     { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
     { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
+    { text: 'Case Strengthening – Helping you prepare stronger financial, employment, and compliance documents.', icon: <FileText size={20} /> },
     { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
 ];
 
 const stepByStep: Step[] = [
@@ -123,7 +122,6 @@ const AdminReviewPage = () => {
             background-color: #1A202C;
             color: white;
             padding: 7rem 0;
-            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -237,7 +235,7 @@ const AdminReviewPage = () => {
             <div className="hero-content">
               <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                A refusal does not always have to be the end of your journey. Knowing which option applies to your case — and acting quickly — is critical to protecting your future in the UK.
               </p>
               <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
             </div>
@@ -248,7 +246,7 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
+                        <h2>Common Reasons for Skilled Worker Visa Refusal</h2>
                         <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
                             {refusalReasons.map((item, index) => (

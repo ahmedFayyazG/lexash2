@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Scale, FileCheck, Gavel, Shield, CheckCircle, Phone, Mail, MapPin } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -16,54 +16,49 @@ const Link = ({ href, children, ...props }: LinkProps) => (
   </a>
 );
 
-// --- SEO METADATA ---
-// In a real Next.js App Router project, this would be exported from the page.tsx file
-// export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
-// };
-
-
 // --- INTERFACES ---
-interface ListItem {
-    text: string;
-}
-
 interface Step {
     number: string;
     title: string;
     description: string;
 }
 
+interface SupportItem {
+    text: string;
+}
+
+interface ChoiceItem {
+    text: string;
+}
+
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const appealProcess: Step[] = [
+    { number: '01', title: 'Review of Refusal', description: 'We carefully examine your refusal letter to identify errors in fact or law.' },
+    { number: '02', title: 'Lodging the Appeal', description: 'Appeals must usually be filed within strict deadlines (14 days if inside the UK, 28 days if outside).' },
+    { number: '03', title: 'Preparing Grounds of Appeal', description: 'We draft strong legal arguments explaining why the refusal was incorrect.' },
+    { number: '04', title: 'Gathering Evidence', description: 'Supporting documents, witness statements, and expert reports are compiled to strengthen your case.' },
+    { number: '05', title: 'Tribunal Hearing', description: 'Your case is heard before an independent judge at the First-tier Tribunal. We represent you and cross-examine the Home Office’s arguments.' },
+    { number: '06', title: 'Decision', description: 'If your appeal is successful, the Home Office must reconsider and grant your application.' },
 ];
 
-const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
+const supportItems: SupportItem[] = [
+    { text: 'Provide a clear explanation of your refusal and your appeal rights' },
+    { text: 'Draft persuasive legal grounds tailored to your case' },
+    { text: 'Prepare and submit your appeal within the deadline' },
+    { text: 'Represent you at the Tribunal with professionalism and determination' },
+    { text: 'Advise on next steps if the appeal is unsuccessful, including Upper Tribunal, Judicial Review, or re-application strategies' },
 ];
 
-const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+const whyChooseUsItems: ChoiceItem[] = [
+    { text: 'Extensive knowledge of UK immigration law' },
+    { text: 'Proven experience handling appeals at all Tribunal levels' },
+    { text: 'Personalised support, recognising the human impact of each case' },
+    { text: 'A commitment to securing the best possible outcome for our clients' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const ImmigrationAppealsPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -157,44 +152,24 @@ const AdminReviewPage = () => {
           .intro-content h2 { text-align: left; }
           .intro-image { border-radius: 12px; max-width: 100%; }
 
-          .support-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+          .timeline {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-          }
-          .support-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-          }
-          .support-icon {
-            color: #B9946A;
-            flex-shrink: 0;
-            margin-top: 5px;
-          }
-          
-          .timeline {
-            position: relative;
+            gap: 2rem;
             max-width: 800px;
             margin: 0 auto;
           }
           .timeline-item {
-            padding: 1rem 3rem 2rem 5rem;
-            position: relative;
-            background-color: inherit;
-            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
           }
           .timeline-icon {
-            position: absolute;
             width: 60px;
             height: 60px;
-            left: 0;
+            flex-shrink: 0;
             background-color: #fff;
             border: 3px solid #B9946A;
-            top: 15px;
             border-radius: 50%;
             z-index: 1;
             display: flex;
@@ -216,30 +191,43 @@ const AdminReviewPage = () => {
             font-size: 1.25rem;
           }
 
-          .cta-section {
-            background: #212C3C;
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
+          .support-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
           }
-          .cta-section h2 { color: white; }
-          .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto 2rem; }
+          .support-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+          }
+          .support-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+          }
+          .support-icon {
+            color: #B9946A;
+            flex-shrink: 0;
+            margin-top: 5px;
+          }
 
-          @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
-          @media (max-width: 768px) {
-            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; }
-          }
+          @media (max-width: 992px) { .intro-grid, .support-grid { grid-template-columns: 1fr; } }
         `}</style>
 
         <section className="hero-section">
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Immigration Appeals Procedure: Your Guide to Challenging Refusals</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                Receiving a refusal from the Home Office can be stressful and life-changing. A refusal doesn’t always have to be the end of your journey.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Request a Case Review</Link>
             </div>
           </div>
         </section>
@@ -248,49 +236,24 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
-                        <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
-                                <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
-                                    <span>{item.text}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        <h2>Understanding the Immigration Appeals Process</h2>
+                        <p>In many cases, you may have the right to challenge the decision through the UK Immigration Appeals Procedure. This process allows you to argue your case before an independent tribunal, ensuring that your application is reconsidered fairly.</p>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="/assets/img/legal/gavel.jpg" alt="A courtroom gavel" className="intro-image" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="support" className="section bg-light">
-            <div className="container">
-                <div className="section-header animate-on-scroll">
-                    <div className="subtitle">OUR EXPERTISE</div>
-                    <h2>How Lexington Ashworth Solicitors Can Help</h2>
-                </div>
-                <ul className="support-list" style={{maxWidth: '800px', margin: '0 auto'}}>
-                    {howWeHelp.map((item, index) => (
-                        <li key={index} className="support-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="support-icon">{item.icon}</div>
-                            <span>{item.text}</span>
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        </section>
-        
-        <section id="process" className="section">
+        <section id="process" className="section bg-light">
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
+                    <h2>The Appeals Procedure Step by Step</h2>
                 </div>
                 <div className="timeline">
-                    {stepByStep.map((step, index) => (
+                    {appealProcess.map((step, index) => (
                         <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
                             <div className="timeline-icon">{step.number}</div>
                             <div className="timeline-content">
@@ -302,12 +265,35 @@ const AdminReviewPage = () => {
                 </div>
             </div>
         </section>
-
-        <section className="cta-section">
-            <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+        
+        <section id="support" className="section">
+            <div className="container">
+                <div className="support-grid">
+                    <div className="intro-content animate-on-scroll">
+                        <h2>How Lexington Ashworth Supports You</h2>
+                        <p>At Lexington Ashworth Solicitors, we treat every appeal with the seriousness it deserves. Our immigration team will:</p>
+                        <ul className="support-list" style={{marginTop: '2rem'}}>
+                            {supportItems.map((item, index) => (
+                                <li key={index} className="support-item">
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
+                                    <span>{item.text}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="intro-content animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                        <h2>Why Choose Us?</h2>
+                        <p>The outcome of your appeal can decide your future in the UK. Working with experienced immigration solicitors ensures your case is presented in the strongest possible way. We bring:</p>
+                        <ul className="support-list" style={{marginTop: '2rem'}}>
+                            {whyChooseUsItems.map((item, index) => (
+                                <li key={index} className="support-item">
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
+                                    <span>{item.text}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -316,4 +302,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default ImmigrationAppealsPage;

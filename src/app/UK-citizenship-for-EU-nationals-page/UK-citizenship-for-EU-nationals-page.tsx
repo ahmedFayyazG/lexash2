@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode, useRef } from 'react';
+import { Search, FileText, Gavel, Shield, CheckCircle, XCircle } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -15,37 +16,55 @@ const Link = ({ href, children, ...props }: LinkProps) => (
   </a>
 );
 
-// --- INTERFACES ---
-interface Guarantee {
-    title: string;
-    description: string;
-    icon: ReactNode;
-}
+// --- SEO METADATA ---
+// In a real Next.js App Router project, this would be exported from the page.tsx file
+// export const metadata = {
+//   title: 'Skilled Worker Visa Administrative Review | Challenge Home Office Refusals',
+//   description: 'Expert solicitors in Manchester specialising in Administrative Reviews for Skilled Worker Visa refusals. We help you challenge Home Office errors and secure your visa.',
+// };
 
-interface Requirement {
+
+// --- INTERFACES ---
+interface ListItem {
     text: string;
 }
 
+interface Step {
+    number: string;
+    title: string;
+    description: string;
+}
+
 // --- COMPONENT DATA ---
-const guarantees: Guarantee[] = [
-    { title: 'Expert Service', description: 'Bad advice can lead to delays and refusals. We assign a subject matter expert to manage your case throughout.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> },
-    { title: 'Fast Response', description: 'We guarantee a reply to all messages and emails within 24 working hours or we refund 20% of your fees.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> },
-    { title: 'Fixed Fees', description: 'Our services have fixed fees so you know exactly how much you need to pay, with no nasty surprises down the line.', icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> },
+const refusalReasons: ListItem[] = [
+    { text: 'Certificate of Sponsorship (CoS) issues' },
+    { text: 'Salary threshold not met' },
+    { text: 'Job role not on eligible list' },
+    { text: 'English language requirement issues' },
+    { text: 'Financial maintenance problems' },
+    { text: 'Home Office doubts about genuineness' },
 ];
 
-const eligibilityRequirements: Requirement[] = [
-    { text: 'Have legally lived in the UK for at least five years.' },
-    { text: 'Hold EU Settled Status.' },
-    { text: 'Meet the continuous residency requirements.' },
-    { text: 'Prove English language proficiency.' },
-    { text: 'Pass the ‘Life in the UK’ test.' },
-    { text: 'Be of good character.' },
-    { text: 'Plan to live in the UK permanently.' },
+const howWeHelp: { text: string; icon: ReactNode }[] = [
+    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
+    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
+    { text: 'Case Strengthening – Helping you prepare stronger financial, employment, and compliance documents.', icon: <FileText size={20} /> },
+    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
+];
+
+const stepByStep: Step[] = [
+    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
+    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
+    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
+    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
+    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const EUCitizenshipPage = () => {
+const AdminReviewPage = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -59,13 +78,28 @@ const EUCitizenshipPage = () => {
     elementsToAnimate.forEach(el => observer.observe(el));
 
     return () => {
-        elementsToAnimate.forEach(el => observer.unobserve(el));
+        elementsToAnimate.forEach(el => {
+            if (el) observer.unobserve(el);
+        });
     };
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if(!pageRef.current) return;
+    const heroSection = pageRef.current.querySelector('.hero-section');
+    if (heroSection && heroSection instanceof HTMLElement) {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = heroSection;
+        const xPos = (clientX / offsetWidth) * 100;
+        const yPos = (clientY / offsetHeight) * 100;
+        heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+        heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+    }
+  };
+
   return (
     <>
-      <div className="pageWrapper">
+      <div className="pageWrapper" ref={pageRef} onMouseMove={handleMouseMove}>
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
           body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; background: #fff; font-weight: 300; }
@@ -81,107 +115,130 @@ const EUCitizenshipPage = () => {
           }
         `}</style>
         <style>{`
-          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
           .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-          .delay-1 { transition-delay: 0.1s; }
-          .delay-2 { transition-delay: 0.2s; }
-          .delay-3 { transition-delay: 0.3s; }
           
           .hero-section {
-            background-color: #212C3C;
+            background-color: #1A202C;
             color: white;
             padding: 7rem 0;
+            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
           }
-          .hero-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; }
-          .gradient-blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; }
-          .blob1 { width: 600px; height: 600px; background: #EBBF7D; top: -200px; left: -200px; animation: moveBlob 20s infinite alternate; }
-          .blob2 { width: 500px; height: 500px; background: #4A5568; bottom: -150px; right: -150px; animation: moveBlob 25s infinite alternate-reverse; }
-          @keyframes moveBlob {
-            0% { transform: scale(1.1) translate(0, 0) rotate(0deg); }
-            100% { transform: scale(1.4) translate(120px, 80px) rotate(180deg); }
+          .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--gradient-x, 50%) var(--gradient-y, 50%), rgba(185, 148, 106, 0.15), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.2s ease-out;
           }
           .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
           .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; }
           .hero-content p { font-size: 1.1rem; margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
           @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-          .cta-group { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; animation: fadeInUp 1s ease-out 0.6s backwards; }
+          .cta-button { background: #B9946A; color: #1A202C; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; animation: fadeInUp 1s ease-out 0.6s backwards; }
           @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-          .cta-button { background: #EBBF7D; color: #212C3C; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
-          .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(235, 191, 125, 0.4); }
-          .cta-button.secondary { background: transparent; color: #EBBF7D; border: 1px solid #EBBF7D; }
+          .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(185, 148, 106, 0.4); }
           
           .section { padding: 5rem 0; }
           .section.bg-light { background: #f8f9fa; }
-          .section-header { text-align: center; max-width: 800px; margin: 0 auto 3.5rem; }
-          .section-header .subtitle { color: #EBBF7D; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
+          .section-header { text-align: center; max-width: 800px; margin: 0 auto 4rem; }
+          .section-header .subtitle { color: #B9946A; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
           .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
           .intro-content h2 { text-align: left; }
           .intro-image { border-radius: 12px; max-width: 100%; }
 
-          .testimonial-card { background: #fff; border-radius: 12px; box-shadow: 0 15px 40px rgba(44, 62, 80, 0.1); max-width: 800px; margin: 3rem auto; padding: 2.5rem; }
-          .testimonial-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-          .testimonial-header h4 { margin: 0; }
-          .stars { color: #f1c40f; }
-          .testimonial-body { font-style: italic; color: #555; }
-          .testimonial-author { font-weight: 500; margin-top: 1.5rem; text-align: right; }
-
-          .guarantee-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-          .guarantee-card { background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid #e9ecef; }
-          .guarantee-card h4 { display: flex; align-items: center; gap: 0.75rem; }
-          .guarantee-icon { color: #EBBF7D; }
-          
-          .eligibility-card {
-            background: linear-gradient(135deg, #2c3e50, #212C3C);
-            color: white;
-            padding: 3rem;
-            border-radius: 16px;
-            max-width: 900px;
-            margin: 3rem auto;
-          }
-          .eligibility-card h3 { color: #EBBF7D; }
-          .eligibility-list {
+          .support-list {
             list-style: none;
             padding: 0;
-            margin: 2rem 0 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
           }
-          .eligibility-list li { display: flex; align-items: center; gap: 0.75rem; font-weight: 300; color: rgba(255,255,255,0.9); }
-          .eligibility-list li svg { color: #EBBF7D; flex-shrink: 0; }
+          .support-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+          }
+          .support-icon {
+            color: #B9946A;
+            flex-shrink: 0;
+            margin-top: 5px;
+          }
+          
+          .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+          .timeline-item {
+            padding: 1rem 3rem 2rem 5rem;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+          }
+          .timeline-icon {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            left: 0;
+            background-color: #fff;
+            border: 3px solid #B9946A;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #B9946A;
+          }
+          .timeline-content {
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            flex-grow: 1;
+          }
+          .timeline-content h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+          }
 
           .cta-section {
-            background: #f8f9fa;
+            background: #212C3C;
+            color: white;
             padding: 4rem 0;
             text-align: center;
           }
-          .cta-section p { max-width: 600px; margin: 1.5rem auto 2rem; }
+          .cta-section h2 { color: white; }
+          .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto 2rem; }
 
-          @media (max-width: 992px) { 
-            .intro-grid { grid-template-columns: 1fr; }
-            .eligibility-list { grid-template-columns: 1fr; }
+          @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
+          @media (max-width: 768px) {
+            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; }
           }
         `}</style>
 
-        <section className="hero-section" style={{paddingTop:"15rem"}}>
-          <div className="hero-background">
-            <div className="gradient-blob blob1"></div>
-            <div className="gradient-blob blob2"></div>
-          </div>
+        <section className="hero-section">
+          <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Expert Legal Guidance on UK Citizenship For EU Nationals</h1>
+              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
               <p>
-                Personal Immigration Solicitors supporting EEA and EU citizens in UK citizenship applications.
+                A refusal does not always have to be the end of your journey. Knowing which option applies to your case — and acting quickly — is critical to protecting your future in the UK.
               </p>
-              <div className="cta-group">
-                <Link href="#contact" className="cta-button">Contact Our Team</Link>
-                <Link href="#guide" className="cta-button secondary">Download Ultimate Guide</Link>
-              </div>
+              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
             </div>
           </div>
         </section>
@@ -190,60 +247,66 @@ const EUCitizenshipPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Confused by UK Citizenship Requirements for EU citizens?</h2>
-                        <p>Brexit left many EU and EEA nationals confused about how to apply for British citizenship. The process is lengthy and involved. At Lexington Ashworth, we understand the insecurity felt by EU and EEA nationals. Our Personal Immigration team can take all the anxiety away and present you with a straightforward, understandable path toward British citizenship.</p>
-                        <Link href="#contact" className="cta-button" style={{marginTop: '1rem'}}>Contact Our Team</Link>
+                        <h2>Common Reasons for Skilled Worker Visa Refusal</h2>
+                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <ul className="support-list" style={{marginTop: '2rem'}}>
+                            {refusalReasons.map((item, index) => (
+                                <li key={index} className="support-item">
+                                    <div className="support-icon"><XCircle size={20} /></div>
+                                    <span>{item.text}</span>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div className="animate-on-scroll delay-1">
-                        <img src="https://images.unsplash.com/photo-1513038630932-13873b1a7f29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Person holding a British passport" className="intro-image" />
+                    <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="reviews" className="section bg-light">
+        <section id="support" className="section bg-light">
             <div className="container">
-                <div className="testimonial-card animate-on-scroll">
-                    <div className="testimonial-header">
-                        <div>
-                            <h4>Lexington Ashworth</h4>
-                            <div className="stars">★★★★★ 4.9 | 1,317 Reviews</div>
-                        </div>
-                        <Link href="#" className="cta-button secondary">View Review</Link>
-                    </div>
-                    <p className="testimonial-body">"Blown away by the services provided by Lexington Ashworth. A special mention to Amy Felix-George who has always gone above and beyond in all of our applications and ensured that the process has been smooth for us. She is very knowledgeable in her field and strives for perfection. I would have no issues in recommending this firm to anyone considering immigration services. Thank you!"</p>
-                    <p className="testimonial-author">- Simi Sandhu</p>
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">OUR EXPERTISE</div>
+                    <h2>How Lexington Ashworth Solicitors Can Help</h2>
                 </div>
+                <ul className="support-list" style={{maxWidth: '800px', margin: '0 auto'}}>
+                    {howWeHelp.map((item, index) => (
+                        <li key={index} className="support-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <div className="support-icon">{item.icon}</div>
+                            <span>{item.text}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </section>
         
-        <section id="eligibility" className="section">
+        <section id="process" className="section">
             <div className="container">
-                 <div className="eligibility-card animate-on-scroll">
-                    <h3>To be eligible for British Citizenship as an EEA national, you must:</h3>
-                    <ul className="eligibility-list">
-                        {eligibilityRequirements.map((req, index) => (
-                            <li key={index}><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>{req.text}</li>
-                        ))}
-                    </ul>
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">STEP-BY-STEP</div>
+                    <h2>Step-by-Step Administrative Review Process</h2>
+                </div>
+                <div className="timeline">
+                    {stepByStep.map((step, index) => (
+                        <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <div className="timeline-icon">{step.number}</div>
+                            <div className="timeline-content">
+                                <h3>{step.title}</h3>
+                                <p>{step.description}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
 
-        <section id="guarantees" className="section bg-light">
-            <div className="container">
-                <div className="section-header animate-on-scroll">
-                    <div className="subtitle">OUR COMMITMENT</div>
-                    <h2>Expertise, Speed, and Transparency</h2>
-                </div>
-                <div className="guarantee-grid">
-                    {guarantees.map((item, index) => (
-                        <div key={index} className="guarantee-card animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <h4><div className="guarantee-icon">{item.icon}</div>{item.title}</h4>
-                            <p>{item.description}</p>
-                        </div>
-                    ))}
-                </div>
+        <section className="cta-section">
+            <div className="container animate-on-scroll">
+                <h2>Act Fast: Time Limits Apply</h2>
+                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
+                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
             </div>
         </section>
 
@@ -252,4 +315,4 @@ const EUCitizenshipPage = () => {
   );
 };
 
-export default EUCitizenshipPage;
+export default AdminReviewPage;

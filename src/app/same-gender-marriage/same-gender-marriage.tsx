@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Heart, Shield, FileText, UserCheck, Clock, CheckCircle, Phone, Mail, MapPin, Search } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Same-Sex Partner Visa UK | Live Together in the United Kingdom',
+//   description: 'Apply for a UK Same-Sex Partner Visa with Lexington Ashworth. Expert solicitors in Manchester for unmarried and same-sex partner applications.',
 // };
 
 
@@ -29,41 +29,35 @@ interface ListItem {
     text: string;
 }
 
-interface Step {
-    number: string;
-    title: string;
-    description: string;
-}
-
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const eligibilityCriteria: ListItem[] = [
+    { text: 'Your partner is a British citizen, holds Indefinite Leave to Remain (ILR), or has settled status in the UK' },
+    { text: 'You are in a genuine and subsisting same-sex relationship' },
+    { text: 'You and your partner have lived together for at least 2 years in a relationship similar to marriage or civil partnership' },
+    { text: 'You both intend to live together permanently in the UK' },
+    { text: 'You meet the financial requirement (usually £18,600 per year, higher if children are included)' },
+    { text: 'You meet the English language requirement (unless exempt)' },
+    { text: 'You have adequate accommodation in the UK' },
 ];
 
 const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
+    { text: 'Eligibility Assessment – Confirming you meet the Home Office rules before applying', icon: <Search size={20} /> },
+    { text: 'Evidence Review – Ensuring relationship, financial, and accommodation documents are complete and persuasive', icon: <FileText size={20} /> },
+    { text: 'Application Preparation – Drafting and submitting your application to the Home Office', icon: <UserCheck size={20} /> },
+    { text: 'Legal Representation – Handling Home Office correspondence and addressing any queries', icon: <Shield size={20} /> },
+    { text: 'Appeals Support – If refused, assisting with appeals or re-applications', icon: <Heart size={20} /> },
 ];
 
-const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+const whyChooseUsItems: ListItem[] = [
+    { text: 'Experienced in handling LGBTQ+ immigration applications' },
+    { text: 'Inclusive, supportive, and professional legal advice' },
+    { text: 'Tailored guidance to avoid common refusal reasons' },
+    { text: 'A step-by-step plan for visa applications, extensions, and ILR' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const SameSexPartnerVisaPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -176,46 +170,6 @@ const AdminReviewPage = () => {
             margin-top: 5px;
           }
           
-          .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-          }
-          .timeline-item {
-            padding: 1rem 3rem 2rem 5rem;
-            position: relative;
-            background-color: inherit;
-            width: 100%;
-          }
-          .timeline-icon {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            left: 0;
-            background-color: #fff;
-            border: 3px solid #B9946A;
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #B9946A;
-          }
-          .timeline-content {
-            padding: 1.5rem;
-            background-color: #fff;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            flex-grow: 1;
-          }
-          .timeline-content h3 {
-            margin-top: 0;
-            font-size: 1.25rem;
-          }
-
           .cta-section {
             background: #212C3C;
             color: white;
@@ -226,20 +180,17 @@ const AdminReviewPage = () => {
           .cta-section p { color: rgba(255,255,255,0.8); max-width: 600px; margin: 1.5rem auto 2rem; }
 
           @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
-          @media (max-width: 768px) {
-            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; }
-          }
         `}</style>
 
         <section className="hero-section">
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Same-Sex Partner Visa UK: Live Together in the United Kingdom</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                The Same-Sex Partner Visa allows unmarried or same-sex partners of British citizens or settled persons to live together in the UK. It falls under the Family Visa route and is designed for couples who can prove a committed, genuine relationship.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Start Your Application</Link>
             </div>
           </div>
         </section>
@@ -248,19 +199,18 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <h2>Who Can Apply for a Same-Sex Partner Visa?</h2>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
+                            {eligibilityCriteria.map((item, index) => (
                                 <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
                                     <span>{item.text}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1588274103176-3c50d1c7a1d3?q=80&w=2070&auto=format&fit=crop" alt="A happy couple together" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -283,31 +233,18 @@ const AdminReviewPage = () => {
             </div>
         </section>
         
-        <section id="process" className="section">
-            <div className="container">
-                <div className="section-header animate-on-scroll">
-                    <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
-                </div>
-                <div className="timeline">
-                    {stepByStep.map((step, index) => (
-                        <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="timeline-icon">{step.number}</div>
-                            <div className="timeline-content">
-                                <h3>{step.title}</h3>
-                                <p>{step.description}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>Why Choose Our Immigration Solicitors in Manchester?</h2>
+                <ul className="support-list" style={{maxWidth: '800px', margin: '2rem auto', textAlign: 'left'}}>
+                    {whyChooseUsItems.map((item, index) => (
+                        <li key={index} className="support-item">
+                            <div className="support-icon"><CheckCircle size={20} /></div>
+                            <span>{item.text}</span>
+                        </li>
+                    ))}
+                </ul>
+                <Link href="#contact" className="cta-button">Book a Consultation</Link>
             </div>
         </section>
 
@@ -316,4 +253,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default SameSexPartnerVisaPage;

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield, Heart } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,8 +19,8 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Naturalise as a British Citizen – Form AN | Lexington Ashworth',
+//   description: 'Guidance on applying for British citizenship through naturalisation using Form AN. Our Manchester solicitors can help you meet the requirements and avoid refusal.',
 // };
 
 
@@ -36,34 +36,35 @@ interface Step {
 }
 
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const eligibilityCriteria: ListItem[] = [
+    { text: 'An adult (over 18)' },
+    { text: 'Have lived in the UK for the required qualifying period' },
+    { text: 'Hold Indefinite Leave to Remain (ILR), EU Settled Status, or permanent residence' },
+    { text: 'Meet the good character requirement' },
+    { text: 'Have sufficient knowledge of English language and Life in the UK' },
+    { text: 'Intend to make the UK your permanent home' },
 ];
 
 const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
+    { text: 'Eligibility Assessment – Confirming whether you meet all the requirements before applying.', icon: <Search size={20} /> },
+    { text: 'Document Checking – Ensuring all evidence meets Home Office standards.', icon: <FileText size={20} /> },
+    { text: 'Form AN Preparation – Completing your application accurately and persuasively.', icon: <UserCheck size={20} /> },
+    { text: 'Submission & Representation – Handling correspondence with the Home Office on your behalf.', icon: <Shield size={20} /> },
+    { text: 'Support After Approval – Guiding you through the citizenship ceremony and British passport application.', icon: <Heart size={20} /> },
 ];
 
 const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+    { number: '01', title: 'Consultation', description: 'We review your immigration history and confirm eligibility.' },
+    { number: '02', title: 'Evidence Gathering', description: 'Collect documents on residence, finances, language, and character.' },
+    { number: '03', title: 'Form AN Completion', description: 'We prepare and complete your naturalisation application.' },
+    { number: '04', title: 'Submission to the Home Office', description: 'We file the application and monitor progress.' },
+    { number: '05', title: 'Decision & Ceremony', description: 'Once approved, you attend a citizenship ceremony and receive your certificate.' },
+    { number: '06', title: 'Passport Application', description: 'We guide you in applying for your first British passport.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const NaturalisationPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -235,11 +236,11 @@ const AdminReviewPage = () => {
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Naturalise as a British Citizen – Form AN</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                For many migrants, becoming a British citizen is the final step in their UK immigration journey. Once naturalised, you gain the full rights of citizenship, including the right to vote, hold a British passport, and enjoy unrestricted residence in the UK.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Start Your Application</Link>
             </div>
           </div>
         </section>
@@ -248,19 +249,18 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
+                        <h2>Who Can Apply to Naturalise as a British Citizen?</h2>
                         <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
+                            {eligibilityCriteria.map((item, index) => (
                                 <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
+                                    <div className="support-icon"><CheckCircle size={20} /></div>
                                     <span>{item.text}</span>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1513038630932-13873b1a7f29?q=80&w=2070&auto=format&fit=crop" alt="A British passport" className="intro-image" />
                     </div>
                 </div>
             </div>
@@ -287,7 +287,7 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
+                    <h2>Step-by-Step Process to Naturalisation</h2>
                 </div>
                 <div className="timeline">
                     {stepByStep.map((step, index) => (
@@ -305,9 +305,9 @@ const AdminReviewPage = () => {
 
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>Secure Your British Citizenship with Confidence</h2>
+                <p>Don’t risk refusal because of errors or missing documents. With Lexington Ashworth Solicitors, you can apply with confidence, knowing your Form AN application is handled by experienced professionals.</p>
+                <Link href="#contact" className="cta-button">Book a Consultation</Link>
             </div>
         </section>
 
@@ -316,4 +316,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default NaturalisationPage;

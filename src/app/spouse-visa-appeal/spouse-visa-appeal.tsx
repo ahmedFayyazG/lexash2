@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, ReactNode, useRef } from 'react';
-import { XCircle, CheckCircle, ArrowRight, Search, FileText, Gavel, UserCheck, Shield } from 'lucide-react';
+import { Heart, Shield, FileText, UserCheck, Clock, CheckCircle, Phone, Mail, MapPin } from 'lucide-react';
 
 // --- MOCK COMPONENTS ---
 interface LinkProps {
@@ -19,51 +19,42 @@ const Link = ({ href, children, ...props }: LinkProps) => (
 // --- SEO METADATA ---
 // In a real Next.js App Router project, this would be exported from the page.tsx file
 // export const metadata = {
-//   title: 'Skilled Worker Visa Administrative Review – Challenge Home Office Refusals',
-//   description: 'Lexington Ashworth Solicitors specialise in challenging Skilled Worker Visa refusals through Administrative Review. Our Manchester-based experts can help overturn Home Office errors.',
+//   title: 'Spouse Visa Appeal Solicitors UK | Reunite With Your Partner',
+//   description: 'Has your Spouse Visa been refused? Lexington Ashworth Solicitors specialise in Spouse Visa appeals, challenging refusals and reuniting families in the UK.',
 // };
 
 
 // --- INTERFACES ---
-interface ListItem {
-    text: string;
+interface RefusalReason {
+    title: string;
+    icon: ReactNode;
 }
 
-interface Step {
+interface AppealStep {
     number: string;
     title: string;
     description: string;
 }
 
 // --- COMPONENT DATA ---
-const refusalReasons: ListItem[] = [
-    { text: 'Certificate of Sponsorship (CoS) issues' },
-    { text: 'Salary threshold not met' },
-    { text: 'Job role not on eligible list' },
-    { text: 'English language requirement issues' },
-    { text: 'Financial maintenance problems' },
-    { text: 'Home Office doubts about genuineness' },
+const refusalReasons: RefusalReason[] = [
+    { title: 'Genuineness of Relationship Doubted', icon: <Heart/> },
+    { title: 'Financial Requirements Not Met', icon: <FileText/> },
+    { title: 'Documentation Errors or Missing Evidence', icon: <FileText/> },
+    { title: 'English Language Requirement Issues', icon: <UserCheck/> },
 ];
 
-const howWeHelp: { text: string; icon: ReactNode }[] = [
-    { text: 'Refusal Letter Review – A detailed analysis to identify Home Office mistakes or weak evidence.', icon: <Search size={20} /> },
-    { text: 'Grounds of Review/Appeal – Drafting persuasive legal arguments for Administrative Review or Tribunal Appeal.', icon: <Gavel size={20} /> },
-    { text: 'Evidence Preparation – Organising supporting documents, expert reports, and witness statements.', icon: <FileText size={20} /> },
-    { text: 'Representation – Acting on your behalf with the Home Office or Immigration Tribunal.', icon: <Shield size={20} /> },
-    { text: 'Fresh Applications – Preparing and submitting re-applications that address all refusal reasons.', icon: <UserCheck size={20} /> },
-];
-
-const stepByStep: Step[] = [
-    { number: '01', title: 'Immediate Review', description: 'Book a consultation to review your refusal letter.' },
-    { number: '02', title: 'Strategy Decision', description: 'Decide whether to pursue Administrative Review, Appeal, or fresh application.' },
-    { number: '03', title: 'Case Preparation', description: 'Collect stronger evidence and draft persuasive legal arguments.' },
-    { number: '04', title: 'Submission', description: 'File the AR, appeal, or new application within the strict Home Office deadlines.' },
-    { number: '05', title: 'Ongoing Support', description: 'Stay updated throughout the process until a final decision is made.' },
+const appealProcess: AppealStep[] = [
+    { number: '01', title: 'Analyse the Refusal', description: 'We meticulously review the Home Office’s decision to understand the exact reasons for the rejection and identify legal or factual errors.' },
+    { number: '02', title: 'Prepare Grounds of Appeal', description: 'Our team drafts persuasive legal arguments that form the foundation of your case, challenging the refusal on solid grounds.' },
+    { number: '03', title: 'Gather & Compile Evidence', description: 'We work with you to strengthen your case by gathering robust relationship evidence, financial records, and witness statements into a comprehensive appeal bundle.' },
+    { number: '04', title: 'Represent You at Tribunal', description: 'An experienced advocate from our firm will represent you at the Immigration Tribunal, presenting your case with expertise and conviction.' },
+    { number: '05', title: 'Receive the Decision', description: 'Once the Tribunal makes a decision, we provide clear advice on the outcome and the next steps to reunite your family in the UK.' },
 ];
 
 
 // --- MAIN PAGE COMPONENT ---
-const AdminReviewPage = () => {
+const SpouseVisaAppealPage = () => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -157,25 +148,30 @@ const AdminReviewPage = () => {
           .intro-content h2 { text-align: left; }
           .intro-image { border-radius: 12px; max-width: 100%; }
 
-          .support-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+          .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+          }
+          .reason-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 1rem;
           }
-          .support-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-          }
-          .support-icon {
+          .reason-icon {
             color: #B9946A;
             flex-shrink: 0;
-            margin-top: 5px;
           }
-          
+          .reason-card h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+          }
+
           .timeline {
             position: relative;
             max-width: 800px;
@@ -207,9 +203,9 @@ const AdminReviewPage = () => {
           .timeline-content {
             padding: 1.5rem;
             background-color: #fff;
+            position: relative;
             border-radius: 8px;
             border: 1px solid #e9ecef;
-            flex-grow: 1;
           }
           .timeline-content h3 {
             margin-top: 0;
@@ -235,11 +231,11 @@ const AdminReviewPage = () => {
           <div className="hero-background"></div>
           <div className="container">
             <div className="hero-content">
-              <h1>Skilled Worker Visa Administrative Review – Challenge Home Office Refusals</h1>
+              <h1>Spouse Visa Appeal: Reuniting Families, Restoring Futures</h1>
               <p>
-                A refusal does not always have to be the end of your journey. At Lexington Ashworth Solicitors, our experts analyse your refusal letter, identify errors, and build the strongest case possible.
+                A Spouse Visa refusal does not have to mean separation. With the right legal guidance, you can challenge the Home Office’s decision and fight for your right to live with your loved one in the UK.
               </p>
-              <Link href="#contact" className="cta-button">Challenge Your Refusal</Link>
+              <Link href="#contact" className="cta-button">Start Your Appeal</Link>
             </div>
           </div>
         </section>
@@ -248,49 +244,41 @@ const AdminReviewPage = () => {
             <div className="container">
                 <div className="intro-grid">
                     <div className="intro-content animate-on-scroll">
-                        <h2>Common Reasons for Skilled Worker Visa Refusals</h2>
-                        <p>Most refusals can be avoided with careful preparation — but when they happen, they can and should be challenged.</p>
-                        <ul className="support-list" style={{marginTop: '2rem'}}>
-                            {refusalReasons.map((item, index) => (
-                                <li key={index} className="support-item">
-                                    <div className="support-icon"><XCircle size={20} /></div>
-                                    <span>{item.text}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        <h2>When Your Spouse Visa is Refused</h2>
+                        <p>A refusal of a UK Spouse Visa can feel devastating. It puts your future, your family life, and your peace of mind on hold. Many applicants assume a refusal is final — but in reality, you may have the legal right to appeal. These refusals can feel unfair, especially when your relationship is genuine and your intention is to build a life together in the UK.</p>
                     </div>
                     <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80" alt="Professionals in a business meeting" className="intro-image" />
+                        <img src="https://images.unsplash.com/photo-1560520450-4d2d4c00a29d?q=80&w=2070&auto=format&fit=crop" alt="A couple holding hands" className="intro-image" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="support" className="section bg-light">
+        <section id="reasons" className="section bg-light">
             <div className="container">
                 <div className="section-header animate-on-scroll">
-                    <div className="subtitle">OUR EXPERTISE</div>
-                    <h2>How Lexington Ashworth Solicitors Can Help</h2>
+                    <div className="subtitle">COMMON ISSUES</div>
+                    <h2>Why Spouse Visas Are Refused</h2>
                 </div>
-                <ul className="support-list" style={{maxWidth: '800px', margin: '0 auto'}}>
-                    {howWeHelp.map((item, index) => (
-                        <li key={index} className="support-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
-                            <div className="support-icon">{item.icon}</div>
-                            <span>{item.text}</span>
-                        </li>
+                <div className="reasons-grid">
+                    {refusalReasons.map((reason, index) => (
+                        <div key={index} className="reason-card animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <div className="reason-icon">{reason.icon}</div>
+                            <h4>{reason.title}</h4>
+                        </div>
                     ))}
-                </ul>
+                </div>
             </div>
         </section>
-        
+
         <section id="process" className="section">
             <div className="container">
                 <div className="section-header animate-on-scroll">
                     <div className="subtitle">STEP-BY-STEP</div>
-                    <h2>Step-by-Step Administrative Review Process</h2>
+                    <h2>The Appeal Process in Simple Steps</h2>
                 </div>
                 <div className="timeline">
-                    {stepByStep.map((step, index) => (
+                    {appealProcess.map((step, index) => (
                         <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
                             <div className="timeline-icon">{step.number}</div>
                             <div className="timeline-content">
@@ -305,9 +293,9 @@ const AdminReviewPage = () => {
 
         <section className="cta-section">
             <div className="container animate-on-scroll">
-                <h2>Act Fast: Time Limits Apply</h2>
-                <p>Administrative Review: 14 days (UK) / 28 days (outside UK)<br/>Appeals: Usually 14–28 days depending on location and grounds<br/>Missing these deadlines may mean losing your right to challenge the refusal.</p>
-                <Link href="#contact" className="cta-button">Start Your Challenge Today</Link>
+                <h2>Why Timing Matters</h2>
+                <p>Appeals are time-sensitive. You usually have 14 days (inside the UK) or 28 days (outside the UK) to lodge your appeal. Missing the deadline may mean losing your right to challenge the decision. It’s important to act quickly and seek expert advice as soon as you receive a refusal notice.</p>
+                <Link href="#contact" className="cta-button">Contact Us Today</Link>
             </div>
         </section>
 
@@ -316,4 +304,4 @@ const AdminReviewPage = () => {
   );
 };
 
-export default AdminReviewPage;
+export default SpouseVisaAppealPage;

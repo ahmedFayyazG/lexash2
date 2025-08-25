@@ -162,29 +162,29 @@ const businessImmigrationCategories = [
       { text: 'Self-Sponsorship Requirements', href: '/UK-Self-Sponsorship-Visa-Route' },
       { text: 'Self-Sponsorship Cost', href: '/self-sponsorship-cost' },
       { text: 'Self-Sponsorship Skilled Worker Visa', href: '/self-sponsorship-skilled-worker-visa' },
-      { text: 'Apply for Self-Sponsorship', href: '/apply-self-sponsorship' },
+      { text: 'Apply for Self-Sponsorship', href: '/apply-for-self-sponsorship' },
     ]
   },
   {
     title: 'Challenge Decisions, Secure Rights',
     links: [
-      { text: 'Immigration Appeals Procedure', href: '/immigration-appeals' },
+      { text: 'Immigration Appeals Procedure', href: '/immigration-appeal-procedure' },
       { text: 'Spouse Visa Appeal', href: '/spouse-visa-appeal' },
       { text: 'ILR /Settlement Visa Refusal Appeal', href: '/long-residence-ILR-page' },
-      { text: 'Administrative Review & Appeal', href: '/administrative-review' },
+      { text: 'Administrative Review & Appeal', href: '/administrative-Review-&-Appeal-Page' },
     ]
   },
   {
     title: 'UK Exploration Made Easy',
     links: [
       { text: 'Standard Visitor Visa UK', href: '/standard-visit-visa' },
-      { text: 'UK Visitor Visa Refusal', href: '/visitor-visa-refusal' },
+      { text: 'UK Visitor Visa Refusal', href: '/uk-visit-visa-refusal' },
     ]
   },
   {
     title: 'Business Expansion in UK',
     links: [
-      { text: 'Global Business Mobility Visa', href: '/global-business-mobility' },
+      { text: 'Global Business Mobility Visa', href: '/global-bussines-mobility-visa' },
       { text: 'UK Expansion worker Visa', href: '/uk-expansion-worker' },
       { text: 'Sole Representative Visa Extension', href: '/sole-representative-extension' },
     ]
@@ -195,10 +195,10 @@ const personalImmigrationCategories = [
   {
     title: 'Unite Families in UK',
     links: [
-      { text: 'Spouse Visa UK', href: '/spouse-visa-uk' },
+      { text: 'Spouse Visa UK', href: '/uk-spouse-visa' },
       { text: 'Spouse/Civil Partnership Visa Extension', href: '/spouse-civil-partnership-visa-extension' },
       { text: 'Spouse Visa Appeal', href: '/spouse-visa-appeal' },
-      { text: 'Same Sex partner Visa', href: '/same-sex-partner-visa' },
+      { text: 'Same Sex partner Visa', href: '/same-gender-marriage' },
       { text: 'Civil Partnership', href: '/civil-partnership' },
     ]
   },
@@ -216,14 +216,14 @@ const personalImmigrationCategories = [
     links: [
       { text: 'British Citizenship Application', href: '/british-citizenship-application-page' },
       { text: 'British Citizenship for EU or EEA Nationals', href: '/UK-citizenship-for-EU-nationals-page' },
-      { text: 'Naturalise As A British Citizen - Form AN', href: '/naturalise-british-citizen-form-an' },
+      { text: 'Naturalise As A British Citizen - Form AN', href: '/naturalise-as-a-british-citizen-form-AN' },
     ]
   },
     {
     title: 'UK Skilled Work Opportunity',
     links: [
       { text: 'Skilled Worker Visa', href: '/tier-2-skilled-worker-administrative' },
-      { text: 'Skilled Worker Visa Refusal', href: '/skilled-worker-visa-refusal' },
+      { text: 'Skilled Worker Visa Refusal', href: '/skilled-visa-refusal' },
     ]
   },
   {
@@ -231,7 +231,7 @@ const personalImmigrationCategories = [
     links: [
       { text: 'Global Talent Visa', href: '/global-talent-visa-page' },
       { text: 'Global Talent Accelerator', href: '/global-talent-accelerator' },
-      { text: 'Permanent visa for exceptionally talented', href: '/permanent-visa-exceptionally-talented' },
+      { text: 'Permanent visa for exceptionally talented', href: '/permanent-visa-for-exceptionally-talented' },
     ]
   },
 ];
