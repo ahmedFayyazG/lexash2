@@ -505,7 +505,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             color: #ced4da;
           }
           .right-panel-placeholder h3 {
-            font-family: 'Roundo', sans-serif;
+            font-family: 'poppins', sans-serif;
             font-size: 1.2rem;
             color: #495057;
           }
@@ -865,7 +865,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
 
                         {/* --- DESKTOP MEGA MENU --- */}
                         <div className={`desktop-expertise-mega-menu ${showExpertiseDropdown ? 'show' : ''}`}>
-                          <div className="mega-menu-wrapper">
+                          <div className="mega-menu-wrapper" style={{fontFamily: 'Poppins'}}>
                             <div className="mega-menu-left-panel">
                               {expertiseItems.map((expItem, expIndex) => (
                                 <Link
@@ -885,7 +885,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
                             </div>
                             <div className="mega-menu-right-panel">
                               {hoveredExpertise === 'Business Immigration' ? (
-                                <div className="right-panel-grid">
+                                <div className="right-panel-grid" style={{fontFamily: 'Poppins'}}>
                                   {businessImmigrationCategories.map((cat, catIndex) => (
                                     <div key={catIndex}>
                                       <h3 className="right-panel-category-title">{cat.title}</h3>
@@ -896,7 +896,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
                                   ))}
                                 </div>
                               ) : hoveredExpertise === 'Personal Immigration' ? (
-                                <div className="right-panel-grid">
+                                <div className="right-panel-grid" style={{fontFamily: 'Poppins'}}>
                                   {personalImmigrationCategories.map((cat, catIndex) => (
                                     <div key={catIndex}>
                                       <h3 className="right-panel-category-title">{cat.title}</h3>
