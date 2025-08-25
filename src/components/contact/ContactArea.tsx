@@ -161,21 +161,21 @@ const ContactArea = () => {
   }, []);
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-  if (!pageRef.current) return;
-  const heroSection = pageRef.current.querySelector('.hero-section') as HTMLElement | null;
-  if (heroSection) {
-    const { left, top, width, height } = heroSection.getBoundingClientRect();
+    if (!pageRef.current) return;
+    const heroSection = pageRef.current.querySelector('.hero-section') as HTMLElement | null;
+    if (heroSection) {
+      const { left, top, width, height } = heroSection.getBoundingClientRect();
 
-    const x = e.clientX - left;
-    const y = e.clientY - top;
+      const x = e.clientX - left;
+      const y = e.clientY - top;
 
-    const xPos = (x / width) * 100;
-    const yPos = (y / height) * 100;
+      const xPos = (x / width) * 100;
+      const yPos = (y / height) * 100;
 
-    heroSection.style.setProperty('--gradient-x', `${xPos}%`);
-    heroSection.style.setProperty('--gradient-y', `${yPos}%`);
-  }
-};
+      heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+      heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+    }
+  };
 
   const getButtonState = () => {
     if (isSubmitting) return { text: 'SENDING...', className: 'submitting' };
@@ -202,27 +202,15 @@ const ContactArea = () => {
   return (
     <>
     <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         .contact-page-wrapper {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-poppins), sans-serif;
             background: ${theme.background};
             color: ${theme.text};
             min-height: 100vh;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .animate-on-scroll { 
-            opacity: 0; 
-            transform: translateY(30px); 
-            transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); 
-        }
-        .animate-on-scroll.is-visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
         
         .hero-section {
             background-color: #1A202C;
@@ -250,15 +238,8 @@ const ContactArea = () => {
         .hero-content p { font-size: clamp(1rem, 2vw, 1.15rem); margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .contact-info-section {
-            padding: 6rem 2rem;
-        }
-        .contact-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-            margin-bottom: 6rem;
-        }
+        .contact-info-section { padding: 6rem 2rem; }
+        .contact-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 6rem; }
         .contact-info-card {
             background: #fff;
             border: 1px solid ${theme.border};
@@ -269,190 +250,84 @@ const ContactArea = () => {
             gap: 1.5rem;
             transition: all 0.3s ease;
         }
-        .contact-info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
-            border-color: ${theme.accent};
-        }
+        .contact-info-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.07); border-color: ${theme.accent}; }
         .info-icon-wrapper {
-            width: 56px;
-            height: 56px;
-            flex-shrink: 0;
-            background: ${theme.lightBackground};
-            color: ${theme.accent};
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 56px; height: 56px; flex-shrink: 0;
+            background: ${theme.lightBackground}; color: ${theme.accent};
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
         }
-        .contact-info-card:hover .info-icon-wrapper {
-            background: ${theme.accent};
-            color: #fff;
-        }
-        .info-text-wrapper h3 {
-            font-size: 1.2rem;
-            font-weight: 500;
-            margin: 0 0 0.25rem;
-        }
+        .contact-info-card:hover .info-icon-wrapper { background: ${theme.accent}; color: #fff; }
+        .info-text-wrapper h3 { font-size: 1.2rem; font-weight: 500; margin: 0 0 0.25rem; }
         .info-text-wrapper p, .info-text-wrapper a {
-            font-size: 1rem;
-            color: ${theme.text};
-            margin: 0;
-            text-decoration: none;
-            font-weight: 300;
-            word-break: break-word;
+            font-size: 1rem; color: ${theme.text}; margin: 0; text-decoration: none;
+            font-weight: 300; word-break: break-word;
         }
-        .info-text-wrapper span {
-            font-size: 0.9rem;
-            color: ${theme.lightText};
-            font-weight: 300;
-        }
-        .form-layout {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 5rem;
-            align-items: flex-start;
-        }
+        .info-text-wrapper span { font-size: 0.9rem; color: ${theme.lightText}; font-weight: 300; }
+        
+        .form-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: flex-start; }
         .form-intro h2 {
-            font-size: 2.5rem;
-            font-weight: 600;
-            line-height: 1.2;
-            color: ${theme.text};
-            border-left: 4px solid ${theme.accent};
-            padding-left: 1.5rem;
-            margin-bottom: 2rem;
+            font-size: 2.5rem; font-weight: 600; line-height: 1.2; color: ${theme.text};
+            border-left: 4px solid ${theme.accent}; padding-left: 1.5rem; margin-bottom: 2rem;
         }
-        .form-intro p {
-            font-size: 1.1rem;
-            color: ${theme.lightText};
-            font-weight: 300;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
-        .input-field {
-            position: relative;
-            margin-bottom: 1rem;
-        }
+        .form-intro p { font-size: 1.1rem; color: ${theme.lightText}; font-weight: 300; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        
+        .input-field { position: relative; margin-bottom: 1rem; }
         .input-field label {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            color: ${theme.lightText};
-            pointer-events: none;
-            transition: all 0.3s ease;
-            font-weight: 300;
-            background: #fff;
-            padding: 0 0.5rem;
+            position: absolute; top: 1rem; left: 1rem; color: ${theme.lightText};
+            pointer-events: none; transition: all 0.3s ease; font-weight: 300; background: #fff; padding: 0 0.5rem;
         }
         .input-field input, .input-field textarea, .input-field select {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid ${theme.border};
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Poppins', sans-serif;
-            background: #fff;
-            outline: none;
-            transition: border-color 0.3s ease;
+            width: 100%; padding: 1rem; border: 1px solid ${theme.border}; border-radius: 8px;
+            font-size: 1rem; font-family: inherit;
+            background: #fff; outline: none; transition: border-color 0.3s ease;
         }
-        .input-field input:focus, .input-field textarea:focus, .input-field select:focus {
-            border-color: ${theme.accent};
-        }
+        .input-field input:focus, .input-field textarea:focus, .input-field select:focus { border-color: ${theme.accent}; }
         .input-field input:focus + label,
         .input-field.has-value input + label,
         .input-field textarea:focus + label,
         .input-field.has-value textarea + label,
         .input-field select:focus + label,
         .input-field.has-value select + label {
-            top: -0.75rem;
-            font-size: 0.8rem;
-            color: ${theme.accent};
+            top: -0.75rem; font-size: 0.8rem; color: ${theme.accent};
         }
-        .input-field.has-error input, .input-field.has-error textarea, .input-field.has-error select {
-            border-color: ${theme.error};
-        }
-        .input-field.has-error label {
-            color: ${theme.error};
-        }
-        .error-message {
-            color: ${theme.error};
-            font-size: 0.8rem;
-            padding-top: 0.25rem;
-        }
-        .consent-checkbox {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-        }
+        .input-field.has-error input, .input-field.has-error textarea, .input-field.has-error select { border-color: ${theme.error}; }
+        .input-field.has-error label { color: ${theme.error}; }
+        .error-message { color: ${theme.error}; font-size: 0.8rem; padding-top: 0.25rem; }
+        
+        .consent-checkbox { display: flex; align-items: center; margin: 1.5rem 0; }
         .custom-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 1px solid ${theme.border};
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-right: 0.75rem;
-            transition: all 0.3s ease;
+            width: 20px; height: 20px; border: 1px solid ${theme.border}; border-radius: 4px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            margin-right: 0.75rem; transition: all 0.3s ease;
         }
-        .custom-checkbox.checked {
-            background: ${theme.accent};
-            border-color: ${theme.accent};
-        }
-        .custom-checkbox.has-error {
-            border-color: ${theme.error};
-        }
-        .consent-label {
-            font-size: 0.9rem;
-            color: ${theme.lightText};
-        }
-        .consent-label a {
-            color: ${theme.accent};
-            text-decoration: none;
-        }
-        .recaptcha-container {
-            margin: 1.5rem 0;
-        }
+        .custom-checkbox.checked { background: ${theme.accent}; border-color: ${theme.accent}; }
+        .custom-checkbox.has-error { border-color: ${theme.error}; }
+        .consent-label { font-size: 0.9rem; color: ${theme.lightText}; }
+        .consent-label a { color: ${theme.accent}; text-decoration: none; }
+        
         .submit-button {
-            background: ${theme.text};
-            color: #fff;
-            border: 1px solid ${theme.text};
-            padding: 0.9rem 2.5rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0.8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            outline: none;
-            text-transform: uppercase;
+            background: ${theme.text}; color: #fff; border: 1px solid ${theme.text};
+            padding: 0.9rem 2.5rem; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 500; font-family: inherit;
+            letter-spacing: 0.8px; cursor: pointer; transition: all 0.3s ease;
+            outline: none; text-transform: uppercase;
         }
-        .submit-button:hover {
-            background: ${theme.accent};
-            border-color: ${theme.accent};
-        }
+        .submit-button:hover { background: ${theme.accent}; border-color: ${theme.accent}; }
         .submit-button.success { background: ${theme.success}; border-color: ${theme.success}; }
         .submit-button.error { background: ${theme.error}; border-color: ${theme.error}; }
         .submit-button.submitting { cursor: wait; }
         
-        @media (max-width: 992px) {
-            .form-layout { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 992px) { .form-layout { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } }
     `}</style>
     <div className="contact-page-wrapper">
       <section className="hero-section">
           <div className="container">
               <div className="hero-content animate-on-scroll">
-                  <h1 style={{fontFamily:"Poppins, sans-serif", fontWeight:300}}>Contact Our Experts</h1>
-                  <p style={{fontFamily:"Poppins, sans-serif", fontWeight:300}}>
+                  <h1 className="font-lighter">Contact Our Experts</h1>
+                  <p className="font-light">
                       Initiate a confidential dialogue with our team. We are structured to provide clarity and strategic direction for your most pressing legal needs.
                   </p>
               </div>
@@ -473,7 +348,7 @@ const ContactArea = () => {
                     </p>
                 </aside>
 
-                <form onSubmit={(e) => handleSubmit(e, )} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
+                <form onSubmit={(e) => handleSubmit(e)} noValidate className="animate-on-scroll" style={{transitionDelay: '0.4s'}}>
                     <div className="form-grid">
                         <InputField id="name" name="name" label="Full Name *" value={formData.name} onChange={handleInputChange} required error={errors.name}/>
                         <InputField id="email" name="email" label="Email Address *" type="email" value={formData.email} onChange={handleInputChange} required error={errors.email}/>

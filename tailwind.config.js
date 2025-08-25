@@ -1,5 +1,5 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  // ✅ This block can stay even in Tailwind v4 (it's optional if using @source, but still works)
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
@@ -11,7 +11,10 @@ module.exports = {
         gold: "#E3B77A",
       },
       fontFamily: {
-        poppins: ['"Poppins"', 'sans-serif'],
+        // Make 'font-sans' = Poppins everywhere
+        sans: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+        // Optional: keep a named utility if you want to target Poppins explicitly
+        poppins: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
       },
     },
   },
