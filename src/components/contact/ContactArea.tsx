@@ -220,6 +220,7 @@ const ContactArea = () => {
             padding-top: 15rem;
             text-align: center;
             position: relative;
+            font-family: 'Poppins', sans-serif;
             overflow: hidden;
         }
         .hero-section::before {
@@ -234,9 +235,9 @@ const ContactArea = () => {
             pointer-events: none;
             transition: background 0.2s ease-out;
         }
-        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
-        .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 600; }
-        .hero-content p { font-size: clamp(1rem, 2vw, 1.15rem); margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
+        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2;font-family: 'Poppins', sans-serif; }
+        .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 300; font-family: 'Poppins', sans-serif;}
+        .hero-content p { font-size: clamp(1rem, 2vw, 1.15rem); margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards;font-family: 'Poppins', sans-serif; }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
         .contact-info-section { padding: 6rem 2rem; }
