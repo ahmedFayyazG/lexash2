@@ -1,263 +1,305 @@
-import Image from "next/image";
-import Link from "next/link";
-import styles from "./self-sponsorship.module.css";
-import { FAQClient, FAQItem } from "./faq-client";
+'use client';
+
+import React, { useState, useEffect, ReactNode, useRef } from 'react';
+import { Building, UserCheck, Shield, CheckCircle, ArrowRight, FileText, Briefcase } from 'lucide-react';
+
+// --- MOCK COMPONENTS ---
+interface LinkProps {
+  href: string;
+  children: ReactNode;
+  [key: string]: any;
+}
+
+const Link = ({ href, children, ...props }: LinkProps) => (
+  <a href={href} {...props}>
+    {children}
+  </a>
+);
+
+// --- SEO METADATA ---
+// In a real Next.js App Router project, this would be exported from the page.tsx file
+// export const metadata = {
+//   title: 'Self-Sponsorship UK Requirements | UK Visa & Sponsor Licence Solicitors',
+//   description: 'Discover how to secure a UK visa through Self-Sponsorship. Learn the key requirements for starting your business, obtaining a Sponsor Licence, and applying for a Skilled Worker visa. Expert guidance from immigration solicitors.',
+//   keywords: 'Self-Sponsorship UK, UK self-sponsorship visa requirements, sponsor licence UK, skilled worker visa self sponsorship, business immigration UK, self sponsor visa',
+// };
+
+
+// --- INTERFACES ---
+interface Step {
+    number: string;
+    title: string;
+    description: string;
+}
 
 interface Requirement {
-  title: string;
-  description: string;
-  icon: React.ReactNode;
-}
-interface ProcessStep {
-  number: number;
-  title: string;
-  description: string;
+    title: string;
+    description: string;
+    icon: ReactNode;
 }
 
-export default function SelfSponsorship() {
-  const requirements: Requirement[] = [
-    {
-      title: "Business Structure",
-      description:
-        "Establish a genuine UK limited company with proper registration, business plan, and operational structure that meets Home Office scrutiny.",
-      icon: (
-        <span className={styles.requirementIcon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2z"/>
-            <path d="M9 7h6v6H9z"/>
-          </svg>
-        </span>
-      ),
-    },
-    {
-      title: "Sponsor Licence",
-      description: "Obtain a Sponsor Licence for your company, demonstrating genuine trading activities and compliance systems.",
-      icon: (
-        <span className={styles.requirementIcon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </span>
-      ),
-    },
-    {
-      title: "Financial Requirements",
-      description: "Meet minimum salary thresholds (£38,700 or going rate) and maintain sufficient funds for business operations.",
-      icon: (
-        <span className={styles.requirementIcon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-          </svg>
-        </span>
-      ),
-    },
-    {
-      title: "Documentation",
-      description:
-        "Comprehensive documentation including business plans, financial projections, and evidence of genuine business activities.",
-      icon: (
-        <span className={styles.requirementIcon} aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-        </span>
-      ),
-    },
-  ];
+// --- COMPONENT DATA ---
+const requirements: Requirement[] = [
+    { title: 'Business Structure', description: 'Incorporate a genuine UK company at Companies House with a clear business plan and operating model.', icon: <Building size={24} /> },
+    { title: 'Sponsor Licence', description: 'Apply for and secure a Sponsor Licence by proving your business is legitimate, compliant, and capable of fulfilling sponsorship duties.', icon: <FileText size={24} /> },
+    { title: 'Financial Requirements', description: 'Demonstrate you can pay yourself the Skilled Worker minimum salary (currently £38,700 per year or the “going rate” for your occupation).', icon: <Briefcase size={24} /> },
+    { title: 'Documentation', description: 'Provide evidence including business plans, contracts, financial forecasts, and proof of genuine trading activities.', icon: <UserCheck size={24} /> },
+];
 
-  const processSteps: ProcessStep[] = [
-    {
-      number: 1,
-      title: "Company Formation",
-      description:
-        "Register your UK limited company with Companies House, ensuring proper structure and shareholding arrangements that comply with immigration rules.",
-    },
-    {
-      number: 2,
-      title: "Business Establishment",
-      description:
-        "Develop genuine business operations, secure office premises, create employment contracts, and establish HR systems required for sponsorship.",
-    },
-    {
-      number: 3,
-      title: "Sponsor Licence Application",
-      description:
-        "Apply for a Sponsor Licence, demonstrating your company's legitimacy and ability to fulfill sponsorship duties.",
-    },
-    {
-      number: 4,
-      title: "Skilled Worker Visa",
-      description:
-        "Once approved, assign a Certificate of Sponsorship to yourself and apply for the Skilled Worker visa.",
-    },
-  ];
+const processSteps: Step[] = [
+    { number: '01', title: 'Company Formation', description: 'Register your company with Companies House, set up a business bank account, and prepare contracts.' },
+    { number: '02', title: 'Business Establishment', description: 'Secure office space (virtual or physical), build compliance systems, and ensure operational readiness.' },
+    { number: '03', title: 'Sponsor Licence Application', description: 'Apply to the Home Office for a Sponsor Licence and pass eligibility and compliance checks.' },
+    { number: '04', title: 'Skilled Worker Visa Application', description: 'Assign yourself a Certificate of Sponsorship and apply for your Skilled Worker visa.' },
+];
 
-  const benefits = [
-    "Direct pathway to UK settlement after 5 years of continuous residence",
-    "Ability to bring family members as dependants",
-    "Full control over your business operations and growth",
-    "No investment threshold unlike the Innovator Founder visa",
-    "Flexibility to switch between eligible job roles within your company",
-    "Opportunity to sponsor other skilled workers as your business grows",
-  ];
 
-  const faqItems: FAQItem[] = [
-    {
-      question: "What is the minimum salary for self-sponsorship?",
-      answer:
-        'The minimum salary is £38,700 per year or the "going rate" for your occupation code, whichever is higher. Some roles may qualify for reduced thresholds.',
-    },
-    {
-      question: "Can I be the sole director and employee?",
-      answer:
-        "While possible, it's generally advisable to have additional directors or employees to demonstrate genuine business operations and reduce Home Office scrutiny.",
-    },
-    {
-      question: "How long does the process take?",
-      answer:
-        "The entire process typically takes 3–6 months, including company setup (1–2 weeks), sponsor licence application (8–12 weeks), and visa application (3–8 weeks).",
-    },
-  ];
+// --- MAIN PAGE COMPONENT ---
+const SelfSponsorshipRequirementsPage = () => {
+    const pageRef = useRef<HTMLDivElement>(null);
 
-  const relatedServices = [
-    { title: "Sponsor Licence Application", href: "/sponsor-licence" },
-    { title: "Skilled Worker Visa", href: "/skilled-worker-visa" },
-    { title: "Business Immigration", href: "/business-immigration" },
-    { title: "Compliance Audit Services", href: "/compliance-audit" },
-    { title: "ILR & Settlement", href: "/ilr-settlement" },
-  ];
+    useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach(el => observer.observe(el));
+
+    return () => {
+        elementsToAnimate.forEach(el => {
+            if (el) observer.unobserve(el);
+        });
+    };
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if(!pageRef.current) return;
+    const heroSection = pageRef.current.querySelector('.hero-section');
+    if (heroSection && heroSection instanceof HTMLElement) {
+        const { clientX, clientY } = e;
+        const { offsetWidth, offsetHeight } = heroSection;
+        const xPos = (clientX / offsetWidth) * 100;
+        const yPos = (clientY / offsetHeight) * 100;
+        heroSection.style.setProperty('--gradient-x', `${xPos}%`);
+        heroSection.style.setProperty('--gradient-y', `${yPos}%`);
+    }
+  };
 
   return (
-    <div className={styles.motionSafe}>
-      {/* Hero */}
-      <section className={styles.heroSection}>
-        <div className={styles.container}>
-          <div className={styles.heroContent}>
-            <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-              <Link href="/">Home</Link>
-              <span aria-hidden="true">›</span>
-              <Link href="/services">Services</Link>
-              <span aria-hidden="true">›</span>
-              <span>Self-Sponsorship UK Requirements</span>
-            </nav>
+    <>
+      <div className="pageWrapper" ref={pageRef} onMouseMove={handleMouseMove}>
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+          body { margin: 0; font-family: 'Poppins', sans-serif; line-height: 1.8; color: #333; background: #fff; font-weight: 300; }
+          * { box-sizing: border-box; }
+          .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+          h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; color: #212C3C; font-weight: 400; }
+          h1 { font-size: 3rem; line-height: 1.25; }
+          h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+          p { color: #555; font-size: 1rem; }
+          @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            h2 { font-size: 2rem; }
+          }
+        `}</style>
+        <style>{`
+          .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); }
+          .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+          
+          .hero-section {
+            background-color: #1A202C;
+            color: white;
+            padding: 7rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+          }
+          .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--gradient-x, 50%) var(--gradient-y, 50%), rgba(185, 148, 106, 0.15), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+            transition: background 0.2s ease-out;
+          }
+          .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+          .hero-content h1 { color: #fff; animation: fadeInDown 1s ease-out 0.2s backwards; }
+          .hero-content p { font-size: 1.1rem; margin: 1.5rem 0 2.5rem; color: rgba(255, 255, 255, 0.85); animation: fadeInDown 1s ease-out 0.4s backwards; }
+          @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+          .cta-button { background: #B9946A; color: #1A202C; padding: 0.8rem 1.8rem; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; animation: fadeInUp 1s ease-out 0.6s backwards; }
+          @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+          .cta-button:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(185, 148, 106, 0.4); }
+          
+          .section { padding: 5rem 0; }
+          .section.bg-light { background: #f8f9fa; }
+          .section-header { text-align: center; max-width: 800px; margin: 0 auto 4rem; }
+          .section-header .subtitle { color: #B9946A; font-weight: 500; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
-            <h1 className={styles.h1}>Self-Sponsorship UK Requirements</h1>
-            <p className={styles.heroDescription}>
-              Navigate the complexities of UK self-sponsorship with confidence. Our expert immigration solicitors
-              guide you through every requirement, ensuring your business and visa applications meet all Home Office standards.
-            </p>
+          .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+          .intro-content h2 { text-align: left; }
+          .intro-image { border-radius: 12px; max-width: 100%; }
+
+          .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+          }
+          .requirement-card {
+            background: #fff;
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: all 0.3s ease;
+          }
+          .requirement-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.07);
+          }
+          .requirement-icon {
+            width: 64px;
+            height: 64px;
+            background: #B9946A;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+          }
+          .requirement-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+          }
+          .requirement-card p {
+            font-size: 0.95rem;
+            color: #5A6774;
+          }
+
+          .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+          .timeline-item {
+            padding: 1rem 3rem 2rem 5rem;
+            position: relative;
+            background-color: inherit;
+            width: 100%;
+          }
+          .timeline-icon {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            left: 0;
+            background-color: #fff;
+            border: 3px solid #B9946A;
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #B9946A;
+          }
+          .timeline-content {
+            padding: 1.5rem;
+            background-color: #fff;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            flex-grow: 1;
+          }
+          .timeline-content h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+          }
+
+          @media (max-width: 992px) { .intro-grid { grid-template-columns: 1fr; } }
+          @media (max-width: 768px) {
+            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; }
+          }
+        `}</style>
+
+        <section className="hero-section">
+          <div className="hero-background"></div>
+          <div className="container">
+            <div className="hero-content">
+              <h1>Self-Sponsorship UK Requirements</h1>
+              <p>
+                The Self-Sponsorship route offers entrepreneurs, business owners, and professionals a unique pathway to live and work in the UK without needing an external sponsor. By establishing and running your own UK-registered company, you can obtain a Sponsor Licence and assign yourself a Skilled Worker visa.
+              </p>
+              <Link href="#contact" className="cta-button">Check Your Eligibility</Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Below-the-fold image (lazy) */}
-      <section className={styles.belowFold} aria-hidden="true">
-        <Image
-          src="/assets/img/bigben.jpg"
-          alt=""
-          fill
-          loading="lazy"
-          sizes="100vw"
-          placeholder="empty"
-          style={{ objectFit: "cover", objectPosition: "center" }}
-        />
-      </section>
-
-      {/* Main */}
-      <div className={styles.container}>
-        <div className={styles.main}>
-          {/* Content */}
-          <div className={styles.contentArea}>
-            <section className={styles.section}>
-              <h2 className={styles.h2}>Understanding Self-Sponsorship in the UK</h2>
-              <p className={styles.paragraph}>
-                Self-sponsorship represents a unique pathway for entrepreneurs and business owners to establish
-                themselves in the UK. This route allows you to set up a UK company that can sponsor your own
-                Skilled Worker visa, combining business establishment with personal immigration goals.
-              </p>
-              <p className={styles.paragraph}>
-                The process requires careful planning and adherence to strict Home Office requirements. Our
-                experienced team at Lexington Ashworth has successfully guided numerous entrepreneurs through
-                this complex journey, ensuring compliance at every step.
-              </p>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.h2}>Key Requirements for Self-Sponsorship</h2>
-              <div className={styles.requirementsGrid}>
-                {requirements.map((req, i) => (
-                  <div key={i} className={styles.requirementCard}>
-                    <h4>
-                      {req.icon}
-                      {req.title}
-                    </h4>
-                    <p className={styles.paragraph}>{req.description}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.h2}>The Self-Sponsorship Process</h2>
-              <div className={styles.processSteps}>
-                {processSteps.map((step) => (
-                  <div key={step.number} className={styles.step}>
-                    <div className={styles.stepNumber} aria-hidden="true">{step.number}</div>
-                    <div className={styles.stepContent}>
-                      <h4>{step.title}</h4>
-                      <p className={styles.paragraph}>{step.description}</p>
+        <section className="section">
+            <div className="container">
+                <div className="intro-grid">
+                    <div className="intro-content animate-on-scroll">
+                        <h2>Understanding Self-Sponsorship in the UK</h2>
+                        <p>Self-Sponsorship is not a separate visa category but a practical way to use the existing Skilled Worker visa system. Instead of relying on an employer, you create your own UK company and become both the sponsor and the sponsored employee.</p>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.h2}>Benefits of Self-Sponsorship</h2>
-              <ul className={styles.benefitsList}>
-                {benefits.map((b, i) => <li key={i}>{b}</li>)}
-              </ul>
-            </section>
-
-            <section className={styles.section}>
-              <h2 className={styles.h2}>Frequently Asked Questions</h2>
-              <FAQClient items={faqItems} />
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <aside className={styles.sidebar} aria-label="Actions and quick links">
-            <div className={styles.ctaCard}>
-              <h3>Need Expert Guidance?</h3>
-              <p>Get professional assistance with your self-sponsorship journey</p>
-              <Link href="/contact" className={styles.ctaButton}>
-                Book Consultation
-              </Link>
+                    <div className="animate-on-scroll" style={{transitionDelay: '0.2s'}}>
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=2070&auto=format&fit=crop" alt="A person working on a business plan" className="intro-image" />
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div className={styles.quickLinks}>
-              <h4>Related Services</h4>
-              <ul>
-                {relatedServices.map((s, i) => (
-                  <li key={i}>
-                    <Link href={s.href} className={styles.quickLink}>
-                      {s.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        <section id="requirements" className="section bg-light">
+            <div className="container">
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">ELIGIBILITY</div>
+                    <h2>Key Requirements</h2>
+                    <p>To succeed in a Self-Sponsorship application, you must meet specific Home Office requirements:</p>
+                </div>
+                <div className="requirements-grid">
+                    {requirements.map((item, index) => (
+                        <div key={index} className="requirement-card animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <div className="requirement-icon">{item.icon}</div>
+                            <h4>{item.title}</h4>
+                            <p>{item.description}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
+        </section>
+        
+        <section id="process" className="section">
+            <div className="container">
+                <div className="section-header animate-on-scroll">
+                    <div className="subtitle">STEP-BY-STEP</div>
+                    <h2>The Self-Sponsorship Process</h2>
+                </div>
+                <div className="timeline">
+                    {processSteps.map((step, index) => (
+                        <div key={index} className="timeline-item animate-on-scroll" style={{transitionDelay: `${index * 0.1}s`}}>
+                            <div className="timeline-icon">{step.number}</div>
+                            <div className="timeline-content">
+                                <h3>{step.title}</h3>
+                                <p>{step.description}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
 
-            <div className={styles.downloadBox}>
-              <h4>Free Guide</h4>
-              <p className={styles.paragraph}>Download our comprehensive Self-Sponsorship Guide</p>
-              <a href="#" className={styles.downloadButton}>Download PDF</a>
-            </div>
-          </aside>
-        </div>
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default SelfSponsorshipRequirementsPage;

@@ -202,8 +202,9 @@ const ContactArea = () => {
   return (
     <>
     <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         .contact-page-wrapper {
-            font-family: var(--font-poppins), sans-serif;
+            font-family: 'Poppins', sans-serif;
             background: ${theme.background};
             color: ${theme.text};
             min-height: 100vh;
