@@ -2,11 +2,11 @@
 import "../styles/index.css";
 import { Poppins } from "next/font/google";
 
-export const poppins = Poppins({
-  subsets: ["latin"],              // add "latin-ext" if you use extended characters
+const poppins = Poppins({
+  subsets: ["latin"],
   weight: ["300", "400", "600", "700"],
   display: "swap",
-  variable: "--font-poppins",      // ← expose a variable
+  variable: "--font-poppins",
   preload: true,
 });
 
@@ -18,9 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={poppins.variable}>
-      {/* Apply Tailwind class that uses the variable */}
-      <body className="font-poppins">{children}</body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
-
