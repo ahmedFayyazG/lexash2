@@ -527,7 +527,7 @@ const SponsorLicenceRenewalPage = () => {
                         At Lexington Ashworth Solicitors, we support UK businesses of all sizes with Sponsor Licence renewals. Our immigration lawyers have extensive experience in compliance matters and dealing with the Home Office.
                     </p>
                     <div className="requirementsGrid">
-                        {renewalBenefits.map((item, index) => (
+                        {requirements.map((item, index) => (
                             <div className="requirementCard" key={item.title}>
                                 <h4>
                                     {item.icon}
@@ -542,7 +542,7 @@ const SponsorLicenceRenewalPage = () => {
                 <section className="section section-dark" id="process">
                     <h2 className="h2">Our Step-by-Step Renewal Process</h2>
                     <div className="processSteps">
-                        {renewalProcessSteps.map((step) => (
+                        {processSteps.map((step: ProcessStep) => (
                              <div className="step" key={step.title}>
                                 <div className="stepNumber" aria-hidden="true">{step.number}</div>
                                 <div className="stepContent">
