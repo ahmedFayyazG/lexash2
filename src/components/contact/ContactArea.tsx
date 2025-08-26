@@ -344,7 +344,7 @@ const ContactArea = () => {
 
             <section className="form-layout">
                 <aside className="form-intro animate-on-scroll" style={{transitionDelay: '0.2s'}}>
-                    <h2>Your Inquiry</h2>
+                    <h2 style={{fontFamily:"poppins"}}>Your Inquiry</h2>
                     <p>
                     Please provide as much detail as possible. This allows our team to assess your situation and respond with the most relevant information.
                     </p>

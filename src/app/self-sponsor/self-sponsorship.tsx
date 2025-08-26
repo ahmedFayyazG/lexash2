@@ -115,6 +115,7 @@ const SelfSponsorshipRequirementsPage = () => {
             background-color: #1A202C;
             color: white;
             padding: 7rem 0;
+            padding-top: 15rem;
             text-align: center;
             position: relative;
             overflow: hidden;
