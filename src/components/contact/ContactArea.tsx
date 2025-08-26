@@ -338,7 +338,7 @@ const ContactArea = () => {
       
       <section className="contact-info-section">
         <div className="container">
-            <div className="contact-info-grid">
+            <div className="contact-info-grid" style={{fontFamily: 'Poppins'}} >
                 {cardData.map((card, index) => <ContactInfoCard key={card.title} {...card} />)}
             </div>
 
