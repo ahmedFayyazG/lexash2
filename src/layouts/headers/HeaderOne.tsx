@@ -435,7 +435,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             height: 28px;
           }
           .mega-menu-item-text .mega-menu-item-title {
-            font-family: 'Roundo', sans-serif;
+            font-family: 'poppins', sans-serif;
             font-weight: 600;
             font-size: 1rem;
             color: #212529;
@@ -468,7 +468,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             width: 100%;
           }
           .right-panel-category-title {
-            font-family: 'Roundo', sans-serif;
+            font-family: 'poppins', sans-serif;
             font-size: 1rem;
             font-weight: 600;
             color: #343a40;
@@ -591,7 +591,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             margin-bottom: 1rem;
           }
           .will-option h4 {
-            font-family: 'Roundo', sans-serif;
+            font-family: 'poppins', sans-serif;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
             color: #2c3e50;
@@ -682,7 +682,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             font-weight: 600;
             color: #212C3C;
             margin-bottom: 0.1rem;
-            font-family: 'Roundo', sans-serif;
+            font-family: 'Poppins', sans-serif;
           }
           .mobile-expertise-item.expanded .mobile-expertise-title {
             color: #EBBF7D;
@@ -735,7 +735,7 @@ const HeaderOne = ({ style_2 }: HeaderOneProps) => {
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #e0e0e0;
-            font-family: 'Roundo', sans-serif;
+            font-family: 'poppins', sans-serif;
           }
           .mobile-category-links {
             display: flex;
